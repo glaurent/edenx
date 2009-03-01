@@ -17,11 +17,15 @@
 		775BDEF1067A8BF0009058FE /* MyDocument.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 775BDEF0067A8BF0009058FE /* MyDocument.xcdatamodel */; };
 		775DFF38067A968500C5B868 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
-		8D15AC2D0486D014006FF6A4 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */; };
-		8D15AC2E0486D014006FF6A4 /* MyDocument.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B4FDCFA73011CA2CEA /* MyDocument.nib */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC310486D014006FF6A4 /* MyDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4ACFDCFA73011CA2CEA /* MyDocument.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		AF3E7E630F1CDDE300CCF05E /* MyDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF3E7E610F1CDDE300CCF05E /* MyDocument.xib */; };
+		AF3E7E680F1CDE2B00CCF05E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF3E7E660F1CDE2B00CCF05E /* MainMenu.xib */; };
+		AFA0C7F80F4866C900D67487 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0C7F70F4866C900D67487 /* AppController.m */; };
+		AFA0C8490F48794700D67487 /* PlaybackCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0C8480F48794700D67487 /* PlaybackCursorView.m */; };
+		AFA0C93E0F50746E00D67487 /* SynchroScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0C93D0F50746E00D67487 /* SynchroScrollView.m */; };
+		AFA0CACD0F5AA7E100D67487 /* CompositionController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0CACC0F5AA7E100D67487 /* CompositionController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +35,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 514E9DF8081EBF9C009B8CD9;
 			remoteInfo = "edenx Spotlight Importer";
+		};
+		AF3E7E380F1C7DB800CCF05E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFAD22CB0F18FE2500166E36 /* DrawKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9660E6100BEF442B00B6A38C;
+			remoteInfo = DrawKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -50,26 +61,34 @@
 /* Begin PBXFileReference section */
 		089C1660FE840EACC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		2A37F4ACFDCFA73011CA2CEA /* MyDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDocument.m; sourceTree = "<group>"; };
-		2A37F4AEFDCFA73011CA2CEA /* MyDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDocument.h; sourceTree = "<group>"; };
-		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2A37F4B5FDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MyDocument.nib; sourceTree = "<group>"; };
-		2A37F4B7FDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		2A37F4ACFDCFA73011CA2CEA /* MyDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyDocument.m; path = src/MyDocument.m; sourceTree = "<group>"; };
+		2A37F4AEFDCFA73011CA2CEA /* MyDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyDocument.h; path = src/MyDocument.h; sourceTree = "<group>"; };
+		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = src/main.m; sourceTree = "<group>"; };
 		2A37F4BAFDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		32DBCF750370BD2300C91783 /* edenx_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = edenx_Prefix.pch; sourceTree = "<group>"; };
 		514E9DF9081EBF9C009B8CD9 /* edenx.mdimporter */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = edenx.mdimporter; sourceTree = BUILT_PRODUCTS_DIR; };
-		514E9DFA081EBF9C009B8CD9 /* Importer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Importer-Info.plist"; path = "Importer/Importer-Info.plist"; sourceTree = "<group>"; };
+		514E9DFA081EBF9C009B8CD9 /* Importer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Importer-Info.plist"; path = "Importer/Importer-Info.plist"; sourceTree = "<group>"; };
 		514E9E10081EC6B8009B8CD9 /* GetMetadataForFile.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 30; name = GetMetadataForFile.c; path = Importer/GetMetadataForFile.c; sourceTree = "<group>"; };
 		514E9E11081EC6B8009B8CD9 /* main.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = main.c; path = Importer/main.c; sourceTree = "<group>"; };
 		514E9E16081EC6D5009B8CD9 /* Importer Read Me.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = "Importer Read Me.txt"; path = "Importer/Importer Read Me.txt"; sourceTree = "<group>"; };
 		514E9E2D081EC793009B8CD9 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		514EA014081EC7C3009B8CD9 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
-		775BDEF0067A8BF0009058FE /* MyDocument.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = MyDocument.xcdatamodel; sourceTree = "<group>"; };
+		775BDEF0067A8BF0009058FE /* MyDocument.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = MyDocument.xcdatamodel; path = src/MyDocument.xcdatamodel; sourceTree = "<group>"; };
 		7788DA0506752A1600599AAD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* edenx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edenx.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF3E7E620F1CDDE300CCF05E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MyDocument.xib; sourceTree = "<group>"; };
+		AF3E7E670F1CDE2B00CCF05E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		AFA0C7F60F4866C900D67487 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = src/AppController.h; sourceTree = "<group>"; };
+		AFA0C7F70F4866C900D67487 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppController.m; path = src/AppController.m; sourceTree = "<group>"; };
+		AFA0C8470F48794700D67487 /* PlaybackCursorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaybackCursorView.h; path = src/PlaybackCursorView.h; sourceTree = "<group>"; };
+		AFA0C8480F48794700D67487 /* PlaybackCursorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaybackCursorView.m; path = src/PlaybackCursorView.m; sourceTree = "<group>"; };
+		AFA0C93C0F50746E00D67487 /* SynchroScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynchroScrollView.h; path = src/SynchroScrollView.h; sourceTree = "<group>"; };
+		AFA0C93D0F50746E00D67487 /* SynchroScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SynchroScrollView.m; path = src/SynchroScrollView.m; sourceTree = "<group>"; };
+		AFA0CACB0F5AA7E100D67487 /* CompositionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CompositionController.h; path = src/CompositionController.h; sourceTree = "<group>"; };
+		AFA0CACC0F5AA7E100D67487 /* CompositionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CompositionController.m; path = src/CompositionController.m; sourceTree = "<group>"; };
+		AFAD22CB0F18FE2500166E36 /* DrawKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DrawKit.xcodeproj; path = "../DrawKit stuff/DrawKit/DrawKit.xcodeproj"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +146,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* edenx */ = {
 			isa = PBXGroup;
 			children = (
+				AFAD22CB0F18FE2500166E36 /* DrawKit.xcodeproj */,
 				E1B74B1A0667B4A90069E3BA /* Models */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
 				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
@@ -141,9 +161,17 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AFA0C8470F48794700D67487 /* PlaybackCursorView.h */,
+				AFA0C8480F48794700D67487 /* PlaybackCursorView.m */,
 				2A37F4AEFDCFA73011CA2CEA /* MyDocument.h */,
 				2A37F4ACFDCFA73011CA2CEA /* MyDocument.m */,
+				AFA0C93C0F50746E00D67487 /* SynchroScrollView.h */,
+				AFA0C93D0F50746E00D67487 /* SynchroScrollView.m */,
 				514E9E0C081EC698009B8CD9 /* Importer */,
+				AFA0C7F60F4866C900D67487 /* AppController.h */,
+				AFA0C7F70F4866C900D67487 /* AppController.m */,
+				AFA0CACB0F5AA7E100D67487 /* CompositionController.h */,
+				AFA0CACC0F5AA7E100D67487 /* CompositionController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -151,7 +179,6 @@
 		2A37F4AFFDCFA73011CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				32DBCF750370BD2300C91783 /* edenx_Prefix.pch */,
 				2A37F4B0FDCFA73011CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
@@ -160,9 +187,9 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AF3E7E610F1CDDE300CCF05E /* MyDocument.xib */,
+				AF3E7E660F1CDE2B00CCF05E /* MainMenu.xib */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
-				2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */,
-				2A37F4B4FDCFA73011CA2CEA /* MyDocument.nib */,
 				8D15AC360486D014006FF6A4 /* Info.plist */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
 				514E9DFA081EBF9C009B8CD9 /* Importer-Info.plist */,
@@ -186,6 +213,14 @@
 				514E9E10081EC6B8009B8CD9 /* GetMetadataForFile.c */,
 			);
 			name = Importer;
+			sourceTree = "<group>";
+		};
+		AF3E7E350F1C7DB800CCF05E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AF3E7E390F1C7DB800CCF05E /* GCDrawKit.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		E1B74B1A0667B4A90069E3BA /* Models */ = {
@@ -246,6 +281,12 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* edenx */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = AF3E7E350F1C7DB800CCF05E /* Products */;
+					ProjectRef = AFAD22CB0F18FE2500166E36 /* DrawKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8D15AC270486D014006FF6A4 /* edenx */,
@@ -253,6 +294,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		AF3E7E390F1C7DB800CCF05E /* GCDrawKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GCDrawKit.framework;
+			remoteRef = AF3E7E380F1C7DB800CCF05E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		514E9DF5081EBF9C009B8CD9 /* Resources */ = {
@@ -267,9 +318,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */,
-				8D15AC2D0486D014006FF6A4 /* MainMenu.nib in Resources */,
-				8D15AC2E0486D014006FF6A4 /* MyDocument.nib in Resources */,
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
+				AF3E7E630F1CDDE300CCF05E /* MyDocument.xib in Resources */,
+				AF3E7E680F1CDE2B00CCF05E /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +343,10 @@
 				8D15AC310486D014006FF6A4 /* MyDocument.m in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				775BDEF1067A8BF0009058FE /* MyDocument.xcdatamodel in Sources */,
+				AFA0C7F80F4866C900D67487 /* AppController.m in Sources */,
+				AFA0C8490F48794700D67487 /* PlaybackCursorView.m in Sources */,
+				AFA0C93E0F50746E00D67487 /* SynchroScrollView.m in Sources */,
+				AFA0CACD0F5AA7E100D67487 /* CompositionController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,28 +369,28 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		2A37F4B4FDCFA73011CA2CEA /* MyDocument.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2A37F4B5FDCFA73011CA2CEA /* English */,
-			);
-			name = MyDocument.nib;
-			sourceTree = "<group>";
-		};
-		2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2A37F4B7FDCFA73011CA2CEA /* English */,
-			);
-			name = MainMenu.nib;
-			sourceTree = "<group>";
-		};
 		2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
 				2A37F4BAFDCFA73011CA2CEA /* English */,
 			);
 			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		AF3E7E610F1CDDE300CCF05E /* MyDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AF3E7E620F1CDDE300CCF05E /* English */,
+			);
+			name = MyDocument.xib;
+			sourceTree = "<group>";
+		};
+		AF3E7E660F1CDE2B00CCF05E /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AF3E7E670F1CDE2B00CCF05E /* English */,
+			);
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -383,12 +438,17 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_ENABLE_SYMBOL_SEPARATION = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = edenx_Prefix.pch;
+				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				ONLY_ACTIVE_ARCH = YES;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = edenx;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
