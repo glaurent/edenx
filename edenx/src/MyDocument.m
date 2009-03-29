@@ -8,6 +8,7 @@
 
 #import "MyDocument.h"
 #import "PlaybackCursorView.h"
+#import "TrackEditor.h"
 
 @implementation MyDocument
 
@@ -44,5 +45,13 @@
         
 }
 
+- (IBAction)editSelectedTrack:(id)sender
+{
+    NSLog(@"editSelectedTrack");
+    
+    id trackEditor = [[TrackEditor alloc] init];
+    
+    [trackEditor showWindow:self];
+}
 
 @end

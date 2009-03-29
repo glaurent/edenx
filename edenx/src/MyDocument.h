@@ -17,6 +17,7 @@
 }
 
 - (IBAction)showPlayBackCursor:(id)sender;
+- (IBAction)editSelectedTrack:(id)sender;
 
 
 @end
