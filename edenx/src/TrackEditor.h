@@ -14,6 +14,4 @@
 
 }
 
-- (MyDocument*)document;
-
 @end

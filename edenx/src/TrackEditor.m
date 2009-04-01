@@ -24,9 +24,4 @@
     NSLog(@"TrackEditor nib file is loaded");
 }
 
-- (MyDocument*)document
-{
-    return [[NSDocumentController sharedDocumentController] currentDocument];
-}
-
 @end

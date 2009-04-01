@@ -16,7 +16,7 @@
 {
     self = [super init];
     if (self != nil) {
-        // initialization code
+        trackEditor = nil;
     }
     return self;
 }
@@ -39,17 +39,20 @@
 - (IBAction)showPlayBackCursor:(id)sender
 {
     NSLog(@"showPlayBackCursor : %d", [sender state]);
-
     
     [playbackCursorView setHidden:([sender state] == NSOffState)];
-        
 }
 
 - (IBAction)editSelectedTrack:(id)sender
 {
     NSLog(@"editSelectedTrack");
     
-    id trackEditor = [[TrackEditor alloc] init];
+    if (!trackEditor) {
+        NSLog(@"editSelectedTrack : allocating track editor");
+        trackEditor = [[TrackEditor alloc] init];        
+    }
+    
+    NSLog(@"showing track editor %@", trackEditor);
     
     [trackEditor showWindow:self];
 }
