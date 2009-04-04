@@ -49,7 +49,7 @@
     
     if (!trackEditor) {
         NSLog(@"editSelectedTrack : allocating track editor");
-        trackEditor = [[TrackEditor alloc] init];        
+        trackEditor = [[TrackEditor alloc] init];
     }
     
     NSLog(@"showing track editor %@", trackEditor);

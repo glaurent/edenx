@@ -14,4 +14,6 @@
 
 }
 
+- (id) editedDocument;
+
 @end

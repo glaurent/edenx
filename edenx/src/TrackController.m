@@ -11,4 +11,12 @@
 
 @implementation TrackController
 
+- (id)content
+{
+    id res = [super content];
+    NSLog(@"TrackController - returning content %@", res);
+    
+    return res;
+}
+
 @end

@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface TrackController : NSArrayController {
+@interface TrackController : NSObjectController {
 
 }
 

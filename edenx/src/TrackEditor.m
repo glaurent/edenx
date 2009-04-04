@@ -24,4 +24,21 @@
     NSLog(@"TrackEditor nib file is loaded");
 }
 
+//- (id)document
+//{
+//    id res = [super document];
+//    NSLog(@"TrackEditor:document - returning %@", res);
+//    
+//    return res;
+//}
+
+- (id) editedDocument
+{
+    id res = [[NSDocumentController sharedDocumentController] currentDocument];
+
+//    NSLog(@"TrackEditor:editedDocument - returning %@", res);
+    
+    return res;    
+}
+
 @end
