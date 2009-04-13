@@ -25,7 +25,12 @@
 		AF4B28760F75768B00438CAC /* TrackEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF4B28740F75768B00438CAC /* TrackEditor.xib */; };
 		AF4B28820F75920000438CAC /* TrackEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4B28810F75920000438CAC /* TrackEditor.m */; };
 		AF4B28A80F759F2500438CAC /* TrackController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4B28A70F759F2500438CAC /* TrackController.m */; };
-		AF8692A30F87388300305C7D /* TestDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF8692A20F87388300305C7D /* TestDocument.xib */; };
+		AF8693B00F9146EB00305C7D /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8693AF0F9146EB00305C7D /* Player.m */; };
+		AF8693BC0F914F5900305C7D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8693B80F914F5900305C7D /* AudioToolbox.framework */; };
+		AF8693BD0F914F5900305C7D /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8693B90F914F5900305C7D /* AudioUnit.framework */; };
+		AF8693BE0F914F5900305C7D /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8693BA0F914F5900305C7D /* CoreAudio.framework */; };
+		AF8693BF0F914F5900305C7D /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8693BB0F914F5900305C7D /* CoreMIDI.framework */; };
+		AF86951F0F92AB9200305C7D /* CoreDataStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = AF86951E0F92AB9200305C7D /* CoreDataStuff.m */; };
 		AFA0C7F80F4866C900D67487 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0C7F70F4866C900D67487 /* AppController.m */; };
 		AFA0C8490F48794700D67487 /* PlaybackCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0C8480F48794700D67487 /* PlaybackCursorView.m */; };
 		AFA0C93E0F50746E00D67487 /* SynchroScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0C93D0F50746E00D67487 /* SynchroScrollView.m */; };
@@ -89,7 +94,14 @@
 		AF4B28810F75920000438CAC /* TrackEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackEditor.m; path = src/TrackEditor.m; sourceTree = "<group>"; };
 		AF4B28A60F759F2500438CAC /* TrackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrackController.h; path = src/TrackController.h; sourceTree = "<group>"; };
 		AF4B28A70F759F2500438CAC /* TrackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackController.m; path = src/TrackController.m; sourceTree = "<group>"; };
-		AF8692A20F87388300305C7D /* TestDocument.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestDocument.xib; sourceTree = "<group>"; };
+		AF8693AE0F9146EB00305C7D /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = src/Player.h; sourceTree = "<group>"; };
+		AF8693AF0F9146EB00305C7D /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Player.m; path = src/Player.m; sourceTree = "<group>"; };
+		AF8693B80F914F5900305C7D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
+		AF8693B90F914F5900305C7D /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = /System/Library/Frameworks/AudioUnit.framework; sourceTree = "<absolute>"; };
+		AF8693BA0F914F5900305C7D /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; sourceTree = "<absolute>"; };
+		AF8693BB0F914F5900305C7D /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = /System/Library/Frameworks/CoreMIDI.framework; sourceTree = "<absolute>"; };
+		AF86951D0F92AB9200305C7D /* CoreDataStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataStuff.h; path = src/CoreDataStuff.h; sourceTree = "<group>"; };
+		AF86951E0F92AB9200305C7D /* CoreDataStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataStuff.m; path = src/CoreDataStuff.m; sourceTree = "<group>"; };
 		AFA0C7F60F4866C900D67487 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = src/AppController.h; sourceTree = "<group>"; };
 		AFA0C7F70F4866C900D67487 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppController.m; path = src/AppController.m; sourceTree = "<group>"; };
 		AFA0C8470F48794700D67487 /* PlaybackCursorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaybackCursorView.h; path = src/PlaybackCursorView.h; sourceTree = "<group>"; };
@@ -118,6 +130,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				775DFF38067A968500C5B868 /* Cocoa.framework in Frameworks */,
+				AF8693BC0F914F5900305C7D /* AudioToolbox.framework in Frameworks */,
+				AF8693BD0F914F5900305C7D /* AudioUnit.framework in Frameworks */,
+				AF8693BE0F914F5900305C7D /* CoreAudio.framework in Frameworks */,
+				AF8693BF0F914F5900305C7D /* CoreMIDI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +143,10 @@
 		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF8693B80F914F5900305C7D /* AudioToolbox.framework */,
+				AF8693B90F914F5900305C7D /* AudioUnit.framework */,
+				AF8693BA0F914F5900305C7D /* CoreAudio.framework */,
+				AF8693BB0F914F5900305C7D /* CoreMIDI.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
 				514EA014081EC7C3009B8CD9 /* CoreFoundation.framework */,
 				514E9E2D081EC793009B8CD9 /* CoreServices.framework */,
@@ -164,7 +184,6 @@
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 				514E9E16081EC6D5009B8CD9 /* Importer Read Me.txt */,
-				AF8692A20F87388300305C7D /* TestDocument.xib */,
 			);
 			name = edenx;
 			sourceTree = "<group>";
@@ -187,6 +206,10 @@
 				AF4B28810F75920000438CAC /* TrackEditor.m */,
 				AF4B28A60F759F2500438CAC /* TrackController.h */,
 				AF4B28A70F759F2500438CAC /* TrackController.m */,
+				AF8693AE0F9146EB00305C7D /* Player.h */,
+				AF8693AF0F9146EB00305C7D /* Player.m */,
+				AF86951D0F92AB9200305C7D /* CoreDataStuff.h */,
+				AF86951E0F92AB9200305C7D /* CoreDataStuff.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -338,7 +361,6 @@
 				AF3E7E630F1CDDE300CCF05E /* MyDocument.xib in Resources */,
 				AF3E7E680F1CDE2B00CCF05E /* MainMenu.xib in Resources */,
 				AF4B28760F75768B00438CAC /* TrackEditor.xib in Resources */,
-				AF8692A30F87388300305C7D /* TestDocument.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +389,8 @@
 				AFA0CACD0F5AA7E100D67487 /* CompositionController.m in Sources */,
 				AF4B28820F75920000438CAC /* TrackEditor.m in Sources */,
 				AF4B28A80F759F2500438CAC /* TrackController.m in Sources */,
+				AF8693B00F9146EB00305C7D /* Player.m in Sources */,
+				AF86951F0F92AB9200305C7D /* CoreDataStuff.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +525,7 @@
 		26FC0ACF0875C91100E6366F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;

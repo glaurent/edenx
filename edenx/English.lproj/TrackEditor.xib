@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="6"/>
+			<integer value="7"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -178,7 +178,7 @@
 															<int key="NSColorSpace">6</int>
 															<string key="NSCatalogName">System</string>
 															<string key="NSColorName">controlBackgroundColor</string>
-															<object class="NSColor" key="NSColor" id="304809703">
+															<object class="NSColor" key="NSColor" id="1070130488">
 																<int key="NSColorSpace">3</int>
 																<bytes key="NSWhite">MC42NjY2NjY2OQA</bytes>
 															</object>
@@ -557,23 +557,23 @@
 								<int key="NSPeriodicInterval">25</int>
 							</object>
 						</object>
-						<object class="NSTextField" id="833699219">
+						<object class="NSTextField" id="624831229">
 							<reference key="NSNextResponder" ref="596363374"/>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{444, 47}, {277, 17}}</string>
 							<reference key="NSSuperview" ref="596363374"/>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSTextFieldCell" key="NSCell" id="209641270">
+							<object class="NSTextFieldCell" key="NSCell" id="1021037543">
 								<int key="NSCellFlags">68288064</int>
 								<int key="NSCellFlags2">272630784</int>
 								<string key="NSContents">Edited Track Info</string>
 								<reference key="NSSupport" ref="917559285"/>
-								<reference key="NSControlView" ref="833699219"/>
+								<reference key="NSControlView" ref="624831229"/>
 								<object class="NSColor" key="NSBackgroundColor">
 									<int key="NSColorSpace">6</int>
 									<string key="NSCatalogName">System</string>
 									<string key="NSColorName">controlColor</string>
-									<reference key="NSColor" ref="304809703"/>
+									<reference key="NSColor" ref="1070130488"/>
 								</object>
 								<reference key="NSTextColor" ref="99502178"/>
 							</object>
@@ -604,6 +604,7 @@
 				<bool key="NSSelectsInsertedObjects">YES</bool>
 				<bool key="NSFilterRestrictsInsertion">YES</bool>
 				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
+				<bool key="NSAutomaticallyRearrangesObjects">YES</bool>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -740,10 +741,10 @@
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">displayPatternValue1: editedDocument.tracksController.selection.name</string>
-						<reference key="source" ref="833699219"/>
+						<reference key="source" ref="624831229"/>
 						<reference key="destination" ref="1001"/>
-						<object class="NSNibBindingConnector" key="connector" id="663456383">
-							<reference key="NSSource" ref="833699219"/>
+						<object class="NSNibBindingConnector" key="connector" id="1003974702">
+							<reference key="NSSource" ref="624831229"/>
 							<reference key="NSDestination" ref="1001"/>
 							<string key="NSLabel">displayPatternValue1: editedDocument.tracksController.selection.name</string>
 							<string key="NSBinding">displayPatternValue1</string>
@@ -760,10 +761,10 @@
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">displayPatternValue2: editedDocument.tracksController.selection.events.@count</string>
-						<reference key="source" ref="833699219"/>
+						<reference key="source" ref="624831229"/>
 						<reference key="destination" ref="1001"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="833699219"/>
+							<reference key="NSSource" ref="624831229"/>
 							<reference key="NSDestination" ref="1001"/>
 							<string key="NSLabel">displayPatternValue2: editedDocument.tracksController.selection.events.@count</string>
 							<string key="NSBinding">displayPatternValue2</string>
@@ -772,7 +773,7 @@
 								<string key="NS.key.0">NSDisplayPattern</string>
 								<string key="NS.object.0">Track name : %{value1}@ - %{value2}@ events</string>
 							</object>
-							<reference key="NSPreviousConnector" ref="663456383"/>
+							<reference key="NSPreviousConnector" ref="1003974702"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
@@ -826,7 +827,7 @@
 							<reference ref="238482171"/>
 							<reference ref="527381039"/>
 							<reference ref="83999283"/>
-							<reference ref="833699219"/>
+							<reference ref="624831229"/>
 						</object>
 						<reference key="parent" ref="1054910935"/>
 					</object>
@@ -1011,18 +1012,18 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">78</int>
-						<reference key="object" ref="833699219"/>
+						<reference key="object" ref="624831229"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="209641270"/>
+							<reference ref="1021037543"/>
 						</object>
 						<reference key="parent" ref="596363374"/>
 						<string key="objectName">Edited Track Name</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">79</int>
-						<reference key="object" ref="209641270"/>
-						<reference key="parent" ref="833699219"/>
+						<reference key="object" ref="1021037543"/>
+						<reference key="parent" ref="624831229"/>
 					</object>
 				</object>
 			</object>

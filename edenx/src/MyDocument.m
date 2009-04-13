@@ -9,6 +9,7 @@
 #import "MyDocument.h"
 #import "PlaybackCursorView.h"
 #import "TrackEditor.h"
+#import "Player.h"
 
 @implementation MyDocument
 
@@ -16,7 +17,7 @@
 {
     self = [super init];
     if (self != nil) {
-        trackEditor = nil;
+        player = [[Player alloc] init];
     }
     return self;
 }
@@ -56,5 +57,37 @@
     
     [trackEditor showWindow:self];
 }
+
+- (IBAction)togglePlay:(id)sender
+{
+    if ([player isPlaying])
+        [self stop:self];
+    else
+        [self play:self];
+}
+
+- (IBAction)play:(id)sender
+{
+    NSLog(@"start playing"); 
+    [player setUp:[self managedObjectContext]];
+    [player play];
+}
+
+- (IBAction)stop:(id)sender
+{
+    [player stop];
+    NSLog(@"stop playing"); 
+}
+
+- (BOOL)playing
+{
+    return [player isPlaying];
+}
+
+- (IBAction)rewind:(id)sender
+{
+    [player rewind];
+}
+
 
 @end
