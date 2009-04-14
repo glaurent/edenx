@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="7"/>
+			<integer value="10"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -123,15 +123,17 @@
 																	<bool key="EncodedWithXMLCoder">YES</bool>
 																	<string>allowsFloats</string>
 																	<string>formatterBehavior</string>
+																	<string>numberStyle</string>
 																</object>
 																<object class="NSMutableArray" key="dict.values">
 																	<bool key="EncodedWithXMLCoder">YES</bool>
 																	<integer value="1" id="9"/>
 																	<integer value="1040"/>
+																	<reference ref="9"/>
 																</object>
 															</object>
-															<string key="NS.positiveformat">#</string>
-															<string key="NS.negativeformat">#</string>
+															<string key="NS.positiveformat">#,##0.###</string>
+															<string key="NS.negativeformat">#,##0.###</string>
 															<nil key="NS.positiveattrs"/>
 															<nil key="NS.negativeattrs"/>
 															<object class="NSAttributedString" key="NS.zero">
@@ -169,7 +171,7 @@
 															</object>
 															<string key="NS.decimal">.</string>
 															<string key="NS.thousand">,</string>
-															<bool key="NS.hasthousands">NO</bool>
+															<bool key="NS.hasthousands">YES</bool>
 															<bool key="NS.localized">YES</bool>
 															<bool key="NS.allowsfloats">YES</bool>
 														</object>
@@ -298,15 +300,17 @@
 																	<bool key="EncodedWithXMLCoder">YES</bool>
 																	<string>allowsFloats</string>
 																	<string>formatterBehavior</string>
+																	<string>numberStyle</string>
 																</object>
 																<object class="NSMutableArray" key="dict.values">
 																	<bool key="EncodedWithXMLCoder">YES</bool>
 																	<reference ref="9"/>
 																	<integer value="1040"/>
+																	<reference ref="9"/>
 																</object>
 															</object>
-															<string key="NS.positiveformat">#</string>
-															<string key="NS.negativeformat">#</string>
+															<string key="NS.positiveformat">#,##0.###</string>
+															<string key="NS.negativeformat">#,##0.###</string>
 															<nil key="NS.positiveattrs"/>
 															<nil key="NS.negativeattrs"/>
 															<object class="NSAttributedString" key="NS.zero">
@@ -329,7 +333,7 @@
 															</object>
 															<string key="NS.decimal">.</string>
 															<string key="NS.thousand">,</string>
-															<bool key="NS.hasthousands">NO</bool>
+															<bool key="NS.hasthousands">YES</bool>
 															<bool key="NS.localized">YES</bool>
 															<bool key="NS.allowsfloats">YES</bool>
 														</object>
@@ -444,7 +448,6 @@
 									</object>
 									<string key="NSFrame">{{1, 17}, {681, 475}}</string>
 									<reference key="NSSuperview" ref="397050465"/>
-									<reference key="NSNextKeyView" ref="328331522"/>
 									<reference key="NSDocView" ref="328331522"/>
 									<reference key="NSBGColor" ref="20253897"/>
 									<int key="NScvFlags">4</int>
@@ -479,7 +482,6 @@
 									</object>
 									<string key="NSFrame">{{1, 0}, {681, 17}}</string>
 									<reference key="NSSuperview" ref="397050465"/>
-									<reference key="NSNextKeyView" ref="395935957"/>
 									<reference key="NSDocView" ref="395935957"/>
 									<reference key="NSBGColor" ref="20253897"/>
 									<int key="NScvFlags">4</int>
@@ -488,7 +490,6 @@
 							</object>
 							<string key="NSFrame">{{20, 85}, {698, 508}}</string>
 							<reference key="NSSuperview" ref="596363374"/>
-							<reference key="NSNextKeyView" ref="81593166"/>
 							<int key="NSsFlags">50</int>
 							<reference key="NSVScroller" ref="582081334"/>
 							<reference key="NSHScroller" ref="294110582"/>
@@ -1092,9 +1093,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{136, 458}, {740, 613}}</string>
+					<string>{{150, 263}, {740, 613}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{136, 458}, {740, 613}}</string>
+					<string>{{150, 263}, {740, 613}}</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

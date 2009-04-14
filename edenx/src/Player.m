@@ -51,7 +51,7 @@
         
         [self setupAUGraph];
         
-        isSetup = YES;
+        // isSetup = YES;
     }
 
 }
@@ -148,6 +148,8 @@ OSStatus GetSynthFromGraph (AUGraph inGraph, AudioUnit outSynth);
         NSLog(@"error when fetching track");
     }
     
+    NSLog(@"CAShow sequence :");
+    CAShow(sequence);
 }
 
 - (void)play {
