@@ -1,6 +1,6 @@
 //
 //  GetMetadataForFile.c
-//  orchard Spotlight Importer
+//  edenx Spotlight Importer
 //
 //  Created by Guillaume Laurent on 4/13/08.
 //  Copyright (c) 2008 __MyCompanyName__. All rights reserved.

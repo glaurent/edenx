@@ -28,9 +28,8 @@
     [super finalize];
 }
 
-- (OSStatus)lastError {
-    return lastError;
-}
+@synthesize lastError;
+
 
 - (void)setLastError:(OSStatus)newLastError {
     if (newLastError != 0)
@@ -39,7 +38,7 @@
     lastError = newLastError;
 }
 
-- (void)setUp:(NSManagedObjectContext*)managedObjectContext {
+- (void)setUpAndFillWithSequence:(NSManagedObjectContext*)managedObjectContext {
     NSLog(@"Player:setUp");
     
     if (!isSetup) {
@@ -127,7 +126,7 @@ OSStatus GetSynthFromGraph (AUGraph inGraph, AudioUnit outSynth);
                 
                 NSLog(@"got %d playable events for track '%@'", [playableEvents count], [aTrack name]);
                 
-                NSManagedObject* anEvent;
+                NSManagedObject<Element,Note>* anEvent;
                 
                 while(anEvent = [eventsEnumerator nextObject]) {
                     // NSLog(@"event : %@ ", anEvent);

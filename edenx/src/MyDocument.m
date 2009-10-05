@@ -7,9 +7,17 @@
 //
 
 #import "MyDocument.h"
+
 #import "PlaybackCursorView.h"
 #import "TrackEditor.h"
 #import "Player.h"
+#import "SMMessage.h"
+#import "MIDIReceiver.h"
+#import "AppController.h"
+#import "Recorder.h"
+#import "CoreDataStuff.h"
+
+#import <CoreAudio/CoreAudioTypes.h>
 
 @implementation MyDocument
 
@@ -17,7 +25,7 @@
 {
     self = [super init];
     if (self != nil) {
-        player = [[Player alloc] init];
+        player = [(AppController*)[NSApp delegate] player];
     }
     return self;
 }
@@ -33,8 +41,8 @@
 
     // synchronize track list and track canvas scroll views
     [trackListView setSynchronizedScrollView:trackCanvasView];
+        
 }
-
 
 
 - (IBAction)showPlayBackCursor:(id)sender
@@ -46,14 +54,10 @@
 
 - (IBAction)editSelectedTrack:(id)sender
 {
-    NSLog(@"editSelectedTrack");
-    
     if (!trackEditor) {
         NSLog(@"editSelectedTrack : allocating track editor");
-        trackEditor = [[TrackEditor alloc] init];
+        trackEditor = [[TrackEditor alloc] initWithCurrentDocument:self];
     }
-    
-    NSLog(@"showing track editor %@", trackEditor);
     
     [trackEditor showWindow:self];
 }
@@ -69,7 +73,7 @@
 - (IBAction)play:(id)sender
 {
     NSLog(@"start playing"); 
-    [player setUp:[self managedObjectContext]];
+    [player setUpAndFillWithSequence:[self managedObjectContext]];
     [player play];
 }
 
@@ -89,5 +93,52 @@
     [player rewind];
 }
 
+- (NSArrayController*)midiSourcesController
+{
+    Recorder* recorder = [(AppController*)[NSApp delegate] recorder];
+    return [recorder midiSourcesController];
+}
+
+- (IBAction)toggleRecording:(id)sender
+{
+    NSLog(@"toggle recording");
+
+    Recorder* recorder = [(AppController*)[NSApp delegate] recorder];
+
+    if ([sender state] == NSOnState) {
+        NSLog(@"MyDocument : start recording");
+        [recorder start];
+    } else {
+        [recorder stop];
+    }
+}
+
+
+- (IBAction)testAddEvent:(id)sender
+{
+    NSManagedObject* currentTrack = [[tracksController selectedObjects] objectAtIndex:0];
+    
+    NSManagedObjectContext* managedObjectContext = [currentTrack managedObjectContext];
+    
+    NSManagedObject<Note>* newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note" 
+                                                             inManagedObjectContext:managedObjectContext];
+    
+//    NSLog(@"MyDocument:testAddEvent note = %@", newNote);
+//    NSLog(@"MyDocument:testAddEvent note duration = %@, pitch = %@", [newNote duration], [newNote note]);
+    
+    UInt64 d = AudioConvertNanosToHostTime(1000000000);
+    
+    [newNote setDuration:[NSNumber numberWithUnsignedLong:d]];
+    [newNote setNote:[NSNumber numberWithInt:60]];
+    [newNote setVelocity:[NSNumber numberWithInt:120]];
+    
+    [currentTrack addEventsObject:newNote];
+
+}
+
+
+
+
+@synthesize tracksController;
 
 @end

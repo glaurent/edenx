@@ -16,10 +16,10 @@
     OSStatus lastError;
 }
 
-@property(readwrite) OSStatus lastError;
+@property(readonly) OSStatus lastError;
 
 - (id)init;
-- (void)setUp:(NSManagedObjectContext*)managedObjectContext;
+- (void)setUpAndFillWithSequence:(NSManagedObjectContext*)managedObjectContext;
 - (void)setupAUGraph;
 - (void)fillSequence:(NSManagedObjectContext*)managedObjectContext;
 - (void)play;

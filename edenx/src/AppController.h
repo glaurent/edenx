@@ -8,10 +8,19 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class MIDIReceiver;
+@class Recorder;
+@class Player;
 
 @interface AppController : NSObject {
+    IBOutlet Recorder* recorder;
+    Player* player;
 }
 
 - (id)init;
+
+
+@property (readonly) Recorder* recorder;
+@property (readonly) Player* player;
 
 @end

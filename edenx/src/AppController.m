@@ -7,15 +7,32 @@
 //
 
 #import "AppController.h"
-
+#import "Player.h"
+#import "Recorder.h"
 
 @implementation AppController
 
 - (id)init
 {
-    [ super init ];
+    self = [ super init ];
     NSLog(@"AppController init");
+
+    // Init player in applicationWillFinishLaunching
+    player = nil;
+    
     return self;
 }
+
+- (void)applicationWillFinishLaunching:(NSNotification *)notification;
+{
+    NSLog(@"AppController:applicationWillFinishLaunching");
+    
+    player = [[Player alloc] init];
+    [recorder setup];
+}
+
+
+@synthesize recorder;
+@synthesize player;
 
 @end

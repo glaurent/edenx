@@ -11,9 +11,11 @@
 @class MyDocument;
 
 @interface TrackEditor : NSWindowController {
-
+    MyDocument* editedDocument;
 }
 
-- (id) editedDocument;
+- (id)initWithCurrentDocument:(MyDocument*)doc;
+
+@property (readonly) MyDocument* editedDocument;
 
 @end

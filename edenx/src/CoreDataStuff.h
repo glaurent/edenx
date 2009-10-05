@@ -8,22 +8,26 @@
 
 #import <Cocoa/Cocoa.h>
 
-// Track CoreData u
-@interface NSManagedObject (Track)
+// Track CoreData
+
+@protocol Track
+
+- (void)addEventsObject:(id)Object;
 
 @property (retain) NSNumber * channel;
 @property (retain) NSString * name;
+@property (retain) id inputSource;
+@property (retain) NSMutableSet* events;
 
 @end
 
-
-@interface NSManagedObject (Element)
+@protocol Element
 
 @property (retain) NSNumber * absoluteTime;
 
 @end
 
-@interface NSManagedObject (Note)
+@protocol Note<Element>
 
 @property (retain) NSNumber * duration;
 @property (retain) NSNumber * note;

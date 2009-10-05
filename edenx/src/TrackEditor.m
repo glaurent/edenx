@@ -7,14 +7,17 @@
 //
 
 #import "TrackEditor.h"
-
+#import "MyDocument.h"
+#import "TracksController.h"
 
 @implementation TrackEditor
 
-- (id)init {
+- (id)initWithCurrentDocument:(MyDocument*)doc {
     if (![super initWithWindowNibName:@"TrackEditor"]) {
         return nil;
     }
+    
+    editedDocument = doc;
     
     return self;
 }
@@ -24,21 +27,6 @@
     NSLog(@"TrackEditor nib file is loaded");
 }
 
-//- (id)document
-//{
-//    id res = [super document];
-//    NSLog(@"TrackEditor:document - returning %@", res);
-//    
-//    return res;
-//}
-
-- (id) editedDocument
-{
-    id res = [[NSDocumentController sharedDocumentController] currentDocument];
-
-//    NSLog(@"TrackEditor:editedDocument - returning %@", res);
-    
-    return res;    
-}
+@synthesize editedDocument;
 
 @end
