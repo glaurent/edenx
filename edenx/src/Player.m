@@ -9,6 +9,13 @@
 #import "Player.h"
 #import "CoreDataStuff.h"
 
+@interface Player (private)
+
+- (void)setupTempo:(NSManagedObjectContext*)moc;
+
+@end
+
+
 @implementation Player
 
 - (id)init {
@@ -30,7 +37,6 @@
 
 @synthesize lastError;
 
-
 - (void)setLastError:(OSStatus)newLastError {
     if (newLastError != 0)
         NSLog(@"Player error : %d", newLastError);
@@ -38,16 +44,13 @@
     lastError = newLastError;
 }
 
-- (void)setUpAndFillWithSequence:(NSManagedObjectContext*)managedObjectContext {
+- (void)setUpWithSequence:(MusicSequence)seq {
     NSLog(@"Player:setUp");
     
     if (!isSetup) {
-        NewMusicSequence(&sequence);
-        
-        [self fillSequence:managedObjectContext];
-        
+  
+        sequence = seq;        
         [self setLastError:MusicPlayerSetSequence(player, sequence)];
-        
         [self setupAUGraph];
         
         // isSetup = YES;
@@ -83,72 +86,6 @@ OSStatus GetSynthFromGraph (AUGraph inGraph, AudioUnit outSynth);
     
     result = AUGraphInitialize (graph);
     
-}
-
-
-
-- (void)fillSequence:(NSManagedObjectContext*)moc {
-    NSLog(@"Player:fillSequence");
-    
-    NSEntityDescription *trackEntityDescription = [NSEntityDescription entityForName:@"Track" inManagedObjectContext:moc];
-
-    NSFetchRequest *tracksRequest = [[[NSFetchRequest alloc] init] autorelease];
-    [tracksRequest setEntity:trackEntityDescription];    
-    
-    NSError *error = nil;
-    NSArray *tracks = [moc executeFetchRequest:tracksRequest error:&error];
-    if (tracks != nil) {
-        NSEnumerator *tracksEnumerator = [tracks objectEnumerator];
-        
-        id aTrack;
-        
-        while(aTrack = [tracksEnumerator nextObject]) {
-            MusicTrack sequenceTrack;
-            MusicSequenceNewTrack(sequence, &sequenceTrack);
-
-            
-            // Fetch all playable events from that track
-            NSEntityDescription *playableEventDescription = [NSEntityDescription entityForName:@"PlayableElement" inManagedObjectContext:moc];
-            
-            NSFetchRequest *playableEventsRequest = [[[NSFetchRequest alloc] init] autorelease];
-            [playableEventsRequest setEntity:playableEventDescription];
-            
-            // I could get the events directly from aTrack, but with a query I get the filtering of playable events for free
-            //
-            NSPredicate *eventsFromThisTrackPredicate = [NSPredicate predicateWithFormat:@"track == %@", aTrack];
-            [playableEventsRequest setPredicate:eventsFromThisTrackPredicate];
-            NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"absoluteTime" ascending:YES];            
-            [playableEventsRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-            
-            NSArray *playableEvents = [moc executeFetchRequest:playableEventsRequest error:&error];
-            if (playableEvents != nil) {
-                NSEnumerator *eventsEnumerator = [playableEvents objectEnumerator];
-                
-                NSLog(@"got %d playable events for track '%@'", [playableEvents count], [aTrack name]);
-                
-                NSManagedObject<Element,Note>* anEvent;
-                
-                while(anEvent = [eventsEnumerator nextObject]) {
-                    // NSLog(@"event : %@ ", anEvent);
-                    MIDINoteMessage msg;
-                    msg.channel = [[aTrack channel] intValue];
-                    msg.duration = [[anEvent duration] floatValue];
-                    msg.velocity = [[anEvent velocity] intValue];
-                    msg.note = [[anEvent note] intValue];
-                    MusicTimeStamp timeStamp = [[anEvent absoluteTime] floatValue];
-                    MusicTrackNewMIDINoteEvent(sequenceTrack, timeStamp, &msg);
-                }
-            } else {
-                NSLog(@"error when fetching events for track");
-            }
-        }
-        
-    } else {
-        NSLog(@"error when fetching track");
-    }
-    
-    NSLog(@"CAShow sequence :");
-    CAShow(sequence);
 }
 
 - (void)play {
@@ -292,8 +229,6 @@ OSStatus GetSynthFromGraph (AUGraph inGraph, AudioUnit outSynth)
 fail:		// didn't find the synth AU
 	return -1;
 }
-
-
 
 
 @end

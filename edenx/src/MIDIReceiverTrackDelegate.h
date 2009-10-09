@@ -7,6 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <CoreAudio/CoreAudioTypes.h>
+#import <AudioToolbox/AudioToolbox.h>
 #import "MIDIReceiver.h"
 #import "CoreDataStuff.h"
 
@@ -19,11 +21,13 @@
     id table[0xf * 0xff];
     NSManagedObject<Track>* track;
     MIDITimeStamp recordingStartTime;
+    Float64 recordingStartTimeInSeconds;
+    MusicSequence sequence; // used to convert events time
 }
 
 static const unsigned int tablesize = 0xf * 0xff;
 
-- (id)initWithTrack:(NSManagedObject<Track>*)aTrack withStartTime:(MIDITimeStamp)startTime;
+- (id)initWithTrack:(NSManagedObject<Track>*)aTrack withStartTime:(MIDITimeStamp)startTime withMusicSequence:(MusicSequence)aSeq;
 
 - (void)didReceiveMessage:(NSArray *)messages count:(unsigned int)count;
 

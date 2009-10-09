@@ -8,6 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 
+// Composition CoreData
+@protocol Composition
+
+@property (retain) NSString* name;
+@property (retain) NSNumber* tempo;
+
+@end
+
+
 // Track CoreData
 
 @protocol Track
@@ -21,11 +30,15 @@
 
 @end
 
+// Element CoreData
+
 @protocol Element
 
 @property (retain) NSNumber * absoluteTime;
 
 @end
+
+// Note CoreData
 
 @protocol Note<Element>
 

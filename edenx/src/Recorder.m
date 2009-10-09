@@ -79,7 +79,10 @@
         
         // create midiReceiver and its delegate
         MIDIReceiver* midiReceiver = [[MIDIReceiver alloc] init];
-        MIDIReceiverTrackDelegate* receiverTrackDelegate = [[MIDIReceiverTrackDelegate alloc] initWithTrack:track withStartTime:recordingStartTime];
+        MIDIReceiverTrackDelegate* receiverTrackDelegate = [[MIDIReceiverTrackDelegate alloc] 
+                                                            initWithTrack:track 
+                                                            withStartTime:recordingStartTime
+                                                            withMusicSequence:[currentDocument sequence]];
         
         // setup midiReceiver so it gets messages from this endPoint, and forwards them to receiverTrackDelegate
         [midiReceiver setDelegate:receiverTrackDelegate];

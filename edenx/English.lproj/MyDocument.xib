@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="5"/>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -878,6 +878,27 @@
 								<int key="NSPeriodicInterval">25</int>
 							</object>
 						</object>
+						<object class="NSSlider" id="245128844">
+							<reference key="NSNextResponder" ref="562619584"/>
+							<int key="NSvFlags">268</int>
+							<string key="NSFrame">{{978, 40}, {142, 21}}</string>
+							<reference key="NSSuperview" ref="562619584"/>
+							<bool key="NSEnabled">YES</bool>
+							<object class="NSSliderCell" key="NSCell" id="351368322">
+								<int key="NSCellFlags">-2080244224</int>
+								<int key="NSCellFlags2">0</int>
+								<string key="NSContents"/>
+								<reference key="NSControlView" ref="245128844"/>
+								<double key="NSMaxValue">250</double>
+								<double key="NSMinValue">1</double>
+								<double key="NSValue">120</double>
+								<double key="NSAltIncValue">0.0</double>
+								<int key="NSNumberOfTickMarks">0</int>
+								<int key="NSTickMarkPosition">1</int>
+								<bool key="NSAllowsTickMarkValuesOnly">NO</bool>
+								<bool key="NSVertical">NO</bool>
+							</object>
+						</object>
 					</object>
 					<string key="NSFrameSize">{1197, 726}</string>
 					<reference key="NSSuperview"/>
@@ -918,6 +939,7 @@
 					<string>@count.tracks</string>
 					<string>@count</string>
 					<string>name</string>
+					<string>tempo</string>
 				</object>
 				<bool key="NSEditable">YES</bool>
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
@@ -1249,6 +1271,22 @@
 					</object>
 					<int key="connectionID">284</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.tempo</string>
+						<reference key="source" ref="245128844"/>
+						<reference key="destination" ref="45846733"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="245128844"/>
+							<reference key="NSDestination" ref="45846733"/>
+							<string key="NSLabel">value: selection.tempo</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.tempo</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">291</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1304,6 +1342,7 @@
 							<reference ref="1053353672"/>
 							<reference ref="194875123"/>
 							<reference ref="1064551678"/>
+							<reference ref="245128844"/>
 						</object>
 						<reference key="parent" ref="189174793"/>
 					</object>
@@ -1712,6 +1751,21 @@
 						<reference key="object" ref="128121065"/>
 						<reference key="parent" ref="1064551678"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">285</int>
+						<reference key="object" ref="245128844"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="351368322"/>
+						</object>
+						<reference key="parent" ref="562619584"/>
+						<string key="objectName">Tempo</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">286</int>
+						<reference key="object" ref="351368322"/>
+						<reference key="parent" ref="245128844"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1762,6 +1816,8 @@
 					<string>28.IBPluginDependency</string>
 					<string>282.IBPluginDependency</string>
 					<string>283.IBPluginDependency</string>
+					<string>285.IBPluginDependency</string>
+					<string>286.IBPluginDependency</string>
 					<string>29.IBPluginDependency</string>
 					<string>31.IBPluginDependency</string>
 					<string>32.IBPluginDependency</string>
@@ -1840,15 +1896,17 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<real value="0.0"/>
 					<reference ref="804144009"/>
 					<real value="0.0"/>
 					<real value="0.0"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{96, 307}, {1197, 726}}</string>
+					<string>{{411, 215}, {1197, 726}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{96, 307}, {1197, 726}}</string>
+					<string>{{411, 215}, {1197, 726}}</string>
 					<integer value="1"/>
 					<integer value="1"/>
 					<string>{131.131, 86}</string>
@@ -1881,7 +1939,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">284</int>
+			<int key="maxID">291</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2483,6 +2541,22 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSScroller.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSSlider</string>
+					<string key="superclassName">NSControl</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">AppKit.framework/Headers/NSSlider.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSSliderCell</string>
+					<string key="superclassName">NSActionCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">AppKit.framework/Headers/NSSliderCell.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

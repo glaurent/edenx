@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#include <AudioToolbox/AudioToolbox.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface Player : NSObject {
     MusicSequence sequence;
@@ -16,15 +16,14 @@
     OSStatus lastError;
 }
 
-@property(readonly) OSStatus lastError;
-
 - (id)init;
-- (void)setUpAndFillWithSequence:(NSManagedObjectContext*)managedObjectContext;
+- (void)setUpWithSequence:(MusicSequence)seq;
 - (void)setupAUGraph;
-- (void)fillSequence:(NSManagedObjectContext*)managedObjectContext;
 - (void)play;
 - (void)stop;
 - (void)rewind;
 - (BOOL)isPlaying;
+
+@property(readonly) OSStatus lastError;
 
 @end

@@ -19,6 +19,14 @@
 
 #import <CoreAudio/CoreAudioTypes.h>
 
+@interface MyDocument (private)
+
+- (void)setupTempo;
+- (void)fillSequence;
+
+@end
+
+
 @implementation MyDocument
 
 - (id)init 
@@ -26,6 +34,7 @@
     self = [super init];
     if (self != nil) {
         player = [(AppController*)[NSApp delegate] player];
+        NewMusicSequence(&sequence);
     }
     return self;
 }
@@ -72,8 +81,9 @@
 
 - (IBAction)play:(id)sender
 {
-    NSLog(@"start playing"); 
-    [player setUpAndFillWithSequence:[self managedObjectContext]];
+    NSLog(@"start playing");
+    [self fillSequence];
+    [player setUpWithSequence:sequence];
     [player play];
 }
 
@@ -87,6 +97,7 @@
 {
     return [player isPlaying];
 }
+
 
 - (IBAction)rewind:(id)sender
 {
@@ -107,6 +118,7 @@
 
     if ([sender state] == NSOnState) {
         NSLog(@"MyDocument : start recording");
+        [self setupTempo];
         [recorder start];
     } else {
         [recorder stop];
@@ -136,9 +148,105 @@
 
 }
 
+- (void)setupTempo
+{
+    NSManagedObjectContext* moc = [self managedObjectContext];
+    
+    // Get tempo from composition
+    NSEntityDescription *compositionEntityDescription = [NSEntityDescription entityForName:@"Composition" inManagedObjectContext:moc];
+    NSFetchRequest *compositionRequest = [[[NSFetchRequest alloc] init] autorelease];
+    [compositionRequest setEntity:compositionEntityDescription];    
+    
+    NSError *error = nil;
+    NSArray *composition = [moc executeFetchRequest:compositionRequest error:&error];
+    
+    id<Composition> theComposition = [composition objectAtIndex:0];
+    
+    NSNumber* f = [theComposition tempo];
+    
+    NSLog(@"MyDocument:setupTempo : tempo = %@", f);
+    
+    MusicTrack tempoTrack;
+    
+    MusicSequenceGetTempoTrack(sequence, &tempoTrack);
+    
+    MusicTrackClear(tempoTrack, 0.0, 1.0); // clear first tempo event, if any
+    
+    MusicTrackNewExtendedTempoEvent(tempoTrack, 0.0, [f doubleValue]);
+    
+}
+
+- (void)fillSequence {
+    NSLog(@"MyDocument:fillSequence");
+
+    [self setupTempo];
+    
+    NSManagedObjectContext* moc = [self managedObjectContext];
+
+    NSEntityDescription *trackEntityDescription = [NSEntityDescription entityForName:@"Track" inManagedObjectContext:moc];
+    
+    NSFetchRequest *tracksRequest = [[[NSFetchRequest alloc] init] autorelease];
+    [tracksRequest setEntity:trackEntityDescription];    
+    
+    NSError *error = nil;
+    NSArray *tracks = [moc executeFetchRequest:tracksRequest error:&error];
+    if (tracks != nil) {
+        NSEnumerator *tracksEnumerator = [tracks objectEnumerator];
+        
+        id aTrack;
+        
+        while(aTrack = [tracksEnumerator nextObject]) {
+            MusicTrack sequenceTrack;
+            MusicSequenceNewTrack(sequence, &sequenceTrack);
+            
+            
+            // Fetch all playable events from that track
+            NSEntityDescription *playableEventDescription = [NSEntityDescription entityForName:@"PlayableElement" inManagedObjectContext:moc];
+            
+            NSFetchRequest *playableEventsRequest = [[[NSFetchRequest alloc] init] autorelease];
+            [playableEventsRequest setEntity:playableEventDescription];
+            
+            // I could get the events directly from aTrack, but with a query I get the filtering of playable events for free
+            //
+            NSPredicate *eventsFromThisTrackPredicate = [NSPredicate predicateWithFormat:@"track == %@", aTrack];
+            [playableEventsRequest setPredicate:eventsFromThisTrackPredicate];
+            NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"absoluteTime" ascending:YES];            
+            [playableEventsRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+            
+            NSArray *playableEvents = [moc executeFetchRequest:playableEventsRequest error:&error];
+            if (playableEvents != nil) {
+                NSEnumerator *eventsEnumerator = [playableEvents objectEnumerator];
+                
+                NSLog(@"got %d playable events for track '%@'", [playableEvents count], [aTrack name]);
+                
+                NSManagedObject<Element,Note>* anEvent;
+                
+                while(anEvent = [eventsEnumerator nextObject]) {
+                    // NSLog(@"event : %@ ", anEvent);
+                    MIDINoteMessage msg;
+                    msg.channel = [[aTrack channel] intValue];
+                    msg.duration = [[anEvent duration] floatValue];
+                    msg.velocity = [[anEvent velocity] intValue];
+                    msg.note = [[anEvent note] intValue];
+                    MusicTimeStamp timeStamp = [[anEvent absoluteTime] doubleValue];
+                    MusicTrackNewMIDINoteEvent(sequenceTrack, timeStamp, &msg);
+                }
+            } else {
+                NSLog(@"error when fetching events for track");
+            }
+        }
+        
+    } else {
+        NSLog(@"error when fetching track");
+    }
+    
+    NSLog(@"CAShow sequence :");
+    CAShow(sequence);
+}
 
 
 
 @synthesize tracksController;
+@synthesize sequence;
 
 @end

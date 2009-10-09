@@ -17,11 +17,12 @@
 
 @implementation MIDIReceiverTrackDelegate
 
-- (id)initWithTrack:(NSManagedObject<Track>*)aTrack withStartTime:(MIDITimeStamp)startTime
+- (id)initWithTrack:(NSManagedObject<Track>*)aTrack withStartTime:(MIDITimeStamp)startTime withMusicSequence:(MusicSequence)aSeq
 {
     self = [super init];
     track = aTrack;
-    recordingStartTime = startTime;   
+    recordingStartTime = startTime;
+    sequence = aSeq;
     return self; 
 }
 
@@ -59,17 +60,27 @@
                 table[ ([vmsg channel] - 1) * [vmsg dataByte1] ] = 0;
                 
                 if (noteOnMsg != nil) {
-                    MIDITimeStamp duration = [vmsg timeStamp] - [noteOnMsg timeStamp];
+                    MIDITimeStamp noteOffTimeStamp = [vmsg timeStamp];
+                    MIDITimeStamp noteOnTimeStamp = [noteOnMsg timeStamp];
+                    MusicTimeStamp noteOffMusicTimeStamp, noteOnMusicTimeStamp;
+                    
+                    MusicSequenceGetBeatsForSeconds(sequence, noteOnTimeStamp  / 1e9, &noteOnMusicTimeStamp);
+                    MusicSequenceGetBeatsForSeconds(sequence, noteOffTimeStamp / 1e9, &noteOffMusicTimeStamp);
+                    
+                    MusicTimeStamp duration = noteOffMusicTimeStamp - noteOnMusicTimeStamp;
+                    
                     
                     NSLog(@"MIDIReceiverTrackDelegate : duration = %u", duration);
                     
                     NSManagedObject<Note>* newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note" 
                                                                                    inManagedObjectContext:[track managedObjectContext]];
                     
-                    [newNote setDuration:[NSNumber numberWithUnsignedLong:duration]];
+                    [newNote setDuration:[NSNumber numberWithDouble:duration]];
                     [newNote setNote:[NSNumber numberWithUnsignedInt:[vmsg dataByte1]]];
                     [newNote setVelocity:[NSNumber numberWithUnsignedInt:[noteOnMsg dataByte2]]];
-                    [newNote setAbsoluteTime:[NSNumber numberWithUnsignedLong:(AudioGetCurrentHostTime() - recordingStartTime)]];
+                    MusicTimeStamp timeStamp;
+                    MusicSequenceGetBeatsForSeconds(sequence, (AudioGetCurrentHostTime() - recordingStartTime) / 1e9, &timeStamp);
+                    [newNote setAbsoluteTime:[NSNumber numberWithDouble:timeStamp]];
                      
                     NSLog(@"MIDIReceiverTrackDelegate : recording %@", newNote);
 //                  NSLog(@"MIDIReceiverTrackDelegate - events = %@ , nb events = %d", trackEventsSet, [trackEventsSet count]);

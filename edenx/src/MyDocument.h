@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 #import "SynchroScrollView.h"
 
@@ -23,7 +24,7 @@
     TrackEditor* trackEditor;
     // cursor position
     Player* player;
-    
+    MusicSequence sequence;
 }
 
 - (IBAction)showPlayBackCursor:(id)sender;
@@ -38,9 +39,11 @@
 
 - (NSArrayController*)midiSourcesController;
 
-// this property actually comes from player, see getter
+
+// this property actually comes from the Player, see implementation
 @property(readonly) BOOL playing;
 
 @property(readonly) TracksController* tracksController;
+@property(readonly) MusicSequence sequence;
 
 @end
