@@ -11,6 +11,9 @@
     Copyright (c) 2002-2004 Peter Yandell.  All Rights Reserved.
     
     $Id: PYMIDIUtils.h,v 1.7 2004/01/12 04:40:38 pete Exp $
+ 
+    Update : new URL is http://notahat.com/pymidi
+
 */
 
 

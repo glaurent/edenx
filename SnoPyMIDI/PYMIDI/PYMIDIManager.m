@@ -11,7 +11,10 @@
  Copyright (c) 2002-2004 Peter Yandell.  All Rights Reserved.
  
  $Id: PYMIDIManager.m,v 1.14 2004/01/12 04:39:28 pete Exp $
- */
+ 
+ Update : new URL is http://notahat.com/pymidi
+ 
+*/
 
 
 #import "PYMIDIManager.h"

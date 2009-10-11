@@ -11,7 +11,10 @@
     Copyright (c) 2002-2004 Peter Yandell.  All Rights Reserved.
     
     $Id: PYMIDIVirtualSource.h,v 1.5 2004/01/10 13:58:32 pete Exp $
-*/
+ 
+    Update : new URL is http://notahat.com/pymidi
+
+ */
 
 
 #import "PYMIDIEndpoint.h"

@@ -11,6 +11,9 @@
     Copyright (c) 2002-2004 Peter Yandell.  All Rights Reserved.
     
     $Id: PYMIDIRealDestination.h,v 1.6 2004/01/10 14:01:17 pete Exp $
+ 
+    Update : new URL is http://notahat.com/pymidi
+
 */
 
 
