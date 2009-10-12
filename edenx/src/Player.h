@@ -12,7 +12,7 @@
 @interface Player : NSObject {
     MusicSequence sequence;
     MusicPlayer player;
-    BOOL isSetup;
+    BOOL isAUGraphSetup;
     OSStatus lastError;
 }
 

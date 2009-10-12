@@ -23,6 +23,7 @@
 
 - (void)setupTempo;
 - (void)fillSequence;
+- (void)documentIsBeingModified:(NSNotification*)notification;
 
 @end
 
@@ -35,6 +36,7 @@
     if (self != nil) {
         player = [(AppController*)[NSApp delegate] player];
         NewMusicSequence(&sequence);
+        documentModifiedSinceLastPlay = NO;
     }
     return self;
 }
@@ -51,6 +53,13 @@
     // synchronize track list and track canvas scroll views
     [trackListView setSynchronizedScrollView:trackCanvasView];
         
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(documentIsBeingModified:)
+     name:NSManagedObjectContextObjectsDidChangeNotification
+     object:[self managedObjectContext]];
+    
 }
 
 
@@ -82,6 +91,12 @@
 - (IBAction)play:(id)sender
 {
     NSLog(@"start playing");
+    if (documentModifiedSinceLastPlay) {
+        documentModifiedSinceLastPlay = NO;
+        DisposeMusicSequence(sequence);
+        NewMusicSequence(&sequence);
+    }
+    
     [self fillSequence];
     [player setUpWithSequence:sequence];
     [player play];
@@ -176,7 +191,14 @@
     
 }
 
-- (void)fillSequence {
+- (void)documentIsBeingModified:(NSNotification*)notification
+{
+//    NSLog(@"MyDocument:documentIsBeingModified");
+    documentModifiedSinceLastPlay = YES;    
+}
+
+- (void)fillSequence
+{
     NSLog(@"MyDocument:fillSequence");
 
     [self setupTempo];

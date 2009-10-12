@@ -25,6 +25,11 @@
 - (void)windowDidLoad
 {
     NSLog(@"TrackEditor nib file is loaded");
+    
+    NSSortDescriptor * sd = [[NSSortDescriptor alloc] initWithKey:@"absoluteTime" ascending:YES];
+    
+    [trackList setSortDescriptors:[NSArray arrayWithObject:sd]];
+    
 }
 
 @synthesize editedDocument;

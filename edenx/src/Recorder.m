@@ -130,15 +130,6 @@
     }
 }
 
-//- (void)didReceiveMessage:(NSArray*)messages count:(unsigned int)count
-//{
-//    for(int i = 0; i < count; ++i, ++idx) {
-//        SMMessage* msg = [receivedMessages objectAtIndex:idx];
-//        NSLog(@"at %@ - type : %@ - %@", [msg timeStampForDisplay], [msg typeForDisplay], [msg dataForDisplay]);
-//        
-//    }
-//}
-
 @synthesize midiSources;
 @synthesize midiSourcesController;
 @synthesize recording;

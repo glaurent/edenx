@@ -22,7 +22,7 @@
     self = [super init];
     if (self != nil) {
         NewMusicPlayer(&player);
-        isSetup = NO;
+        isAUGraphSetup = NO;
     }
     
     return self;
@@ -30,7 +30,6 @@
 
 - (void)finalize
 {
-    DisposeMusicSequence(sequence);
     DisposeMusicPlayer(player);
     [super finalize];
 }
@@ -47,13 +46,14 @@
 - (void)setUpWithSequence:(MusicSequence)seq {
     NSLog(@"Player:setUp");
     
-    if (!isSetup) {
+    sequence = seq;        
+    [self setLastError:MusicPlayerSetSequence(player, sequence)];
+
+    if (!isAUGraphSetup) {
   
-        sequence = seq;        
-        [self setLastError:MusicPlayerSetSequence(player, sequence)];
         [self setupAUGraph];
         
-        // isSetup = YES;
+        isAUGraphSetup = YES;
     }
 
 }

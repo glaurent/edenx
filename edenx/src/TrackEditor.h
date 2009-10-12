@@ -12,6 +12,7 @@
 
 @interface TrackEditor : NSWindowController {
     MyDocument* editedDocument;
+    IBOutlet NSTableView* trackList;
 }
 
 - (id)initWithCurrentDocument:(MyDocument*)doc;

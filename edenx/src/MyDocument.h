@@ -25,6 +25,7 @@
     // cursor position
     Player* player;
     MusicSequence sequence;
+    BOOL documentModifiedSinceLastPlay;
 }
 
 - (IBAction)showPlayBackCursor:(id)sender;
