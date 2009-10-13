@@ -10,10 +10,16 @@
 
 
 @interface TracksController : NSArrayController {
+    NSPredicate *inputSourceSetAndRecordingPredicate;
     NSPredicate *inputSourceSetPredicate;
 }
 
-// returns the lists of tracks which have a recording source set
+// returns the lists of tracks which have an input source set and recording toggled on
 - (NSArray*)recordingTracks;
+
+// same, but with input source set only
+- (NSArray*)inputSourceSetTracks;
+
+- (void)handleMIDIRemoveObject:(NSNotification*)notification;
 
 @end

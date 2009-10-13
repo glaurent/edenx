@@ -8,6 +8,8 @@
 
 #import "MyDocument.h"
 
+#import "PYMIDI.h"
+
 #import "PlaybackCursorView.h"
 #import "TrackEditor.h"
 #import "Player.h"
@@ -54,11 +56,9 @@
     [trackListView setSynchronizedScrollView:trackCanvasView];
         
     
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(documentIsBeingModified:)
-     name:NSManagedObjectContextObjectsDidChangeNotification
-     object:[self managedObjectContext]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentIsBeingModified:) name:NSManagedObjectContextObjectsDidChangeNotification object:[self managedObjectContext]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:tracksController selector:@selector(handleMIDIRemoveObject:) name:PYMIDIObjectRemoved object:nil];
     
 }
 
@@ -265,7 +265,6 @@
     NSLog(@"CAShow sequence :");
     CAShow(sequence);
 }
-
 
 
 @synthesize tracksController;
