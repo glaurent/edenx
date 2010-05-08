@@ -10,17 +10,22 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 #import "SynchroScrollView.h"
+#import "CoreDataUtils.h"
 
 @class TrackEditor;
 @class Player;
 @class NSManagedObject;
 @class TracksController;
+@class CompositionController;
 
 @interface MyDocument : NSPersistentDocument {
     IBOutlet NSView* playbackCursorView;
     IBOutlet SynchroScrollView* trackListView;
     IBOutlet NSScrollView* trackCanvasView;
     IBOutlet TracksController* tracksController;
+    IBOutlet NSArrayController* timeSignaturesController;
+    IBOutlet NSArrayController* temposController;
+    IBOutlet CompositionController* compositionController;
     TrackEditor* trackEditor;
     // cursor position
     Player* player;
@@ -45,6 +50,8 @@
 @property(readonly) BOOL playing;
 
 @property(readonly) TracksController* tracksController;
+@property(readonly) CompositionController* compositionController;
+@property(readonly) NSArrayController* timeSignaturesController;
+@property(readonly) NSArrayController* temposController;
 @property(readonly) MusicSequence sequence;
-
 @end

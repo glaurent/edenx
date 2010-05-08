@@ -34,6 +34,10 @@
 		AFA0C8490F48794700D67487 /* PlaybackCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0C8480F48794700D67487 /* PlaybackCursorView.m */; };
 		AFA0C93E0F50746E00D67487 /* SynchroScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0C93D0F50746E00D67487 /* SynchroScrollView.m */; };
 		AFA0CACD0F5AA7E100D67487 /* CompositionController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0CACC0F5AA7E100D67487 /* CompositionController.m */; };
+		AFCA0767114CF43400FF7BA8 /* RulerScale.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCA0766114CF43400FF7BA8 /* RulerScale.m */; };
+		AFCA077D1152E03A00FF7BA8 /* TimeSignatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCA077C1152E03A00FF7BA8 /* TimeSignatureController.m */; };
+		AFCA07B01154D11300FF7BA8 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCA07AF1154D11300FF7BA8 /* Note.m */; };
+		AFDB18711184C2EB003D5351 /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDB18701184C2EB003D5351 /* CoreDataUtils.m */; };
 		AFEBDCC2105C125A0009E944 /* Recorder.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEBDCC1105C125A0009E944 /* Recorder.m */; };
 		AFFAE989103F16AA000FF2B5 /* SnoPyMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFFAE937103F0BF4000FF2B5 /* SnoPyMIDI.framework */; };
 		AFFAE993103F19F4000FF2B5 /* MIDIReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = AFFAE992103F19F4000FF2B5 /* MIDIReceiver.m */; };
@@ -131,6 +135,14 @@
 		AFA0CACB0F5AA7E100D67487 /* CompositionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositionController.h; sourceTree = "<group>"; };
 		AFA0CACC0F5AA7E100D67487 /* CompositionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompositionController.m; sourceTree = "<group>"; };
 		AFAD22CB0F18FE2500166E36 /* DrawKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DrawKit.xcodeproj; path = "../DrawKit stuff/DrawKit/DrawKit.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		AFCA0765114CF43400FF7BA8 /* RulerScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RulerScale.h; sourceTree = "<group>"; };
+		AFCA0766114CF43400FF7BA8 /* RulerScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RulerScale.m; sourceTree = "<group>"; };
+		AFCA077B1152E03A00FF7BA8 /* TimeSignatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSignatureController.h; sourceTree = "<group>"; };
+		AFCA077C1152E03A00FF7BA8 /* TimeSignatureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSignatureController.m; sourceTree = "<group>"; };
+		AFCA07AE1154D11300FF7BA8 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		AFCA07AF1154D11300FF7BA8 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		AFDB186F1184C2EB003D5351 /* CoreDataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataUtils.h; sourceTree = "<group>"; };
+		AFDB18701184C2EB003D5351 /* CoreDataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataUtils.m; sourceTree = "<group>"; };
 		AFEBDCC0105C125A0009E944 /* Recorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recorder.h; sourceTree = "<group>"; };
 		AFEBDCC1105C125A0009E944 /* Recorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recorder.m; sourceTree = "<group>"; };
 		AFFAE932103F0BF4000FF2B5 /* SnoPyMIDI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SnoPyMIDI.xcodeproj; path = ../SnoPyMIDI/SnoPyMIDI.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -222,6 +234,7 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AFCA07741152B78A00FF7BA8 /* Composition Stuff */,
 				AFEBDCC4105C15F10009E944 /* Record and play */,
 				AFA0C8470F48794700D67487 /* PlaybackCursorView.h */,
 				AFA0C8480F48794700D67487 /* PlaybackCursorView.m */,
@@ -231,14 +244,14 @@
 				AFA0C93D0F50746E00D67487 /* SynchroScrollView.m */,
 				AFA0C7F60F4866C900D67487 /* AppController.h */,
 				AFA0C7F70F4866C900D67487 /* AppController.m */,
-				AFA0CACB0F5AA7E100D67487 /* CompositionController.h */,
-				AFA0CACC0F5AA7E100D67487 /* CompositionController.m */,
 				AF4B28800F75920000438CAC /* TrackEditor.h */,
 				AF4B28810F75920000438CAC /* TrackEditor.m */,
 				AF86951D0F92AB9200305C7D /* CoreDataStuff.h */,
 				AF86951E0F92AB9200305C7D /* CoreDataStuff.m */,
 				AF282F93106646A800EC4D07 /* TracksController.h */,
 				AF282F94106646A800EC4D07 /* TracksController.m */,
+				AFDB186F1184C2EB003D5351 /* CoreDataUtils.h */,
+				AFDB18701184C2EB003D5351 /* CoreDataUtils.m */,
 			);
 			name = Classes;
 			path = src;
@@ -302,6 +315,21 @@
 				AFAD22CB0F18FE2500166E36 /* DrawKit.xcodeproj */,
 			);
 			name = "Other Projects";
+			sourceTree = "<group>";
+		};
+		AFCA07741152B78A00FF7BA8 /* Composition Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				AFA0CACB0F5AA7E100D67487 /* CompositionController.h */,
+				AFA0CACC0F5AA7E100D67487 /* CompositionController.m */,
+				AFCA0765114CF43400FF7BA8 /* RulerScale.h */,
+				AFCA0766114CF43400FF7BA8 /* RulerScale.m */,
+				AFCA077B1152E03A00FF7BA8 /* TimeSignatureController.h */,
+				AFCA077C1152E03A00FF7BA8 /* TimeSignatureController.m */,
+				AFCA07AE1154D11300FF7BA8 /* Note.h */,
+				AFCA07AF1154D11300FF7BA8 /* Note.m */,
+			);
+			name = "Composition Stuff";
 			sourceTree = "<group>";
 		};
 		AFEBDCC4105C15F10009E944 /* Record and play */ = {
@@ -473,6 +501,10 @@
 				AFEBDCC2105C125A0009E944 /* Recorder.m in Sources */,
 				AF282F95106646A800EC4D07 /* TracksController.m in Sources */,
 				AF28316E1066D02400EC4D07 /* MIDIReceiverTrackDelegate.m in Sources */,
+				AFCA0767114CF43400FF7BA8 /* RulerScale.m in Sources */,
+				AFCA077D1152E03A00FF7BA8 /* TimeSignatureController.m in Sources */,
+				AFCA07B01154D11300FF7BA8 /* Note.m in Sources */,
+				AFDB18711184C2EB003D5351 /* CoreDataUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

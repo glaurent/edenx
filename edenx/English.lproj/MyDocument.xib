@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">10B504</string>
-		<string key="IBDocument.InterfaceBuilderVersion">732</string>
-		<string key="IBDocument.AppKitVersion">1038.2</string>
-		<string key="IBDocument.HIToolboxVersion">437.00</string>
+		<string key="IBDocument.SystemVersion">10D573</string>
+		<string key="IBDocument.InterfaceBuilderVersion">740</string>
+		<string key="IBDocument.AppKitVersion">1038.29</string>
+		<string key="IBDocument.HIToolboxVersion">460.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">732</string>
+			<string key="NS.object.0">740</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1012,6 +1012,8 @@
 					<string>@count</string>
 					<string>name</string>
 					<string>tempo</string>
+					<string>timeSignatures</string>
+					<string>tempos</string>
 				</object>
 				<bool key="NSEditable">YES</bool>
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
@@ -1019,6 +1021,24 @@
 					<string key="NSEntityName">Composition</string>
 				</object>
 				<bool key="_NSIsUsingManagedProxy">YES</bool>
+			</object>
+			<object class="NSArrayController" id="240800091">
+				<bool key="NSEditable">YES</bool>
+				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
+				<bool key="NSAvoidsEmptySelection">YES</bool>
+				<bool key="NSPreservesSelection">YES</bool>
+				<bool key="NSSelectsInsertedObjects">YES</bool>
+				<bool key="NSFilterRestrictsInsertion">YES</bool>
+				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
+			</object>
+			<object class="NSArrayController" id="556352901">
+				<bool key="NSEditable">YES</bool>
+				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
+				<bool key="NSAvoidsEmptySelection">YES</bool>
+				<bool key="NSPreservesSelection">YES</bool>
+				<bool key="NSSelectsInsertedObjects">YES</bool>
+				<bool key="NSFilterRestrictsInsertion">YES</bool>
+				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -1374,6 +1394,94 @@
 						</object>
 					</object>
 					<int key="connectionID">302</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">compositionController</string>
+						<reference key="source" ref="951636235"/>
+						<reference key="destination" ref="45846733"/>
+					</object>
+					<int key="connectionID">306</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">contentSet: selection.tempos</string>
+						<reference key="source" ref="556352901"/>
+						<reference key="destination" ref="45846733"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="556352901"/>
+							<reference key="NSDestination" ref="45846733"/>
+							<string key="NSLabel">contentSet: selection.tempos</string>
+							<string key="NSBinding">contentSet</string>
+							<string key="NSKeyPath">selection.tempos</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">312</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">temposController</string>
+						<reference key="source" ref="951636235"/>
+						<reference key="destination" ref="556352901"/>
+					</object>
+					<int key="connectionID">313</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">timeSignaturesController</string>
+						<reference key="source" ref="951636235"/>
+						<reference key="destination" ref="240800091"/>
+					</object>
+					<int key="connectionID">314</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">contentSet: selection.timeSignatures</string>
+						<reference key="source" ref="240800091"/>
+						<reference key="destination" ref="45846733"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="240800091"/>
+							<reference key="NSDestination" ref="45846733"/>
+							<string key="NSLabel">contentSet: selection.timeSignatures</string>
+							<string key="NSBinding">contentSet</string>
+							<string key="NSKeyPath">selection.timeSignatures</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">316</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">sortDescriptors: absoluteTimeSortDescriptorArray</string>
+						<reference key="source" ref="240800091"/>
+						<reference key="destination" ref="951636235"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="240800091"/>
+							<reference key="NSDestination" ref="951636235"/>
+							<string key="NSLabel">sortDescriptors: absoluteTimeSortDescriptorArray</string>
+							<string key="NSBinding">sortDescriptors</string>
+							<string key="NSKeyPath">absoluteTimeSortDescriptorArray</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">318</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">sortDescriptors: absoluteTimeSortDescriptorArray</string>
+						<reference key="source" ref="556352901"/>
+						<reference key="destination" ref="951636235"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="556352901"/>
+							<reference key="NSDestination" ref="951636235"/>
+							<string key="NSLabel">sortDescriptors: absoluteTimeSortDescriptorArray</string>
+							<string key="NSBinding">sortDescriptors</string>
+							<string key="NSKeyPath">absoluteTimeSortDescriptorArray</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">320</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1879,6 +1987,18 @@
 						<reference key="object" ref="648151551"/>
 						<reference key="parent" ref="136138266"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">307</int>
+						<reference key="object" ref="240800091"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">Time Signatures Controller</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">310</int>
+						<reference key="object" ref="556352901"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">Tempos Controller</string>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1937,7 +2057,9 @@
 					<string>305.IBNumberFormatterBehaviorMetadataKey</string>
 					<string>305.IBNumberFormatterLocalizesFormatMetadataKey</string>
 					<string>305.IBPluginDependency</string>
+					<string>307.IBPluginDependency</string>
 					<string>31.IBPluginDependency</string>
+					<string>310.IBPluginDependency</string>
 					<string>32.IBPluginDependency</string>
 					<string>36.IBPluginDependency</string>
 					<string>36.IBViewIntegration.shadowBlurRadius</string>
@@ -2021,15 +2143,17 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<real value="0.0"/>
 					<reference ref="804144009"/>
 					<real value="0.0"/>
 					<real value="0.0"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{411, 215}, {1197, 726}}</string>
+					<string>{{322, 215}, {1197, 726}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{411, 215}, {1197, 726}}</string>
+					<string>{{322, 215}, {1197, 726}}</string>
 					<integer value="1"/>
 					<integer value="1"/>
 					<string>{131.131, 86}</string>
@@ -2062,7 +2186,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">305</int>
+			<int key="maxID">320</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2115,14 +2239,20 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>compositionController</string>
 							<string>playbackCursorView</string>
+							<string>temposController</string>
+							<string>timeSignaturesController</string>
 							<string>trackCanvasView</string>
 							<string>trackListView</string>
 							<string>tracksController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>CompositionController</string>
 							<string>NSView</string>
+							<string>NSArrayController</string>
+							<string>NSArrayController</string>
 							<string>NSScrollView</string>
 							<string>SynchroScrollView</string>
 							<string>TracksController</string>

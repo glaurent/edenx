@@ -38,7 +38,7 @@
     if (self != nil) {
         player = [(AppController*)[NSApp delegate] player];
         NewMusicSequence(&sequence);
-        documentModifiedSinceLastPlay = NO;
+        documentModifiedSinceLastPlay = YES; // this is a new document, so player needs setup.
     }
     return self;
 }
@@ -95,10 +95,10 @@
         documentModifiedSinceLastPlay = NO;
         DisposeMusicSequence(sequence);
         NewMusicSequence(&sequence);
+        [self fillSequence];
+        [player setUpWithSequence:sequence];
     }
     
-    [self fillSequence];
-    [player setUpWithSequence:sequence];
     [player play];
 }
 
@@ -143,7 +143,7 @@
 
 - (IBAction)testAddEvent:(id)sender
 {
-    NSManagedObject* currentTrack = [[tracksController selectedObjects] objectAtIndex:0];
+    NSManagedObject<Track>* currentTrack = [[tracksController selectedObjects] objectAtIndex:0];
     
     NSManagedObjectContext* managedObjectContext = [currentTrack managedObjectContext];
     
@@ -212,6 +212,9 @@
     
     NSError *error = nil;
     NSArray *tracks = [moc executeFetchRequest:tracksRequest error:&error];
+    
+    // TODO: rewrite this using composition.tracks accessor ?
+    
     if (tracks != nil) {
         NSEnumerator *tracksEnumerator = [tracks objectEnumerator];
         
@@ -232,8 +235,7 @@
             //
             NSPredicate *eventsFromThisTrackPredicate = [NSPredicate predicateWithFormat:@"track == %@", aTrack];
             [playableEventsRequest setPredicate:eventsFromThisTrackPredicate];
-            NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"absoluteTime" ascending:YES];            
-            [playableEventsRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+            [playableEventsRequest setSortDescriptors:[CoreDataUtils absoluteTimeSortDescriptorArray]];
             
             NSArray *playableEvents = [moc executeFetchRequest:playableEventsRequest error:&error];
             if (playableEvents != nil) {
@@ -268,6 +270,10 @@
 
 
 @synthesize tracksController;
+@synthesize compositionController;
+@synthesize timeSignaturesController;
+@synthesize temposController;
+
 @synthesize sequence;
 
 @end
