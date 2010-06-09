@@ -11,12 +11,12 @@
 
 @interface CoreDataUtils : NSObject {
     NSSortDescriptor* absoluteTimeSortDescriptor;
-    NSArray* absoluteTimeSortDescriptorArrayDataMember;
+    NSArray* absoluteTimeSortDescriptorArray;
 }
 
-+ (NSArray*) absoluteTimeSortDescriptorArray;
-+ (CoreDataUtils*) instance;
+- (NSArray*) absoluteTimeSortDescriptorArray;
+// + (CoreDataUtils*) instance;
 
-@property(readonly) NSArray* absoluteTimeSortDescriptorArrayDataMember;
+@property(readonly) NSArray* absoluteTimeSortDescriptorArray;
 
 @end

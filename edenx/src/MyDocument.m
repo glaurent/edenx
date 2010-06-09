@@ -10,7 +10,6 @@
 
 #import "PYMIDI.h"
 
-#import "PlaybackCursorView.h"
 #import "TrackEditor.h"
 #import "Player.h"
 #import "SMMessage.h"
@@ -18,6 +17,7 @@
 #import "AppController.h"
 #import "Recorder.h"
 #import "CoreDataStuff.h"
+#import "SegmentCanvas.h"
 
 #import <CoreAudio/CoreAudioTypes.h>
 
@@ -59,15 +59,26 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentIsBeingModified:) name:NSManagedObjectContextObjectsDidChangeNotification object:[self managedObjectContext]];
     
     [[NSNotificationCenter defaultCenter] addObserver:tracksController selector:@selector(handleMIDIRemoveObject:) name:PYMIDIObjectRemoved object:nil];
+
     
 }
 
+- (void)setupZoomSlider
+{
+    // attach as observer to Composition.testRowHeight
+    //
+    NSLog(@"MyDocument adding SegmentCanvas as observer: %@ observing %@", segmentCanvas, [compositionController content]);
+    [[compositionController content] addObserver:segmentCanvas
+                                        forKeyPath:@"testRowHeight"
+                                           options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                                           context:NULL];    
+}
 
 - (IBAction)showPlayBackCursor:(id)sender
 {
+    // TODO - implement me with a CoreAnim layer
     NSLog(@"showPlayBackCursor : %d", [sender state]);
     
-    [playbackCursorView setHidden:([sender state] == NSOffState)];
 }
 
 - (IBAction)editSelectedTrack:(id)sender
@@ -233,9 +244,9 @@
             
             // I could get the events directly from aTrack, but with a query I get the filtering of playable events for free
             //
-            NSPredicate *eventsFromThisTrackPredicate = [NSPredicate predicateWithFormat:@"track == %@", aTrack];
+            NSPredicate *eventsFromThisTrackPredicate = [NSPredicate predicateWithFormat:@"segment.track == %@", aTrack];
             [playableEventsRequest setPredicate:eventsFromThisTrackPredicate];
-            [playableEventsRequest setSortDescriptors:[CoreDataUtils absoluteTimeSortDescriptorArray]];
+            [playableEventsRequest setSortDescriptors:[coreDataUtils absoluteTimeSortDescriptorArray]];
             
             NSArray *playableEvents = [moc executeFetchRequest:playableEventsRequest error:&error];
             if (playableEvents != nil) {
@@ -268,11 +279,12 @@
     CAShow(sequence);
 }
 
-
 @synthesize tracksController;
 @synthesize compositionController;
 @synthesize timeSignaturesController;
 @synthesize temposController;
+@synthesize coreDataUtils;
+@synthesize segmentCanvas;
 
 @synthesize sequence;
 

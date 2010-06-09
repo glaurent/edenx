@@ -17,28 +17,28 @@
     
     if (self != nil) {
         absoluteTimeSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"absoluteTime" ascending:YES];
-        absoluteTimeSortDescriptorArrayDataMember = [NSArray arrayWithObject:absoluteTimeSortDescriptor];        
+        absoluteTimeSortDescriptorArray = [NSArray arrayWithObject:absoluteTimeSortDescriptor];        
     }
     
     return self;
 }
 
-+ (CoreDataUtils*) instance
-{
-    static CoreDataUtils* myInstance = nil;
-    
-    if (myInstance == nil) {
-        myInstance = [[CoreDataUtils alloc] init];
-    }
-    
-    return myInstance;
-}
+//+ (CoreDataUtils*) instance
+//{
+//    static CoreDataUtils* myInstance = nil;
+//    
+//    if (myInstance == nil) {
+//        myInstance = [[CoreDataUtils alloc] init];
+//    }
+//    
+//    return myInstance;
+//}
+//
+//+ (NSArray*) absoluteTimeSortDescriptorArray
+//{
+//    return [[CoreDataUtils instance] absoluteTimeSortDescriptorArrayDataMember];
+//}
 
-+ (NSArray*) absoluteTimeSortDescriptorArray
-{
-    return [[CoreDataUtils instance] absoluteTimeSortDescriptorArrayDataMember];
-}
-
-@synthesize absoluteTimeSortDescriptorArrayDataMember;
+@synthesize absoluteTimeSortDescriptorArray;
 
 @end

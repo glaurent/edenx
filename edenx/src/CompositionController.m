@@ -29,6 +29,13 @@
     return self;
 }
 
+- (void)setContent:(id)content
+{
+    NSLog(@"CompositionController:setContent %@", content);
+    [super setContent:content];
+    [[[NSDocumentController sharedDocumentController] currentDocument] setupZoomSlider]; // TODO - gotta be a better way to do this
+}
+
 - (void)prepareContent
 {
     
@@ -148,7 +155,7 @@
     
     // order by absolute time
     //
-    [timeSignaturesRequest setSortDescriptors:[CoreDataUtils absoluteTimeSortDescriptorArray]];
+    [timeSignaturesRequest setSortDescriptors:[[document coreDataUtils] absoluteTimeSortDescriptorArray]];
     
 //    NSPredicate *timeSigsBeforeThisTimePredicate = [NSPredicate predicateWithFormat:@"absoluteTime < %@", t];
 //    [timeSignaturesRequest setPredicate:timeSigsBeforeThisTimePredicate];
@@ -253,7 +260,7 @@
     
     // order by absolute time
     //
-    [timeSignaturesRequest setSortDescriptors:[CoreDataUtils absoluteTimeSortDescriptorArray]];
+    [timeSignaturesRequest setSortDescriptors:[[document coreDataUtils] absoluteTimeSortDescriptorArray]];
     
     NSError *error = nil;
     
@@ -339,7 +346,7 @@
     [allEventsRequest setFetchLimit:2]; // we're only interested in the first element
     
     
-    NSSortDescriptor* reversedAbsoluteTimeSortDecriptor = [[[CoreDataUtils absoluteTimeSortDescriptorArray] objectAtIndex:0] reversedSortDescriptor];
+    NSSortDescriptor* reversedAbsoluteTimeSortDecriptor = [[[[document coreDataUtils] absoluteTimeSortDescriptorArray] objectAtIndex:0] reversedSortDescriptor];
     [allEventsRequest setSortDescriptors:[NSArray arrayWithObject:reversedAbsoluteTimeSortDecriptor]];
     
     NSError *error = nil;

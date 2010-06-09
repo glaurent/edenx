@@ -30,8 +30,10 @@
 		AF8693BE0F914F5900305C7D /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8693BA0F914F5900305C7D /* CoreAudio.framework */; };
 		AF8693BF0F914F5900305C7D /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8693BB0F914F5900305C7D /* CoreMIDI.framework */; };
 		AF86951F0F92AB9200305C7D /* CoreDataStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = AF86951E0F92AB9200305C7D /* CoreDataStuff.m */; };
+		AF93BB3411BB074D0032FA84 /* SegmentCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = AF93BB3311BB074D0032FA84 /* SegmentCanvas.m */; };
+		AF93BB7C11BB07D00032FA84 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF93BB7B11BB07D00032FA84 /* QuartzCore.framework */; };
+		AF93BBC811BB08380032FA84 /* SegmentLayerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF93BBC711BB08380032FA84 /* SegmentLayerDelegate.m */; };
 		AFA0C7F80F4866C900D67487 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0C7F70F4866C900D67487 /* AppController.m */; };
-		AFA0C8490F48794700D67487 /* PlaybackCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0C8480F48794700D67487 /* PlaybackCursorView.m */; };
 		AFA0C93E0F50746E00D67487 /* SynchroScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0C93D0F50746E00D67487 /* SynchroScrollView.m */; };
 		AFA0CACD0F5AA7E100D67487 /* CompositionController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0CACC0F5AA7E100D67487 /* CompositionController.m */; };
 		AFCA0767114CF43400FF7BA8 /* RulerScale.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCA0766114CF43400FF7BA8 /* RulerScale.m */; };
@@ -126,10 +128,13 @@
 		AF8693BB0F914F5900305C7D /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = /System/Library/Frameworks/CoreMIDI.framework; sourceTree = "<absolute>"; };
 		AF86951D0F92AB9200305C7D /* CoreDataStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataStuff.h; sourceTree = "<group>"; };
 		AF86951E0F92AB9200305C7D /* CoreDataStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataStuff.m; sourceTree = "<group>"; };
+		AF93BB3211BB074D0032FA84 /* SegmentCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentCanvas.h; sourceTree = "<group>"; };
+		AF93BB3311BB074D0032FA84 /* SegmentCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentCanvas.m; sourceTree = "<group>"; };
+		AF93BB7B11BB07D00032FA84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		AF93BBC611BB08380032FA84 /* SegmentLayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentLayerDelegate.h; sourceTree = "<group>"; };
+		AF93BBC711BB08380032FA84 /* SegmentLayerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentLayerDelegate.m; sourceTree = "<group>"; };
 		AFA0C7F60F4866C900D67487 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		AFA0C7F70F4866C900D67487 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
-		AFA0C8470F48794700D67487 /* PlaybackCursorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackCursorView.h; sourceTree = "<group>"; };
-		AFA0C8480F48794700D67487 /* PlaybackCursorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaybackCursorView.m; sourceTree = "<group>"; };
 		AFA0C93C0F50746E00D67487 /* SynchroScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynchroScrollView.h; sourceTree = "<group>"; };
 		AFA0C93D0F50746E00D67487 /* SynchroScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynchroScrollView.m; sourceTree = "<group>"; };
 		AFA0CACB0F5AA7E100D67487 /* CompositionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositionController.h; sourceTree = "<group>"; };
@@ -176,6 +181,7 @@
 				AF8693BD0F914F5900305C7D /* AudioUnit.framework in Frameworks */,
 				AF8693BE0F914F5900305C7D /* CoreAudio.framework in Frameworks */,
 				AF8693BF0F914F5900305C7D /* CoreMIDI.framework in Frameworks */,
+				AF93BB7C11BB07D00032FA84 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +199,7 @@
 				514EA014081EC7C3009B8CD9 /* CoreFoundation.framework */,
 				514E9E2D081EC793009B8CD9 /* CoreServices.framework */,
 				2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */,
+				AF93BB7B11BB07D00032FA84 /* QuartzCore.framework */,
 				7788DA0506752A1600599AAD /* CoreData.framework */,
 			);
 			name = "Linked Frameworks";
@@ -234,10 +241,9 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AF93BB3111BB07080032FA84 /* Segment Canvas */,
 				AFCA07741152B78A00FF7BA8 /* Composition Stuff */,
 				AFEBDCC4105C15F10009E944 /* Record and play */,
-				AFA0C8470F48794700D67487 /* PlaybackCursorView.h */,
-				AFA0C8480F48794700D67487 /* PlaybackCursorView.m */,
 				2A37F4AEFDCFA73011CA2CEA /* MyDocument.h */,
 				2A37F4ACFDCFA73011CA2CEA /* MyDocument.m */,
 				AFA0C93C0F50746E00D67487 /* SynchroScrollView.h */,
@@ -315,6 +321,17 @@
 				AFAD22CB0F18FE2500166E36 /* DrawKit.xcodeproj */,
 			);
 			name = "Other Projects";
+			sourceTree = "<group>";
+		};
+		AF93BB3111BB07080032FA84 /* Segment Canvas */ = {
+			isa = PBXGroup;
+			children = (
+				AF93BB3211BB074D0032FA84 /* SegmentCanvas.h */,
+				AF93BB3311BB074D0032FA84 /* SegmentCanvas.m */,
+				AF93BBC611BB08380032FA84 /* SegmentLayerDelegate.h */,
+				AF93BBC711BB08380032FA84 /* SegmentLayerDelegate.m */,
+			);
+			name = "Segment Canvas";
 			sourceTree = "<group>";
 		};
 		AFCA07741152B78A00FF7BA8 /* Composition Stuff */ = {
@@ -489,7 +506,6 @@
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				775BDEF1067A8BF0009058FE /* MyDocument.xcdatamodel in Sources */,
 				AFA0C7F80F4866C900D67487 /* AppController.m in Sources */,
-				AFA0C8490F48794700D67487 /* PlaybackCursorView.m in Sources */,
 				AFA0C93E0F50746E00D67487 /* SynchroScrollView.m in Sources */,
 				AFA0CACD0F5AA7E100D67487 /* CompositionController.m in Sources */,
 				AF4B28820F75920000438CAC /* TrackEditor.m in Sources */,
@@ -505,6 +521,8 @@
 				AFCA077D1152E03A00FF7BA8 /* TimeSignatureController.m in Sources */,
 				AFCA07B01154D11300FF7BA8 /* Note.m in Sources */,
 				AFDB18711184C2EB003D5351 /* CoreDataUtils.m in Sources */,
+				AF93BB3411BB074D0032FA84 /* SegmentCanvas.m in Sources */,
+				AF93BBC811BB08380032FA84 /* SegmentLayerDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

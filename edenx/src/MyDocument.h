@@ -17,15 +17,17 @@
 @class NSManagedObject;
 @class TracksController;
 @class CompositionController;
+@class SegmentCanvas;
 
 @interface MyDocument : NSPersistentDocument {
-    IBOutlet NSView* playbackCursorView;
     IBOutlet SynchroScrollView* trackListView;
     IBOutlet NSScrollView* trackCanvasView;
     IBOutlet TracksController* tracksController;
     IBOutlet NSArrayController* timeSignaturesController;
     IBOutlet NSArrayController* temposController;
     IBOutlet CompositionController* compositionController;
+    IBOutlet CoreDataUtils* coreDataUtils;
+    IBOutlet SegmentCanvas* segmentCanvas;
     TrackEditor* trackEditor;
     // cursor position
     Player* player;
@@ -45,6 +47,7 @@
 
 - (NSArrayController*)midiSourcesController;
 
+- (void)setupZoomSlider;
 
 // this property actually comes from the Player, see implementation
 @property(readonly) BOOL playing;
@@ -54,4 +57,7 @@
 @property(readonly) NSArrayController* timeSignaturesController;
 @property(readonly) NSArrayController* temposController;
 @property(readonly) MusicSequence sequence;
+@property(readonly) CoreDataUtils* coreDataUtils;
+@property(readonly) SegmentCanvas* segmentCanvas;
+
 @end
