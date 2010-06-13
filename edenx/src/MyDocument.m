@@ -63,13 +63,40 @@
     
 }
 
+- (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
+{
+    NSLog(@"MyDocument writeToURL");
+    return [super writeToURL:absoluteURL ofType:typeName error:outError];
+}
+
+- (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation originalContentsURL:(NSURL *)absoluteOriginalContentsURL error:(NSError **)outError
+{
+    NSLog(@"MyDocument writeToURL 2");
+    BOOL res = [super writeToURL:absoluteURL ofType:typeName forSaveOperation:saveOperation originalContentsURL:absoluteOriginalContentsURL error:outError];
+    if (!res) {
+        // code from http://stackoverflow.com/questions/1283960/iphone-core-data-unresolved-error-while-saving/1297157#1297157
+        NSLog(@"Failed to save to data store: %@", [*outError localizedDescription]);
+        NSArray* detailedErrors = [[*outError userInfo] objectForKey:NSDetailedErrorsKey];
+        if(detailedErrors != nil && [detailedErrors count] > 0) {
+            for(NSError* detailedError in detailedErrors) {
+                NSLog(@"  DetailedError: %@", [detailedError userInfo]);
+            }
+        }
+        else {
+            NSLog(@"  %@", [*outError userInfo]);
+        }
+    }
+    
+    return res;
+}
+
 - (void)setupZoomSlider
 {
     // attach as observer to Composition.testRowHeight
     //
     NSLog(@"MyDocument adding SegmentCanvas as observer: %@ observing %@", segmentCanvas, [compositionController content]);
     [[compositionController content] addObserver:segmentCanvas
-                                        forKeyPath:@"testRowHeight"
+                                        forKeyPath:@"zoomVertical"
                                            options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                                            context:NULL];    
 }

@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="5"/>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -880,9 +880,9 @@
 								<int key="NSCellFlags2">0</int>
 								<string key="NSContents"/>
 								<reference key="NSControlView" ref="727322971"/>
-								<double key="NSMaxValue">100</double>
-								<double key="NSMinValue">20</double>
-								<double key="NSValue">41.25</double>
+								<double key="NSMaxValue">5</double>
+								<double key="NSMinValue">1</double>
+								<double key="NSValue">1</double>
 								<double key="NSAltIncValue">0.0</double>
 								<int key="NSNumberOfTickMarks">0</int>
 								<int key="NSTickMarkPosition">0</int>
@@ -951,6 +951,8 @@
 					<string>tempos</string>
 					<string>viewSettings.rowHeight</string>
 					<string>testRowHeight</string>
+					<string>playbackTempo</string>
+					<string>zoomVertical</string>
 				</object>
 				<bool key="NSEditable">YES</bool>
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
@@ -1296,38 +1298,6 @@
 					<int key="connectionID">284</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.tempo</string>
-						<reference key="source" ref="715254287"/>
-						<reference key="destination" ref="45846733"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="715254287"/>
-							<reference key="NSDestination" ref="45846733"/>
-							<string key="NSLabel">value: selection.tempo</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.tempo</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">291</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.tempo</string>
-						<reference key="source" ref="737446226"/>
-						<reference key="destination" ref="45846733"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="737446226"/>
-							<reference key="NSDestination" ref="45846733"/>
-							<string key="NSLabel">value: selection.tempo</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.tempo</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">302</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">compositionController</string>
 						<reference key="source" ref="951636235"/>
@@ -1424,44 +1394,76 @@
 					<int key="connectionID">336</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.testRowHeight</string>
-						<reference key="source" ref="567355640"/>
-						<reference key="destination" ref="45846733"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="567355640"/>
-							<reference key="NSDestination" ref="45846733"/>
-							<string key="NSLabel">value: selection.testRowHeight</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.testRowHeight</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">343</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.testRowHeight</string>
-						<reference key="source" ref="727322971"/>
-						<reference key="destination" ref="45846733"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="727322971"/>
-							<reference key="NSDestination" ref="45846733"/>
-							<string key="NSLabel">value: selection.testRowHeight</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.testRowHeight</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">344</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">segmentCanvas</string>
 						<reference key="source" ref="951636235"/>
 						<reference key="destination" ref="998332024"/>
 					</object>
 					<int key="connectionID">345</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.playbackTempo</string>
+						<reference key="source" ref="715254287"/>
+						<reference key="destination" ref="45846733"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="715254287"/>
+							<reference key="NSDestination" ref="45846733"/>
+							<string key="NSLabel">value: selection.playbackTempo</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.playbackTempo</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">346</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.playbackTempo</string>
+						<reference key="source" ref="737446226"/>
+						<reference key="destination" ref="45846733"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="737446226"/>
+							<reference key="NSDestination" ref="45846733"/>
+							<string key="NSLabel">value: selection.playbackTempo</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.playbackTempo</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">347</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.zoomVertical</string>
+						<reference key="source" ref="727322971"/>
+						<reference key="destination" ref="45846733"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="727322971"/>
+							<reference key="NSDestination" ref="45846733"/>
+							<string key="NSLabel">value: selection.zoomVertical</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.zoomVertical</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">348</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.zoomVertical</string>
+						<reference key="source" ref="567355640"/>
+						<reference key="destination" ref="45846733"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="567355640"/>
+							<reference key="NSDestination" ref="45846733"/>
+							<string key="NSLabel">value: selection.zoomVertical</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.zoomVertical</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">349</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2036,7 +2038,6 @@
 					<string>326.IBPluginDependency</string>
 					<string>329.IBPluginDependency</string>
 					<string>330.IBPluginDependency</string>
-					<string>333.IBPluginDependency</string>
 					<string>48.IBPluginDependency</string>
 					<string>49.IBPluginDependency</string>
 					<string>5.IBEditorWindowLastContentRect</string>
@@ -2117,7 +2118,6 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{78, 328}, {1197, 726}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{78, 328}, {1197, 726}}</string>
@@ -2153,7 +2153,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">345</int>
+			<int key="maxID">349</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

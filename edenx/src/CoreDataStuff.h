@@ -84,12 +84,15 @@ typedef long timeT;
 @property (nonatomic, retain) NSNumber * hidden;
 @property (nonatomic, retain) NSNumber * hiddenBars;
 
+@property (nonatomic, retain) NSManagedObject * composition;
+
 @end
 
 @protocol Tempo<NSObject>
 
 @property (nonatomic, retain) NSNumber * absoluteTime;
 @property (nonatomic, retain) NSNumber * tempo;
+@property (nonatomic, retain) NSManagedObject * composition;
 
 @end
 

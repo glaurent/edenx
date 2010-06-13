@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
 
+@class SegmentSelector;
 
 @interface SegmentCanvas : NSView {
 
@@ -29,6 +30,8 @@
     CALayer* hitRectLayer;
     CALayer* hitStripLayer;
     float mouseDownXOffset;
+    
+    SegmentSelector* segmentSelector;
     
 }
 

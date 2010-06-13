@@ -36,6 +36,7 @@
 		AFA0C7F80F4866C900D67487 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0C7F70F4866C900D67487 /* AppController.m */; };
 		AFA0C93E0F50746E00D67487 /* SynchroScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0C93D0F50746E00D67487 /* SynchroScrollView.m */; };
 		AFA0CACD0F5AA7E100D67487 /* CompositionController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0CACC0F5AA7E100D67487 /* CompositionController.m */; };
+		AFB1E1F211C4D5420031FFF3 /* SegmentSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB1E1F111C4D5420031FFF3 /* SegmentSelector.m */; };
 		AFCA0767114CF43400FF7BA8 /* RulerScale.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCA0766114CF43400FF7BA8 /* RulerScale.m */; };
 		AFCA077D1152E03A00FF7BA8 /* TimeSignatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCA077C1152E03A00FF7BA8 /* TimeSignatureController.m */; };
 		AFCA07B01154D11300FF7BA8 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCA07AF1154D11300FF7BA8 /* Note.m */; };
@@ -140,6 +141,8 @@
 		AFA0CACB0F5AA7E100D67487 /* CompositionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositionController.h; sourceTree = "<group>"; };
 		AFA0CACC0F5AA7E100D67487 /* CompositionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompositionController.m; sourceTree = "<group>"; };
 		AFAD22CB0F18FE2500166E36 /* DrawKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DrawKit.xcodeproj; path = "../DrawKit stuff/DrawKit/DrawKit.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		AFB1E1F011C4D5420031FFF3 /* SegmentSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentSelector.h; sourceTree = "<group>"; };
+		AFB1E1F111C4D5420031FFF3 /* SegmentSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentSelector.m; sourceTree = "<group>"; };
 		AFCA0765114CF43400FF7BA8 /* RulerScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RulerScale.h; sourceTree = "<group>"; };
 		AFCA0766114CF43400FF7BA8 /* RulerScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RulerScale.m; sourceTree = "<group>"; };
 		AFCA077B1152E03A00FF7BA8 /* TimeSignatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSignatureController.h; sourceTree = "<group>"; };
@@ -330,6 +333,8 @@
 				AF93BB3311BB074D0032FA84 /* SegmentCanvas.m */,
 				AF93BBC611BB08380032FA84 /* SegmentLayerDelegate.h */,
 				AF93BBC711BB08380032FA84 /* SegmentLayerDelegate.m */,
+				AFB1E1F011C4D5420031FFF3 /* SegmentSelector.h */,
+				AFB1E1F111C4D5420031FFF3 /* SegmentSelector.m */,
 			);
 			name = "Segment Canvas";
 			sourceTree = "<group>";
@@ -523,6 +528,7 @@
 				AFDB18711184C2EB003D5351 /* CoreDataUtils.m in Sources */,
 				AF93BB3411BB074D0032FA84 /* SegmentCanvas.m in Sources */,
 				AF93BBC811BB08380032FA84 /* SegmentLayerDelegate.m in Sources */,
+				AFB1E1F211C4D5420031FFF3 /* SegmentSelector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

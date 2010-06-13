@@ -8,6 +8,7 @@
 
 #import "SegmentCanvas.h"
 #import "SegmentLayerDelegate.h"
+#import "SegmentSelector.h"
 
 @implementation SegmentCanvas
 
@@ -33,6 +34,8 @@
         blueColor = CGColorCreateGenericRGB(0.0, 0.0, 1.0, 0.8);
         CFMakeCollectable(blueColor);
         
+        segmentSelector = [[SegmentSelector alloc] init];
+        
         hitLayer = hitHandleLayer = hitRectLayer = nil;
         
     }
@@ -43,8 +46,14 @@
 // - main layer
 //    - cursor layer (see that later)
 //    - container layer for rects
-//        - layer for rect 1
-//        - layer for rect 2
+//        - strip layer 1
+//          - layer for rect 1
+//          - layer for rect 2
+//          - ...
+//        - strip layer 2
+//          - layer for rect 
+//          - layer for rect 
+//          - ...
 //        - ...
 ///
 
@@ -243,6 +252,8 @@
     if (hitStripLayer) {
         [self addRectangle:[containerLayerForRectangles convertPoint:mouseDownPoint toLayer:hitStripLayer] inStripLayer:hitStripLayer];
         [self.layer setNeedsDisplay];        
+    } else if (hitRectLayer && !hitHandleLayer) {
+        [segmentSelector setCurrentSelectedSegment:hitRectLayer];
     } else {
         // forget clicked layer
         hitLayer = hitHandleLayer = hitRectLayer = nil;
@@ -328,11 +339,13 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     NSLog(@"SegmentCanvas:observeValueForKeyPath %@", keyPath);
-    for (id key in change) {
-        NSLog(@"key %@ - value %@", key, [change objectForKey:key]);
-    }
     id newValue = [change objectForKey:NSKeyValueChangeNewKey];
     NSLog(@"newValue = %@", newValue);
+    float scaleFactor = [newValue floatValue];
+    
+    CATransform3D scale = CATransform3DMakeScale(scaleFactor, scaleFactor, 0.0);
+    containerLayerForRectangles.transform = scale;
+    // use a transaction to smooth the zooming ?
 }
 
 //- (void)drawRect:(NSRect)r 

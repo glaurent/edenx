@@ -11,6 +11,7 @@
 #import "TimeSignatureController.h"
 #import "MyDocument.h"
 #import "CoreDataUtils.h"
+#import "CoreDataStuff.h"
 
 @implementation CompositionController
 
@@ -62,8 +63,19 @@
     } else {
         NSLog(@"CompositionController:prepareContent - create new Composition instance");
         
-        [NSEntityDescription insertNewObjectForEntityForName:@"Composition"
+        NSManagedObject* newComposition = [NSEntityDescription insertNewObjectForEntityForName:@"Composition"
                                       inManagedObjectContext:moc];
+
+        // also create default tempo and time signature objects
+        //
+        NSManagedObject<Tempo>* newTempo = [NSEntityDescription insertNewObjectForEntityForName:@"Tempo"
+                                      inManagedObjectContext:moc];
+        newTempo.composition = newComposition;
+
+        NSManagedObject<TimeSignature>* newTimeSignature = [NSEntityDescription insertNewObjectForEntityForName:@"TimeSignature"
+                                                                                         inManagedObjectContext:moc];
+
+        newTimeSignature.composition = newComposition;
         
         // To avoid undo registration for this insertion, removeAllActions on the undoManager.
         // First call processPendingChanges on the managed object context to force the undo registration
