@@ -28,6 +28,7 @@
     IBOutlet CompositionController* compositionController;
     IBOutlet CoreDataUtils* coreDataUtils;
     IBOutlet SegmentCanvas* segmentCanvas;
+    IBOutlet NSArrayController* segmentsController;
     TrackEditor* trackEditor;
     // cursor position
     Player* player;
@@ -53,6 +54,7 @@
 @property(readonly) BOOL playing;
 
 @property(readonly) TracksController* tracksController;
+@property(readonly) NSArrayController* segmentsController;
 @property(readonly) CompositionController* compositionController;
 @property(readonly) NSArrayController* timeSignaturesController;
 @property(readonly) NSArrayController* temposController;

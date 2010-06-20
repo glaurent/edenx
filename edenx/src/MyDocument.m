@@ -18,6 +18,7 @@
 #import "Recorder.h"
 #import "CoreDataStuff.h"
 #import "SegmentCanvas.h"
+#import "TracksController.h"
 
 #import <CoreAudio/CoreAudioTypes.h>
 
@@ -60,6 +61,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:tracksController selector:@selector(handleMIDIRemoveObject:) name:PYMIDIObjectRemoved object:nil];
 
+    //segmentCanvas.tracksArrayController = tracksController;
     
 }
 
@@ -94,11 +96,26 @@
 {
     // attach as observer to Composition.testRowHeight
     //
-    NSLog(@"MyDocument adding SegmentCanvas as observer: %@ observing %@", segmentCanvas, [compositionController content]);
+    NSLog(@"MyDocument adding SegmentCanvas as observer: %@ observing zoomVertical on %@", segmentCanvas, [compositionController content]);
     [[compositionController content] addObserver:segmentCanvas
                                         forKeyPath:@"zoomVertical"
                                            options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                                            context:NULL];    
+
+
+    NSLog(@"MyDocument:windowControllerDidLoadNib: adding observer on composition tracks");
+    [[compositionController content] addObserver:segmentCanvas
+                                      forKeyPath:@"tracks"
+                                         options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                                         context:NULL];
+   
+   
+//    NSLog(@"MyDocument:windowControllerDidLoadNib: tracksArrayController content : %@ - arrangedObjects : %@",
+//          [tracksController content], [tracksController arrangedObjects]);
+
+    segmentCanvas.tracksArrayController = tracksController;
+    
+    [segmentCanvas addStripLayerForTracks:[tracksController content]];
 }
 
 - (IBAction)showPlayBackCursor:(id)sender
@@ -314,5 +331,6 @@
 @synthesize segmentCanvas;
 
 @synthesize sequence;
+@synthesize segmentsController;
 
 @end

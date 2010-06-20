@@ -9,6 +9,7 @@
 #import "SegmentCanvas.h"
 #import "SegmentLayerDelegate.h"
 #import "SegmentSelector.h"
+#import "CoreDataStuff.h"
 
 @implementation SegmentCanvas
 
@@ -42,6 +43,7 @@
     return self;
 }
 
+
 // Layers :
 // - main layer
 //    - cursor layer (see that later)
@@ -68,6 +70,7 @@
     // create container layer for rects
     containerLayerForRectangles = [CALayer layer];
     containerLayerForRectangles.name = @"rectanglesContainer";
+    containerLayerForRectangles.geometryFlipped = YES;
     [containerLayerForRectangles setValue:[NSValue valueWithPointer:rectFillColor] forKey:@"segmentFillColor"];
     mainLayer.layoutManager = [CAConstraintLayoutManager layoutManager];
     
@@ -94,56 +97,47 @@
     
     containerLayerForRectangles.layoutManager = [CAConstraintLayoutManager layoutManager];
     
-#if 0
-    CALayer* testLayer = [GLCALayer layer];
-    testLayer.borderColor = blueColor;
-    testLayer.borderWidth = 4;
-    testLayer.name = @"testLayer";
-    
-    testLayer.bounds = CGRectMake(0.0, 0.0, 50, 50);
-    testLayer.autoresizingMask |= kCALayerWidthSizable;
-    [testLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMidX relativeTo:@"superlayer" attribute:kCAConstraintMidX offset:20.0]];
-    [testLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMidY relativeTo:@"superlayer" attribute:kCAConstraintMidY offset:50.0]];
-    [testLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintWidth relativeTo:@"superlayer" attribute:kCAConstraintWidth]];
-    
-    //    testLayer.position = CGPointMake(200, 200);
-    [testLayer setNeedsDisplay];
-    [containerLayerForRectangles addSublayer:testLayer];
-#endif
-    
-    NSString* previousStripLayerName = @"";
-    
-    // fill view height with strip layers
-    int i = 0;
-    for (int y = 0; y < self.layer.bounds.size.height; y+=rectHeight, ++i) {
-        CALayer* stripLayer = [CALayer layer];
-        //        NSLog(@"adding a strip layer at %d", y);
-        stripLayer.name = [NSString stringWithFormat:@"stripLayer%d", i];
-        stripLayer.bounds = CGRectMake ( 0.0, 0.0, 0.0, rectHeight );
-        //        stripLayer.position = CGPointMake(0.0, y);
-        stripLayer.borderColor = redColor;
-        stripLayer.borderWidth = 1;
-        stripLayer.autoresizingMask |= kCALayerWidthSizable;
-        [stripLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMidX relativeTo:@"superlayer" attribute:kCAConstraintMidX]];
-        [stripLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintWidth relativeTo:@"superlayer" attribute:kCAConstraintWidth]];
-        if ([previousStripLayerName length] > 0) {
-            // NSLog(@"adding MinY-MaxY constraint relative to %@", previousStripLayerName);
-            [stripLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinY relativeTo:previousStripLayerName attribute:kCAConstraintMaxY /*offset:-20.0*/]];
-        } else {
-            [stripLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinY relativeTo:@"superlayer" attribute:kCAConstraintMinY]];
-        }
-        
-        stripLayer.layoutManager = [CAConstraintLayoutManager layoutManager];
-        [containerLayerForRectangles addSublayer:stripLayer];
-        
-        [stripLayer setNeedsDisplay];
-        previousStripLayerName = stripLayer.name;
-        
-    }
-    
-}    
+}
 
-- (void)addRectangle:(CGPoint)origin inStripLayer:(CALayer*)stripLayer
+- (void)addStripLayerForTracks:(NSArray*)tracks
+{
+    for(NSManagedObject<Track>* track in tracks) {
+        [self addStripLayerForTrack:track];
+    }
+}
+
+- (CALayer*)addStripLayerForTrack:(NSManagedObject<Track>*)track
+{
+//    NSLog(@"addStripLayerForTrack : tracksArrayController content : %@ - arrangedObjects : %@",
+//          [tracksArrayController content], [tracksArrayController arrangedObjects]);
+    uint nbTracks = [[tracksArrayController arrangedObjects] count];
+    uint newTrackIndex = nbTracks; // WHAT TO DO WHEN TRACKS ARE REMOVED ?
+    
+    CALayer* stripLayer = [CALayer layer];
+    [stripLayer setValue:track forKey:@"track"];
+    
+    track.associatedCALayer = stripLayer;
+    
+    CGFloat y = (newTrackIndex * rectHeight) + rectHeight / 2;
+    NSLog(@"adding a strip layer for track index %d at %f", newTrackIndex, y);
+    stripLayer.name = [NSString stringWithFormat:@"stripLayer%d", newTrackIndex];
+    stripLayer.bounds = CGRectMake ( 0.0, 0.0, 0.0, rectHeight );
+    stripLayer.position = CGPointMake(0.0, y);
+    stripLayer.borderColor = redColor;
+    stripLayer.borderWidth = 1;
+    stripLayer.autoresizingMask |= kCALayerWidthSizable;
+    [stripLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMidX relativeTo:@"superlayer" attribute:kCAConstraintMidX]];
+    [stripLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintWidth relativeTo:@"superlayer" attribute:kCAConstraintWidth]];
+    
+    stripLayer.layoutManager = [CAConstraintLayoutManager layoutManager];
+    [containerLayerForRectangles addSublayer:stripLayer];
+    
+    [stripLayer setNeedsDisplay];
+    
+    return stripLayer;        
+}
+
+- (void)addSegmentRectangle:(CGPoint)origin inStripLayer:(CALayer*)stripLayer
 {
     // create layer for rect
     //
@@ -208,6 +202,9 @@
     
     [stripLayer setNeedsLayout];
     [rectLayer setNeedsDisplay];
+    
+    // TODO - create Segment, add it in model - use Segment's NSArrayController in MyDocument
+    
 }
 
 - (void)mouseDown:(NSEvent*)aEvent
@@ -250,7 +247,7 @@
 - (void)mouseUp:(NSEvent*)aEvent
 {
     if (hitStripLayer) {
-        [self addRectangle:[containerLayerForRectangles convertPoint:mouseDownPoint toLayer:hitStripLayer] inStripLayer:hitStripLayer];
+        [self addSegmentRectangle:[containerLayerForRectangles convertPoint:mouseDownPoint toLayer:hitStripLayer] inStripLayer:hitStripLayer];
         [self.layer setNeedsDisplay];        
     } else if (hitRectLayer && !hitHandleLayer) {
         [segmentSelector setCurrentSelectedSegment:hitRectLayer];
@@ -281,7 +278,7 @@
             
             [CATransaction begin];
             
-            [CATransaction setValue: [NSNumber numberWithBool:0.0]
+            [CATransaction setValue: [NSNumber numberWithFloat:0.0]
                              forKey: kCATransactionAnimationDuration];
             
             hitRectLayer.position = CGPointMake(mouseDownPoint.x - mouseDownXOffset, hitRectLayer.position.y);
@@ -293,7 +290,7 @@
             
             [CATransaction begin];
             
-            [CATransaction setValue: [NSNumber numberWithBool:0.0]
+            [CATransaction setValue: [NSNumber numberWithFloat:0.0]
                              forKey: kCATransactionAnimationDuration];
             
             CGRect currentFrame = hitRectLayer.frame;
@@ -323,6 +320,7 @@
     
 }
 
+// DEBUG
 - (IBAction)showCoordinates:(id)sender
 {
     NSLog(@"showCoordinates");
@@ -335,18 +333,90 @@
     }
 }
 
+- (void)resetStripLayersYCoordinates:(NSArray*)tracks withRemovedTracks:(NSSet*)removedTracks
+{
+    NSLog(@"SegmentCanvas:resetStripLayersYCoordinates");
+    [CATransaction begin];
+    
+    [CATransaction setValue: [NSNumber numberWithFloat:1.0]
+                     forKey: kCATransactionAnimationDuration];
+
+    int idx = 0;
+    for(NSManagedObject<Track>* track in tracks) {
+        if ([removedTracks containsObject:track])
+            continue; // skip removed tracks
+        
+        CGFloat y = (idx * rectHeight) + rectHeight / 2;
+        NSLog(@"y = %f", y);
+        CALayer* stripLayer = track.associatedCALayer;
+        stripLayer.position = CGPointMake(0.0, y);
+        ++idx;        
+    }
+    
+    [CATransaction commit];
+    
+}
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     NSLog(@"SegmentCanvas:observeValueForKeyPath %@", keyPath);
     id newValue = [change objectForKey:NSKeyValueChangeNewKey];
+    id oldValue = [change objectForKey:NSKeyValueChangeOldKey];
     NSLog(@"newValue = %@", newValue);
-    float scaleFactor = [newValue floatValue];
+    NSLog(@"oldValue = %@", [change objectForKey:NSKeyValueChangeOldKey]);
     
-    CATransform3D scale = CATransform3DMakeScale(scaleFactor, scaleFactor, 0.0);
-    containerLayerForRectangles.transform = scale;
-    // use a transaction to smooth the zooming ?
+    if ([keyPath isEqual:@"tracks"]) {
+        NSLog(@"SegmentCanvas:observeValueForKeyPath - tracks change");
+
+        NSMutableSet* newTracks = [NSMutableSet setWithSet:newValue];
+        [newTracks minusSet:oldValue];
+        
+        NSMutableSet* removedTracks = [NSMutableSet setWithSet:oldValue];
+        [removedTracks minusSet:newValue];
+        
+        for(NSManagedObject<Track>* removedTrack in removedTracks) {
+            CALayer* stripLayer = removedTrack.associatedCALayer;
+            NSLog(@"SegmentCanvas:observeValueForKeyPath - removing layer %@ associated to track %@", stripLayer, removedTrack);
+            [stripLayer removeFromSuperlayer];
+            [self resetStripLayersYCoordinates:[tracksArrayController arrangedObjects] withRemovedTracks:removedTracks];
+        }
+        for(NSManagedObject<Track>* addedTrack in newTracks) {
+            NSLog(@"SegmentCanvas:observeValueForKeyPath - adding strip layer for track %@", addedTrack);
+            [self addStripLayerForTrack:addedTrack];
+        }
+        
+        
+    } else if ([keyPath isEqual:@"zoomVertical"]) {
+        // TODO - do zooming better
+        float scaleFactor = [newValue floatValue];
+        
+        CATransform3D scale = CATransform3DMakeScale(scaleFactor, scaleFactor, 0.0);
+        containerLayerForRectangles.transform = scale;
+        // use a transaction to smooth the zooming ?        
+    }
+
+    
 }
+
+// this was to try observing changes on added/removed tracks, but it doesn't work
+// instead I have to observe the to-many relationship Composition->>tracks
+//
+//- (NSArrayController*)tracksArrayController
+//{
+//    return tracksArrayController;
+//}
+//
+//- (void)setTracksArrayController:(NSArrayController*)controller
+//{
+//    if (tracksArrayController != nil) {
+//        [tracksArrayController removeObserver:self forKeyPath:@"arrangedObjects"];
+//    }
+//    tracksArrayController = controller;
+//    [tracksArrayController addObserver:self 
+//                            forKeyPath:@"arrangedObjects"
+//                               options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+//                               context:NULL];
+//}
 
 //- (void)drawRect:(NSRect)r 
 //{
@@ -364,6 +434,7 @@
 @synthesize rectHeight;
 @synthesize containerLayerForRectangles;
 @synthesize mouseDownPoint;
-
+@synthesize segmentSelector;
+@synthesize tracksArrayController;
 
 @end

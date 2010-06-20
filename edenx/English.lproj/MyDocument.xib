@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">10D573</string>
+		<string key="IBDocument.SystemVersion">10F569</string>
 		<string key="IBDocument.InterfaceBuilderVersion">762</string>
 		<string key="IBDocument.AppKitVersion">1038.29</string>
-		<string key="IBDocument.HIToolboxVersion">460.00</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">762</string>
@@ -191,7 +191,7 @@
 										<bytes key="NSWhite">MQA</bytes>
 									</object>
 								</object>
-								<object class="NSColor" key="NSTextColor">
+								<object class="NSColor" key="NSTextColor" id="547894776">
 									<int key="NSColorSpace">6</int>
 									<string key="NSCatalogName">System</string>
 									<string key="NSColorName">textColor</string>
@@ -924,6 +924,8 @@
 					<string>channel</string>
 					<string>inputSource</string>
 					<string>recording</string>
+					<string>segments</string>
+					<string>segments.@count</string>
 				</object>
 				<bool key="NSEditable">YES</bool>
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
@@ -981,6 +983,18 @@
 			</object>
 			<object class="NSCustomObject" id="140193271">
 				<string key="NSClassName">CoreDataUtils</string>
+			</object>
+			<object class="NSArrayController" id="187421095">
+				<bool key="NSEditable">YES</bool>
+				<object class="_NSManagedProxy" key="_NSManagedProxy">
+					<string key="NSEntityName">Segment</string>
+				</object>
+				<bool key="_NSIsUsingManagedProxy">YES</bool>
+				<bool key="NSAvoidsEmptySelection">YES</bool>
+				<bool key="NSPreservesSelection">YES</bool>
+				<bool key="NSSelectsInsertedObjects">YES</bool>
+				<bool key="NSFilterRestrictsInsertion">YES</bool>
+				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -1133,47 +1147,6 @@
 						</object>
 					</object>
 					<int key="connectionID">144</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">displayPatternValue1: selection.name</string>
-						<reference key="source" ref="179953022"/>
-						<reference key="destination" ref="977033959"/>
-						<object class="NSNibBindingConnector" key="connector" id="878474283">
-							<reference key="NSSource" ref="179953022"/>
-							<reference key="NSDestination" ref="977033959"/>
-							<string key="NSLabel">displayPatternValue1: selection.name</string>
-							<string key="NSBinding">displayPatternValue1</string>
-							<string key="NSKeyPath">selection.name</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSDisplayPattern</string>
-								<string key="NS.object.0">selected track : %{value1}@ has %{value2}@ events</string>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">152</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">displayPatternValue2: selection.events.@count</string>
-						<reference key="source" ref="179953022"/>
-						<reference key="destination" ref="977033959"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="179953022"/>
-							<reference key="NSDestination" ref="977033959"/>
-							<string key="NSLabel">displayPatternValue2: selection.events.@count</string>
-							<string key="NSBinding">displayPatternValue2</string>
-							<string key="NSKeyPath">selection.events.@count</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSDisplayPattern</string>
-								<string key="NS.object.0">selected track : %{value1}@ has %{value2}@ events</string>
-							</object>
-							<reference key="NSPreviousConnector" ref="878474283"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">153</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1464,6 +1437,71 @@
 						</object>
 					</object>
 					<int key="connectionID">349</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">contentSet: selection.segments</string>
+						<reference key="source" ref="187421095"/>
+						<reference key="destination" ref="977033959"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="187421095"/>
+							<reference key="NSDestination" ref="977033959"/>
+							<string key="NSLabel">contentSet: selection.segments</string>
+							<string key="NSBinding">contentSet</string>
+							<string key="NSKeyPath">selection.segments</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">355</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">segmentsController</string>
+						<reference key="source" ref="951636235"/>
+						<reference key="destination" ref="187421095"/>
+					</object>
+					<int key="connectionID">356</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">displayPatternValue1: selection.name</string>
+						<reference key="source" ref="179953022"/>
+						<reference key="destination" ref="977033959"/>
+						<object class="NSNibBindingConnector" key="connector" id="756393320">
+							<reference key="NSSource" ref="179953022"/>
+							<reference key="NSDestination" ref="977033959"/>
+							<string key="NSLabel">displayPatternValue1: selection.name</string>
+							<string key="NSBinding">displayPatternValue1</string>
+							<string key="NSKeyPath">selection.name</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSDisplayPattern</string>
+								<string key="NS.object.0">selected track : %{value1}@ has %{value2}@ segments</string>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">358</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">displayPatternValue2: selection.segments.@count</string>
+						<reference key="source" ref="179953022"/>
+						<reference key="destination" ref="977033959"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="179953022"/>
+							<reference key="NSDestination" ref="977033959"/>
+							<string key="NSLabel">displayPatternValue2: selection.segments.@count</string>
+							<string key="NSBinding">displayPatternValue2</string>
+							<string key="NSKeyPath">selection.segments.@count</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSDisplayPattern</string>
+								<string key="NS.object.0">selected track : %{value1}@ has %{value2}@ segments</string>
+							</object>
+							<reference key="NSPreviousConnector" ref="756393320"/>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">359</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1976,6 +2014,12 @@
 						<reference key="object" ref="140193271"/>
 						<reference key="parent" ref="0"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">354</int>
+						<reference key="object" ref="187421095"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">Segments Controller</string>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -2038,6 +2082,8 @@
 					<string>326.IBPluginDependency</string>
 					<string>329.IBPluginDependency</string>
 					<string>330.IBPluginDependency</string>
+					<string>354.IBPluginDependency</string>
+					<string>354.notes</string>
 					<string>48.IBPluginDependency</string>
 					<string>49.IBPluginDependency</string>
 					<string>5.IBEditorWindowLastContentRect</string>
@@ -2117,6 +2163,32 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<object class="NSMutableAttributedString">
+						<object class="NSMutableString" key="NSString">
+							<bytes key="NS.bytes">c2VsZWN0ZWQgdHJhY2sncyBzZWdtZW50cw</bytes>
+						</object>
+						<object class="NSDictionary" key="NSAttributes">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="NSArray" key="dict.sortedKeys">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<string>NSColor</string>
+								<string>NSFont</string>
+								<string>NSOriginalFont</string>
+								<string>NSParagraphStyle</string>
+							</object>
+							<object class="NSMutableArray" key="dict.values">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<reference ref="547894776"/>
+								<reference ref="26"/>
+								<reference ref="26"/>
+								<object class="NSParagraphStyle">
+									<int key="NSAlignment">4</int>
+									<nil key="NSTabStops"/>
+								</object>
+							</object>
+						</object>
+					</object>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{78, 328}, {1197, 726}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2153,7 +2225,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">349</int>
+			<int key="maxID">359</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2217,6 +2289,7 @@
 							<string>compositionController</string>
 							<string>coreDataUtils</string>
 							<string>segmentCanvas</string>
+							<string>segmentsController</string>
 							<string>temposController</string>
 							<string>timeSignaturesController</string>
 							<string>trackCanvasView</string>
@@ -2228,6 +2301,7 @@
 							<string>CompositionController</string>
 							<string>CoreDataUtils</string>
 							<string>SegmentCanvas</string>
+							<string>NSArrayController</string>
 							<string>NSArrayController</string>
 							<string>NSArrayController</string>
 							<string>NSScrollView</string>

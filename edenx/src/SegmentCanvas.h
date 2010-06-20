@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "CoreDataStuff.h"
+
 @class SegmentSelector;
 
 @interface SegmentCanvas : NSView {
@@ -32,11 +34,19 @@
     float mouseDownXOffset;
     
     SegmentSelector* segmentSelector;
-    
+
+    NSArrayController* tracksArrayController;
+
 }
+
+- (void)addStripLayerForTracks:(NSArray*)tracks;
+- (CALayer*)addStripLayerForTrack:(NSManagedObject<Track>*)track;
+
 
 @property (readonly) unsigned int rectHeight;
 @property (readwrite, assign) CALayer* containerLayerForRectangles;
 @property (readwrite, assign) CGPoint mouseDownPoint;
+@property (readonly) SegmentSelector* segmentSelector;
+@property (readwrite, assign) NSArrayController* tracksArrayController;
 
 @end

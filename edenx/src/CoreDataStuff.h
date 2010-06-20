@@ -48,6 +48,7 @@ typedef long timeT;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) id inputSource;
 @property (nonatomic, retain) NSMutableSet* events;
+@property (nonatomic, retain) id associatedCALayer;
 
 @end
 

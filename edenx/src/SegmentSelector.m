@@ -24,7 +24,7 @@
 
 - (void)setCurrentSelectedSegment:(CALayer*)segment
 {
-    NSLog(@"SegmentSelector:setCurrentSelectedSegment %@", segment);
+    // NSLog(@"SegmentSelector:setCurrentSelectedSegment %@", segment);
     
     if (currentSelectedSegment == segment) {
         NSLog(@"segment already selected - nothing to do");
@@ -48,7 +48,7 @@
 
 - (void)setSelected:(CALayer*)segment toState:(BOOL)state
 {
-    NSLog(@"SegmentSelector:setSelected %@ to %d", segment, state);
+    // NSLog(@"SegmentSelector:setSelected %@ to %d", segment, state);
     
     if (state == NO) {
         segment.shadowRadius = 0.0;
