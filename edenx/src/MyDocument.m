@@ -113,7 +113,7 @@
 //    NSLog(@"MyDocument:windowControllerDidLoadNib: tracksArrayController content : %@ - arrangedObjects : %@",
 //          [tracksController content], [tracksController arrangedObjects]);
 
-    segmentCanvas.tracksArrayController = tracksController;
+    segmentCanvas.tracksController = tracksController;
     
     [segmentCanvas addStripLayerForTracks:[tracksController content]];
 }
@@ -199,6 +199,7 @@
 - (IBAction)testAddEvent:(id)sender
 {
     NSManagedObject<Track>* currentTrack = [[tracksController selectedObjects] objectAtIndex:0];
+    NSManagedObject<Segment>* currentSegment = [[segmentsController selectedObjects] objectAtIndex:0];
     
     NSManagedObjectContext* managedObjectContext = [currentTrack managedObjectContext];
     
@@ -214,7 +215,7 @@
     [newNote setNote:[NSNumber numberWithInt:60]];
     [newNote setVelocity:[NSNumber numberWithInt:120]];
     
-    [currentTrack addEventsObject:newNote];
+    [currentSegment addEventsObject:newNote];
 
 }
 

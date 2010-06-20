@@ -35,7 +35,7 @@
     
     SegmentSelector* segmentSelector;
 
-    NSArrayController* tracksArrayController;
+    NSArrayController* tracksController;
 
 }
 
@@ -47,6 +47,6 @@
 @property (readwrite, assign) CALayer* containerLayerForRectangles;
 @property (readwrite, assign) CGPoint mouseDownPoint;
 @property (readonly) SegmentSelector* segmentSelector;
-@property (readwrite, assign) NSArrayController* tracksArrayController;
+@property (readwrite, assign) NSArrayController* tracksController;
 
 @end

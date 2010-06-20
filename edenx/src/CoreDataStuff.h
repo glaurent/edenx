@@ -42,15 +42,27 @@ typedef long timeT;
 
 @protocol Track<NSObject>
 
-- (void)addEventsObject:(id)Object;
+- (void)addSegmentsObject:(id)Object;
 
 @property (nonatomic, retain) NSNumber * channel;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) id inputSource;
+@property (nonatomic, retain) NSMutableSet* segments;
+@property (nonatomic, retain) id associatedCALayer;
+
+@end
+
+@protocol Segment<NSObject>
+
+- (void)addEventsObject:(id)Object;
+@property (nonatomic, retain) NSNumber * startTime;
+@property (nonatomic, retain) NSNumber * endTime;
 @property (nonatomic, retain) NSMutableSet* events;
 @property (nonatomic, retain) id associatedCALayer;
 
 @end
+
+
 
 // Element CoreData
 

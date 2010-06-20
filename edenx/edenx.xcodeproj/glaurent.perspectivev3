@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>AF976B5911CE3E510069699A</string>
+						<string>AF976BA811CE49E50069699A</string>
 						<key>history</key>
 						<array>
 							<string>AFA33A5811CD706A00CBEF14</string>
@@ -320,12 +320,14 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>59</integer>
-									<integer>58</integer>
+									<integer>5</integer>
+									<integer>3</integer>
+									<integer>2</integer>
+									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 161}, {251, 943}}</string>
+							<string>{{0, 0}, {251, 943}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -370,7 +372,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>AF976B5811CE3E510069699A</string>
+										<string>AF976BA711CE49E50069699A</string>
 										<key>history</key>
 										<array>
 											<string>AFBCDE6B107BEA3D00D384BA</string>
@@ -407,12 +409,12 @@
 											<string>AFD82CBB11C58473001CEBD4</string>
 											<string>AFD82CCF11C6B612001CEBD4</string>
 											<string>AF6923F711CD679900ADF3B7</string>
-											<string>AF976A8811CE12EE0069699A</string>
-											<string>AF976A8911CE12EE0069699A</string>
-											<string>AF976AC411CE21F40069699A</string>
 											<string>AF976ADE11CE22F00069699A</string>
-											<string>AF976B0611CE26FD0069699A</string>
-											<string>AF976B5511CE3E4A0069699A</string>
+											<string>AF976B5B11CE42530069699A</string>
+											<string>AF976B6611CE43CB0069699A</string>
+											<string>AF976B7111CE448F0069699A</string>
+											<string>AF976B9511CE48CF0069699A</string>
+											<string>AF976BA411CE49DA0069699A</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -467,7 +469,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1149, 184}}</string>
+										<string>{{10, 27}, {1149, 199}}</string>
 									</dict>
 									<key>Module</key>
 									<string>PBXProjectFindModule</string>
@@ -752,6 +754,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>AF80E15F11C8A4CB00246D96</string>
 		<string>AF976A8311CDFC740069699A</string>
 		<string>AF976A8411CDFC740069699A</string>
 		<string>AFCA07E71167C97C00FF7BA8</string>
@@ -1618,7 +1621,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>AF80E15F11C8A4CB00246D96</string>
-				<string>AF80E16011C8A4CB00246D96</string>
+				<string>AF976B6B11CE43CB0069699A</string>
 				<string>AF80E15E11C8A4CB00246D96</string>
 			</array>
 			<key>WindowString</key>

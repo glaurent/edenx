@@ -110,7 +110,7 @@
 {
 //    NSLog(@"addStripLayerForTrack : tracksArrayController content : %@ - arrangedObjects : %@",
 //          [tracksArrayController content], [tracksArrayController arrangedObjects]);
-    uint nbTracks = [[tracksArrayController arrangedObjects] count];
+    uint nbTracks = [[tracksController arrangedObjects] count];
     uint newTrackIndex = nbTracks; // WHAT TO DO WHEN TRACKS ARE REMOVED ?
     
     CALayer* stripLayer = [CALayer layer];
@@ -203,8 +203,16 @@
     [stripLayer setNeedsLayout];
     [rectLayer setNeedsDisplay];
     
-    // TODO - create Segment, add it in model - use Segment's NSArrayController in MyDocument
+    // create Segment, add it in model - use Segment's NSArrayController in MyDocument ??
+    NSManagedObject<Track>* associatedTrack = [stripLayer valueForKey:@"track"];
     
+    NSManagedObjectContext* managedObjectContext = [associatedTrack managedObjectContext];
+    
+    NSManagedObject<Segment>* newSegment = [NSEntityDescription insertNewObjectForEntityForName:@"Segment" 
+                                                                   inManagedObjectContext:managedObjectContext];
+
+    [associatedTrack addSegmentsObject:newSegment];
+    newSegment.associatedCALayer = rectLayer;
 }
 
 - (void)mouseDown:(NSEvent*)aEvent
@@ -335,7 +343,7 @@
 
 - (void)resetStripLayersYCoordinates:(NSArray*)tracks withRemovedTracks:(NSSet*)removedTracks
 {
-    NSLog(@"SegmentCanvas:resetStripLayersYCoordinates");
+//    NSLog(@"SegmentCanvas:resetStripLayersYCoordinates");
     [CATransaction begin];
     
     [CATransaction setValue: [NSNumber numberWithFloat:1.0]
@@ -347,7 +355,7 @@
             continue; // skip removed tracks
         
         CGFloat y = (idx * rectHeight) + rectHeight / 2;
-        NSLog(@"y = %f", y);
+//        NSLog(@"y = %f", y);
         CALayer* stripLayer = track.associatedCALayer;
         stripLayer.position = CGPointMake(0.0, y);
         ++idx;        
@@ -362,8 +370,8 @@
     NSLog(@"SegmentCanvas:observeValueForKeyPath %@", keyPath);
     id newValue = [change objectForKey:NSKeyValueChangeNewKey];
     id oldValue = [change objectForKey:NSKeyValueChangeOldKey];
-    NSLog(@"newValue = %@", newValue);
-    NSLog(@"oldValue = %@", [change objectForKey:NSKeyValueChangeOldKey]);
+//    NSLog(@"newValue = %@", newValue);
+//    NSLog(@"oldValue = %@", [change objectForKey:NSKeyValueChangeOldKey]);
     
     if ([keyPath isEqual:@"tracks"]) {
         NSLog(@"SegmentCanvas:observeValueForKeyPath - tracks change");
@@ -376,12 +384,12 @@
         
         for(NSManagedObject<Track>* removedTrack in removedTracks) {
             CALayer* stripLayer = removedTrack.associatedCALayer;
-            NSLog(@"SegmentCanvas:observeValueForKeyPath - removing layer %@ associated to track %@", stripLayer, removedTrack);
+//            NSLog(@"SegmentCanvas:observeValueForKeyPath - removing layer %@ associated to track %@", stripLayer, removedTrack);
             [stripLayer removeFromSuperlayer];
-            [self resetStripLayersYCoordinates:[tracksArrayController arrangedObjects] withRemovedTracks:removedTracks];
+            [self resetStripLayersYCoordinates:[tracksController arrangedObjects] withRemovedTracks:removedTracks];
         }
         for(NSManagedObject<Track>* addedTrack in newTracks) {
-            NSLog(@"SegmentCanvas:observeValueForKeyPath - adding strip layer for track %@", addedTrack);
+//            NSLog(@"SegmentCanvas:observeValueForKeyPath - adding strip layer for track %@", addedTrack);
             [self addStripLayerForTrack:addedTrack];
         }
         
@@ -435,6 +443,6 @@
 @synthesize containerLayerForRectangles;
 @synthesize mouseDownPoint;
 @synthesize segmentSelector;
-@synthesize tracksArrayController;
+@synthesize tracksController;
 
 @end
