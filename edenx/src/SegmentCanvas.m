@@ -10,6 +10,16 @@
 #import "SegmentLayerDelegate.h"
 #import "SegmentSelector.h"
 #import "CoreDataStuff.h"
+#import "MyDocument.h"
+
+@interface SegmentCanvas (Private)
+
+- (CALayer*)findAssociatedLayerForTrack:(NSManagedObject<Track>*)track;
+- (CALayer*)findAssociatedLayerForSegment:(NSManagedObject<Segment>*)segment inTrack:(NSManagedObject<Track>*)track;
+- (void)observeSegment:(id)segment withRectLayer:(CALayer*)rectLayer;
+- (void)forgetSegment:(id)segment;
+
+@end
 
 @implementation SegmentCanvas
 
@@ -38,6 +48,8 @@
         segmentSelector = [[SegmentSelector alloc] init];
         
         hitLayer = hitHandleLayer = hitRectLayer = nil;
+        
+        forgetSegmentTimeChanges = NO;
         
     }
     return self;
@@ -111,12 +123,10 @@
 //    NSLog(@"addStripLayerForTrack : tracksArrayController content : %@ - arrangedObjects : %@",
 //          [tracksArrayController content], [tracksArrayController arrangedObjects]);
     uint nbTracks = [[tracksController arrangedObjects] count];
-    uint newTrackIndex = nbTracks; // WHAT TO DO WHEN TRACKS ARE REMOVED ?
+    uint newTrackIndex = nbTracks;
     
     CALayer* stripLayer = [CALayer layer];
     [stripLayer setValue:track forKey:@"track"];
-    
-    track.associatedCALayer = stripLayer;
     
     CGFloat y = (newTrackIndex * rectHeight) + rectHeight / 2;
     NSLog(@"adding a strip layer for track index %d at %f", newTrackIndex, y);
@@ -137,7 +147,9 @@
     return stripLayer;        
 }
 
-- (void)addSegmentRectangle:(CGPoint)origin inStripLayer:(CALayer*)stripLayer
+#pragma mark rectangle and segment creation
+
+- (CALayer*)makeRectangleInStripLayer:(CALayer*)stripLayer
 {
     // create layer for rect
     //
@@ -145,7 +157,6 @@
     NSLog(@"containerLayerForRectangles.bounds.size.width : %f", containerLayerForRectangles.bounds.size.width);
     rectLayer.name = @"rectLayer";
     rectLayer.bounds = CGRectMake ( 0.0, 0.0, 100 , rectHeight ); // default widht = 100
-    rectLayer.position = origin;
     rectLayer.delegate = rectangleLayerDelegate;
     rectLayer.cornerRadius = 8;
     rectLayer.backgroundColor = rectFillColor;
@@ -200,20 +211,55 @@
     
     [rectLayer addSublayer:rightHandleLayer];
     
+    return rectLayer;
+    
+}
+
+- (CALayer*)addRectangle:(CGPoint)origin inStripLayer:(CALayer*)stripLayer
+{
+    CALayer* rectLayer = [self makeRectangleInStripLayer:stripLayer];
+    rectLayer.position = origin;
+
     [stripLayer setNeedsLayout];
     [rectLayer setNeedsDisplay];
     
-    // create Segment, add it in model - use Segment's NSArrayController in MyDocument ??
-    NSManagedObject<Track>* associatedTrack = [stripLayer valueForKey:@"track"];
+    return rectLayer;
     
-    NSManagedObjectContext* managedObjectContext = [associatedTrack managedObjectContext];
-    
-    NSManagedObject<Segment>* newSegment = [NSEntityDescription insertNewObjectForEntityForName:@"Segment" 
-                                                                   inManagedObjectContext:managedObjectContext];
-
-    [associatedTrack addSegmentsObject:newSegment];
-    newSegment.associatedCALayer = rectLayer;
 }
+
+- (id)addSegmentForRectangle:(CALayer*)rectLayer inTrack:(NSManagedObject<Track>*)associatedTrack
+{
+    [tracksController setSelectedObjects:[NSArray arrayWithObject:associatedTrack]];
+    
+    NSManagedObjectContext* managedObjectContext = [tracksController managedObjectContext];
+
+    forgetSegmentAdd = YES;
+    
+    NSEntityDescription* segmentEntity = [NSEntityDescription entityForName:@"Segment" inManagedObjectContext:managedObjectContext];
+    
+    NSManagedObject<Segment>* newSegment = [[NSManagedObject alloc] initWithEntity:segmentEntity insertIntoManagedObjectContext:nil];
+    
+    NSLog(@"addSegmentForRectangle : newSegment = %@", newSegment);
+
+    [rectLayer setValue:newSegment forKey:@"segment"];
+    
+    newSegment.startTime = [NSNumber numberWithFloat:(rectLayer.position.x - rectLayer.bounds.size.width / 2)];
+    newSegment.endTime = [NSNumber numberWithFloat:(rectLayer.position.x + rectLayer.bounds.size.width / 2)];
+    
+    [managedObjectContext insertObject:newSegment];
+
+    [[segmentSelector segmentArrayController] addObject:newSegment];
+
+    NSLog(@"addSegmentForRectangle : added newSegment = %@", newSegment);
+
+    [self observeSegment:newSegment withRectLayer:rectLayer];
+    
+    forgetSegmentAdd = NO;
+
+    return newSegment;
+}
+
+#pragma mark mouse events
 
 - (void)mouseDown:(NSEvent*)aEvent
 {    
@@ -241,6 +287,7 @@
         if ([hitLayer.name hasSuffix:@"HandleLayer"]) {
             hitHandleLayer = hitLayer;
             hitRectLayer = hitLayer.superlayer;
+            forgetSegmentTimeChanges = YES;
         } else if ([hitLayer.name isEqual:@"rectLayer"]) {
             hitRectLayer = hitLayer;
             mouseDownXOffset = mouseDownPoint.x - hitRectLayer.position.x;
@@ -255,13 +302,35 @@
 - (void)mouseUp:(NSEvent*)aEvent
 {
     if (hitStripLayer) {
-        [self addSegmentRectangle:[containerLayerForRectangles convertPoint:mouseDownPoint toLayer:hitStripLayer] inStripLayer:hitStripLayer];
-        [self.layer setNeedsDisplay];        
+        CALayer* rectLayer = [self addRectangle:[containerLayerForRectangles convertPoint:mouseDownPoint
+                                                                                         toLayer:hitStripLayer]
+                                          inStripLayer:hitStripLayer];
+        NSManagedObject<Track>* associatedTrack = [hitStripLayer valueForKey:@"track"];
+        [self addSegmentForRectangle:rectLayer inTrack:associatedTrack];
+        [self.layer setNeedsDisplay];
+        [segmentSelector setCurrentSelectedSegment:nil];
     } else if (hitRectLayer && !hitHandleLayer) {
         [segmentSelector setCurrentSelectedSegment:hitRectLayer];
+    } else if (hitRectLayer && hitHandleLayer) {
+
+        NSManagedObject<Segment>* currentSegment = [hitRectLayer valueForKey:@"segment"];
+        
+        if ([hitHandleLayer.name isEqualToString:@"leftHandleLayer"]) {
+            long t = lrintf(mouseDownPoint.x - mouseDownXOffset);
+            NSLog(@"setting startTime to %d", t);
+            currentSegment.startTime = [NSNumber numberWithLong:t]; // TODO - convert that to composition time
+        } else {
+            long t = lrintf(mouseDownPoint.x - mouseDownXOffset + hitRectLayer.bounds.size.width);
+            NSLog(@"setting endTime to %d", t);
+            currentSegment.endTime = [NSNumber numberWithLong:t]; // TODO - convert that to composition time            
+        }
+        
+        forgetSegmentTimeChanges = NO;
+        
     } else {
         // forget clicked layer
         hitLayer = hitHandleLayer = hitRectLayer = nil;
+        [segmentSelector setCurrentSelectedSegment:nil];
     }
     
 }
@@ -282,43 +351,52 @@
         // can start a new animation from here, if necessary.
         mouseDownPoint = cgMousePointInView;
         
-        if (hitRectLayer && !hitHandleLayer) {
+        if (hitRectLayer) {
             
-            [CATransaction begin];
+            NSManagedObject<Segment>* currentSegment = [hitRectLayer valueForKey:@"segment"];
+            NSAssert(currentSegment != nil, @"rect layer has no segment");
             
-            [CATransaction setValue: [NSNumber numberWithFloat:0.0]
-                             forKey: kCATransactionAnimationDuration];
-            
-            hitRectLayer.position = CGPointMake(mouseDownPoint.x - mouseDownXOffset, hitRectLayer.position.y);
-            
-            [CATransaction commit];
-            
-            
-        } else if (hitHandleLayer) {
-            
-            [CATransaction begin];
-            
-            [CATransaction setValue: [NSNumber numberWithFloat:0.0]
-                             forKey: kCATransactionAnimationDuration];
-            
-            CGRect currentFrame = hitRectLayer.frame;
-            //CGPoint hitHandleLayerPositionInRect = [containerLayerForRectangles convertPoint:hitHandleLayer.position fromLayer:hitHandleLayer];
-            //NSLog(@"mouseDownPoint.x : %f | hitHandleLayer.position.x : %f", mouseDownPoint.x, hitHandleLayerPositionInRect.x);
-            float deltaWidth = mouseDownPoint.x - previousMouseDownPoint.x;
-            
-            //NSLog(@"current frame : %f,%f w=%f, h=%f", currentFrame.origin.x, currentFrame.origin.y, currentFrame.size.width, currentFrame.size.height);
-            
-            if ([hitHandleLayer.name isEqualToString:@"leftHandleLayer"]) {
-                //NSLog(@"left handle move : current width : %f | delta : %f", currentFrame.size.width, deltaWidth);
-                hitRectLayer.frame = CGRectMake(mouseDownPoint.x, currentFrame.origin.y, currentFrame.size.width - deltaWidth, currentFrame.size.height);                
-            } else {
-                //NSLog(@"right handle move : current width : %f | delta : %f", currentFrame.size.width, deltaWidth);
-                hitRectLayer.frame = CGRectMake(currentFrame.origin.x, currentFrame.origin.y, currentFrame.size.width + deltaWidth, currentFrame.size.height);                
+            if (!hitHandleLayer ) {
+                                
+                [CATransaction begin];
+                
+                [CATransaction setValue: [NSNumber numberWithFloat:0.0]
+                                 forKey: kCATransactionAnimationDuration];
+                
+                hitRectLayer.position = CGPointMake(mouseDownPoint.x - mouseDownXOffset, hitRectLayer.position.y);
+                
+                [CATransaction commit];
+                
+                currentSegment.startTime = [NSNumber numberWithLong:lrint(mouseDownPoint.x - mouseDownXOffset)]; // TODO - convert that to composition time
+                currentSegment.endTime = [NSNumber numberWithLong:lrint(mouseDownPoint.x - mouseDownXOffset + hitRectLayer.bounds.size.width)]; // TODO - convert that to composition time
+                
+            } else { // we're manipulating a segment handle
+                
+                
+                [CATransaction begin];
+                
+                [CATransaction setValue: [NSNumber numberWithFloat:0.0]
+                                 forKey: kCATransactionAnimationDuration];
+                
+                CGRect currentFrame = hitRectLayer.frame;
+                //CGPoint hitHandleLayerPositionInRect = [containerLayerForRectangles convertPoint:hitHandleLayer.position fromLayer:hitHandleLayer];
+                //NSLog(@"mouseDownPoint.x : %f | hitHandleLayer.position.x : %f", mouseDownPoint.x, hitHandleLayerPositionInRect.x);
+                float deltaWidth = mouseDownPoint.x - previousMouseDownPoint.x;
+                
+                //NSLog(@"current frame : %f,%f w=%f, h=%f", currentFrame.origin.x, currentFrame.origin.y, currentFrame.size.width, currentFrame.size.height);
+                
+                if ([hitHandleLayer.name isEqualToString:@"leftHandleLayer"]) {
+                    //NSLog(@"left handle move : current width : %f | delta : %f", currentFrame.size.width, deltaWidth);
+                    hitRectLayer.frame = CGRectMake(mouseDownPoint.x, currentFrame.origin.y, currentFrame.size.width - deltaWidth, currentFrame.size.height);
+                    
+                } else {
+                    //NSLog(@"right handle move : current width : %f | delta : %f", currentFrame.size.width, deltaWidth);
+                    hitRectLayer.frame = CGRectMake(currentFrame.origin.x, currentFrame.origin.y, currentFrame.size.width + deltaWidth, currentFrame.size.height);                
+                }
+                
+                
+                [CATransaction commit];
             }
-            
-            
-            [CATransaction commit];
-            
         }
         
         previousMouseDownPoint = mouseDownPoint;
@@ -332,7 +410,6 @@
 - (IBAction)showCoordinates:(id)sender
 {
     NSLog(@"showCoordinates");
-    NSLog(@"layout manager : %@", containerLayerForRectangles.layoutManager);
     for(CALayer* layer in containerLayerForRectangles.sublayers) {
         NSLog(@"%@ : %f,%f w=%f, h=%f", layer.name, layer.position.x, layer.position.y, layer.bounds.size.width, layer.bounds.size.height);
         for(CAConstraint* constraint in layer.constraints) {
@@ -356,7 +433,7 @@
         
         CGFloat y = (idx * rectHeight) + rectHeight / 2;
 //        NSLog(@"y = %f", y);
-        CALayer* stripLayer = track.associatedCALayer;
+        CALayer* stripLayer = [self findAssociatedLayerForTrack:track];
         stripLayer.position = CGPointMake(0.0, y);
         ++idx;        
     }
@@ -370,8 +447,8 @@
     NSLog(@"SegmentCanvas:observeValueForKeyPath %@", keyPath);
     id newValue = [change objectForKey:NSKeyValueChangeNewKey];
     id oldValue = [change objectForKey:NSKeyValueChangeOldKey];
-//    NSLog(@"newValue = %@", newValue);
-//    NSLog(@"oldValue = %@", [change objectForKey:NSKeyValueChangeOldKey]);
+    NSLog(@"newValue = %@", newValue);
+    NSLog(@"oldValue = %@", oldValue);
     
     if ([keyPath isEqual:@"tracks"]) {
         NSLog(@"SegmentCanvas:observeValueForKeyPath - tracks change");
@@ -383,16 +460,97 @@
         [removedTracks minusSet:newValue];
         
         for(NSManagedObject<Track>* removedTrack in removedTracks) {
-            CALayer* stripLayer = removedTrack.associatedCALayer;
-//            NSLog(@"SegmentCanvas:observeValueForKeyPath - removing layer %@ associated to track %@", stripLayer, removedTrack);
+            [removedTrack removeObserver:self forKeyPath:@"segments"];
+            CALayer* stripLayer =  [self findAssociatedLayerForTrack:removedTrack];
+            NSLog(@"SegmentCanvas:observeValueForKeyPath - removing layer %@ associated to track %@", stripLayer, removedTrack);
             [stripLayer removeFromSuperlayer];
             [self resetStripLayersYCoordinates:[tracksController arrangedObjects] withRemovedTracks:removedTracks];
         }
         for(NSManagedObject<Track>* addedTrack in newTracks) {
-//            NSLog(@"SegmentCanvas:observeValueForKeyPath - adding strip layer for track %@", addedTrack);
+            NSLog(@"SegmentCanvas:observeValueForKeyPath - adding strip layer for track %@", addedTrack);
             [self addStripLayerForTrack:addedTrack];
+            [addedTrack addObserver:self
+                         forKeyPath:@"segments"
+                            options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                            context:addedTrack];
         }
         
+    } else if ([keyPath isEqual:@"segments"]) {
+    
+        NSMutableSet* newSegments = [NSMutableSet setWithSet:newValue];
+        [newSegments minusSet:oldValue];
+        
+        NSMutableSet* removedSegments = [NSMutableSet setWithSet:oldValue];
+        [removedSegments minusSet:newValue];
+
+        NSManagedObject<Track>* track = context;
+        
+        for(NSManagedObject<Segment>* removedSegment in removedSegments) {
+            [self forgetSegment:removedSegment];
+            CALayer* rectLayer =  [self findAssociatedLayerForSegment:removedSegment inTrack:track];
+            NSLog(@"SegmentCanvas:observeValueForKeyPath - removing layer %@ associated to segment %@", rectLayer, removedSegment);
+            [rectLayer removeFromSuperlayer];
+        }
+        if (!forgetSegmentAdd)
+        {            
+            for(NSManagedObject<Segment>* addedSegment in newSegments) {
+                NSLog(@"SegmentCanvas:observeValueForKeyPath - adding rect layer for segment %@", addedSegment);
+                CALayer* stripLayer =  [self findAssociatedLayerForTrack:track];
+                CALayer* rectLayer = [self makeRectangleInStripLayer:stripLayer];
+                [rectLayer setValue:addedSegment forKey:@"segment"];
+                CGFloat startP = [addedSegment.startTime floatValue];
+                CGFloat endP = [addedSegment.endTime floatValue];
+                CGPoint rectPos = CGPointMake(startP, 0.0);
+                CGFloat rectWidth = endP - startP;
+                rectLayer.position = rectPos;
+                rectLayer.bounds = CGRectMake ( 0.0, 0.0, rectWidth, rectHeight);
+                [self observeSegment:addedSegment withRectLayer:rectLayer];
+            }
+        }
+        
+        
+    } else if ([keyPath isEqual:@"startTime"]) {
+        
+        if (!forgetSegmentTimeChanges && newValue != [NSNull null]) {
+            CALayer* rectLayer = context;
+            [CATransaction begin];
+            
+            [CATransaction setValue: [NSNumber numberWithFloat:0.0]
+                             forKey: kCATransactionAnimationDuration];
+            
+            CGRect currentFrame = rectLayer.frame;
+
+            // TODO - convert start time
+            CGFloat newStartTimeX = [newValue floatValue];
+            CGFloat oldStartTimeX = [oldValue floatValue];
+            float deltaWidth = newStartTimeX - oldStartTimeX;
+            
+            rectLayer.frame = CGRectMake(newStartTimeX, currentFrame.origin.y, currentFrame.size.width - deltaWidth, currentFrame.size.height);
+            
+            [CATransaction commit];
+        }
+        
+    } else if ([keyPath isEqual:@"endTime"]) {
+        
+        if (!forgetSegmentTimeChanges && newValue != [NSNull null]) {
+            CALayer* rectLayer = context;
+            [CATransaction begin];
+            
+            [CATransaction setValue: [NSNumber numberWithFloat:0.0]
+                             forKey: kCATransactionAnimationDuration];
+            
+            CGRect currentFrame = rectLayer.frame;
+            
+            // TODO - convert end time
+            CGFloat newEndTimeX = [newValue floatValue];
+            CGFloat oldEndTimeX = [oldValue floatValue];
+            float deltaWidth = newEndTimeX - oldEndTimeX;
+            
+            rectLayer.frame = CGRectMake(currentFrame.origin.x, currentFrame.origin.y, currentFrame.size.width + deltaWidth, currentFrame.size.height);                
+            
+            [CATransaction commit];
+        }
+        // TODO
         
     } else if ([keyPath isEqual:@"zoomVertical"]) {
         // TODO - do zooming better
@@ -406,25 +564,73 @@
     
 }
 
-// this was to try observing changes on added/removed tracks, but it doesn't work
-// instead I have to observe the to-many relationship Composition->>tracks
-//
-//- (NSArrayController*)tracksArrayController
-//{
-//    return tracksArrayController;
-//}
-//
-//- (void)setTracksArrayController:(NSArrayController*)controller
-//{
-//    if (tracksArrayController != nil) {
-//        [tracksArrayController removeObserver:self forKeyPath:@"arrangedObjects"];
-//    }
-//    tracksArrayController = controller;
-//    [tracksArrayController addObserver:self 
-//                            forKeyPath:@"arrangedObjects"
-//                               options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
-//                               context:NULL];
-//}
+- (CALayer*)findAssociatedLayerForTrack:(NSManagedObject<Track>*)track
+{
+    NSArray* stripLayers = [containerLayerForRectangles sublayers];
+    
+    BOOL (^matchTrack)(id, NSUInteger, BOOL*) = ^ (id layer, NSUInteger idx, BOOL *stop) {
+        if ([layer valueForKey:@"track"] ==  track) {
+            *stop = YES;
+            return YES;
+        }
+        return NO;
+    };
+    
+    
+    uint idx = [stripLayers indexOfObjectPassingTest:matchTrack];
+    
+    NSLog(@"findAssociatedLayerForTrack : idx = %u", idx);
+    
+    if (idx != NSNotFound) {
+        return [stripLayers objectAtIndex:idx];
+    }
+    
+    return nil;
+}
+
+- (CALayer*)findAssociatedLayerForSegment:(NSManagedObject<Segment>*)segment inTrack:(NSManagedObject<Track>*)track
+{
+
+    BOOL (^matchSegment)(id, NSUInteger, BOOL*) = ^ (id layer, NSUInteger idx, BOOL *stop) {
+        if ([layer valueForKey:@"segment"] ==  segment) {
+            *stop = YES;
+            return YES;
+        }
+        return NO;
+    };
+        
+    CALayer* stripLayer = [self findAssociatedLayerForTrack:track];  
+    
+    NSArray* rectLayers = [stripLayer sublayers];
+    
+    uint idx = [rectLayers indexOfObjectPassingTest:matchSegment];
+    
+    NSLog(@"findAssociatedLayerForSegment : idx = %u", idx);
+    
+    if (idx != NSNotFound) {
+        return [rectLayers objectAtIndex:idx];
+    }
+    
+    return nil;
+}
+
+- (void)observeSegment:(id)segment withRectLayer:(CALayer*)rectLayer
+{
+    [segment addObserver:self
+              forKeyPath:@"startTime" 
+                 options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                 context:rectLayer];
+    [segment addObserver:self
+              forKeyPath:@"endTime" 
+                 options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                 context:rectLayer];    
+}
+
+- (void)forgetSegment:(id)segment
+{
+    [segment removeObserver:self forKeyPath:@"startTime"];
+    [segment removeObserver:self forKeyPath:@"endTime"];    
+}
 
 //- (void)drawRect:(NSRect)r 
 //{

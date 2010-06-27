@@ -20,6 +20,8 @@
     CGPoint previousMouseDownPoint;
     unsigned int rectHeight;
     id rectangleLayerDelegate;
+    BOOL forgetSegmentTimeChanges;
+    BOOL forgetSegmentAdd; // set to YES on initial segment creation in mouseUp
     
     __strong CGColorRef rectFillColor;
     __strong CGColorRef rectBorderColor;

@@ -14,11 +14,15 @@
     CALayer* currentSelectedSegment;
     
     __strong CGColorRef selectedOnShadowColor;
+    
+    NSArrayController* segmentArrayController;
+    
 }
 
 - (id)init;
 - (void)setSelected:(CALayer*)segment toState:(BOOL)state;
 
 @property (readwrite,assign) CALayer* currentSelectedSegment;
+@property (readwrite,assign) NSArrayController* segmentArrayController;
 
 @end

@@ -64,12 +64,12 @@
         NSLog(@"CompositionController:prepareContent - create new Composition instance");
         
         NSManagedObject* newComposition = [NSEntityDescription insertNewObjectForEntityForName:@"Composition"
-                                      inManagedObjectContext:moc];
+                                                                        inManagedObjectContext:moc];
 
         // also create default tempo and time signature objects
         //
         NSManagedObject<Tempo>* newTempo = [NSEntityDescription insertNewObjectForEntityForName:@"Tempo"
-                                      inManagedObjectContext:moc];
+                                                                         inManagedObjectContext:moc];
         newTempo.composition = newComposition;
 
         NSManagedObject<TimeSignature>* newTimeSignature = [NSEntityDescription insertNewObjectForEntityForName:@"TimeSignature"

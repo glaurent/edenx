@@ -19,6 +19,7 @@
 #import "CoreDataStuff.h"
 #import "SegmentCanvas.h"
 #import "TracksController.h"
+#import "SegmentSelector.h"
 
 #import <CoreAudio/CoreAudioTypes.h>
 
@@ -62,6 +63,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:tracksController selector:@selector(handleMIDIRemoveObject:) name:PYMIDIObjectRemoved object:nil];
 
     //segmentCanvas.tracksArrayController = tracksController;
+    
+    NSLog(@"MyDocument windowControllerDidLoadNib - tracksController = %@", tracksController);
     
 }
 
@@ -116,6 +119,7 @@
     segmentCanvas.tracksController = tracksController;
     
     [segmentCanvas addStripLayerForTracks:[tracksController content]];
+    [[segmentCanvas segmentSelector] setSegmentArrayController:segmentsController];
 }
 
 - (IBAction)showPlayBackCursor:(id)sender
@@ -204,7 +208,7 @@
     NSManagedObjectContext* managedObjectContext = [currentTrack managedObjectContext];
     
     NSManagedObject<Note>* newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note" 
-                                                             inManagedObjectContext:managedObjectContext];
+                                                                   inManagedObjectContext:managedObjectContext];
     
 //    NSLog(@"MyDocument:testAddEvent note = %@", newNote);
 //    NSLog(@"MyDocument:testAddEvent note duration = %@, pitch = %@", [newNote duration], [newNote note]);

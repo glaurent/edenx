@@ -22,11 +22,11 @@
     return self;
 }
 
-- (void)setCurrentSelectedSegment:(CALayer*)segment
+- (void)setCurrentSelectedSegment:(CALayer*)segmentRectangle
 {
     // NSLog(@"SegmentSelector:setCurrentSelectedSegment %@", segment);
     
-    if (currentSelectedSegment == segment) {
+    if (currentSelectedSegment == segmentRectangle) {
         NSLog(@"segment already selected - nothing to do");
         return;
     }
@@ -36,9 +36,18 @@
         [currentSelectedSegment setNeedsDisplay];
     }
     
-    currentSelectedSegment = segment;
-    [self setSelected:currentSelectedSegment toState:YES];
-    [currentSelectedSegment setNeedsDisplay];    
+    currentSelectedSegment = segmentRectangle;
+    if (currentSelectedSegment != nil) {
+        id segment = [segmentRectangle valueForKey:@"segment"];
+        uint segmentIdx = [[segmentArrayController arrangedObjects] indexOfObject:segment];
+        
+        NSLog(@"SegmentSelector:setCurrentSelectedSegment : idx = %d - # of objects : %d",
+              segmentIdx,
+              [[segmentArrayController arrangedObjects] count]);
+        [segmentArrayController setSelectionIndex:segmentIdx];
+        [self setSelected:currentSelectedSegment toState:YES];
+        [currentSelectedSegment setNeedsDisplay];    
+    }
 }
 
 - (CALayer*)currentSelectedSegment
@@ -60,5 +69,7 @@
         segment.shadowOpacity = 1.0;
     }
 }
+
+@synthesize segmentArrayController;
 
 @end
