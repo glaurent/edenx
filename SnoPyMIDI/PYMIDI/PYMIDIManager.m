@@ -64,7 +64,9 @@ static void midiNotifyProc (const MIDINotification* message, void* refCon);
 {
     notificationsEnabled = NO;
     
+    NSLog(@"PYMIDIManager:init - MIDIClientCreate");
     MIDIClientCreate (CFSTR("PYMIDIManager"), midiNotifyProc, (void*)self, &midiClientRef);
+    NSLog(@"PYMIDIManager:init - MIDIClientCreate done");
     
     realSourceArray = [[NSMutableArray alloc] init];
     realDestinationArray = [[NSMutableArray alloc] init];

@@ -313,7 +313,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>AFBCDDD7107A9AA500D384BA</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>PYMIDIEndpointDescriptor.m</string>
+								<string>PYMIDIVirtualSource.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -321,18 +321,36 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>AFBCDDD8107A9AA500D384BA</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>PYMIDIEndpointDescriptor.m</string>
+										<string>PYMIDIVirtualSource.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>AFA549B41081E507008115CC</string>
+										<string>AF6011A7108259E100E756F4</string>
 										<key>history</key>
 										<array>
 											<string>AFA549AF1081E507008115CC</string>
 											<string>AFA549B01081E507008115CC</string>
 											<string>AFA549B11081E507008115CC</string>
-											<string>AFA549B21081E507008115CC</string>
-											<string>AFA549B31081E507008115CC</string>
+											<string>AF601193108259E100E756F4</string>
+											<string>AF601194108259E100E756F4</string>
+											<string>AF601195108259E100E756F4</string>
+											<string>AF601196108259E100E756F4</string>
+											<string>AF601197108259E100E756F4</string>
+											<string>AF601198108259E100E756F4</string>
+											<string>AF601199108259E100E756F4</string>
+											<string>AF60119A108259E100E756F4</string>
+											<string>AF60119B108259E100E756F4</string>
+											<string>AF60119C108259E100E756F4</string>
+											<string>AF60119D108259E100E756F4</string>
+											<string>AF60119E108259E100E756F4</string>
+											<string>AF60119F108259E100E756F4</string>
+											<string>AF6011A0108259E100E756F4</string>
+											<string>AF6011A1108259E100E756F4</string>
+											<string>AF6011A2108259E100E756F4</string>
+											<string>AF6011A3108259E100E756F4</string>
+											<string>AF6011A4108259E100E756F4</string>
+											<string>AF6011A5108259E100E756F4</string>
+											<string>AF6011A6108259E100E756F4</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -346,18 +364,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {903, 341}}</string>
+								<string>{{0, 0}, {903, 329}}</string>
 								<key>RubberWindowFrame</key>
 								<string>306 221 1110 859 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>341pt</string>
+							<string>329pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>472pt</string>
+							<string>484pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -371,9 +389,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {903, 445}}</string>
-										<key>RubberWindowFrame</key>
-										<string>306 221 1110 859 0 0 1920 1178 </string>
+										<string>{{10, 27}, {903, 457}}</string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -403,7 +419,7 @@
 										<dict>
 											<key>PBXCVSModuleTreeModuleColumnWidthsKey</key>
 											<array>
-												<real>316</real>
+												<real>487</real>
 												<real>56</real>
 												<real>63</real>
 												<real>60</real>
@@ -428,7 +444,9 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {732, 369}}</string>
+										<string>{{10, 27}, {903, 457}}</string>
+										<key>RubberWindowFrame</key>
+										<string>306 221 1110 859 0 0 1920 1178 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXCVSModule</string>
@@ -476,11 +494,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>AFA549B51081E507008115CC</string>
+				<string>AF6011A8108259E100E756F4</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>AFA549B61081E507008115CC</string>
+				<string>AF6011A9108259E100E756F4</string>
 				<string>AFBCDDD7107A9AA500D384BA</string>
-				<string>AFA549B71081E507008115CC</string>
+				<string>AF6011AA108259E100E756F4</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
