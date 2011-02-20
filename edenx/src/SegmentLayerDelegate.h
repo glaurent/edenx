@@ -8,8 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+static const unsigned int handleRadius = 8;
 
 @interface SegmentLayerDelegate : NSObject {
+
+    __strong CGColorRef handleFillColor;
 
 }
 

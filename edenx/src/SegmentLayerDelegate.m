@@ -16,6 +16,9 @@
     self = [super init];
     
     if (self) {
+        handleFillColor = CGColorCreateGenericRGB(0.3, 0.5, 0.5, 0.8); // greenish 
+        CFMakeCollectable(handleFillColor);
+
     }
     
     return self;
@@ -47,6 +50,23 @@
     //    
     //    // release the path
     //    CFRelease(thePath);
+    
+    
+    CGMutablePathRef leftHandlePath = CGPathCreateMutable();
+    CGPathAddArc(leftHandlePath, NULL, 0, layer.bounds.size.height / 2, handleRadius, -M_PI_2, M_PI_2, NO);
+    
+    CGMutablePathRef rightHandlePath = CGPathCreateMutable();
+    CGPathAddArc(rightHandlePath, NULL, layer.bounds.size.width, layer.bounds.size.height / 2, handleRadius, M_PI_2, -M_PI_2, NO);
+    
+    CGContextAddPath(context, leftHandlePath);
+    CGContextAddPath(context, rightHandlePath);
+        
+    CGContextSetLineWidth(context, 2.0);
+    CGContextSetFillColorWithColor(context, handleFillColor);
+    CGContextDrawPath(context, kCGPathFill);
+    
+    CFRelease(leftHandlePath);
+    CFRelease(rightHandlePath);
     
 }
 

@@ -12,6 +12,8 @@
 #import "CoreDataStuff.h"
 #import "MyDocument.h"
 
+#import "CALayerDebug.h"
+
 @interface SegmentCanvas (Private)
 
 - (CALayer*)findAssociatedLayerForTrack:(NSManagedObject<Track>*)track;
@@ -27,7 +29,7 @@
 {
     NSLog(@"SegmentCanvas:initWithFrame");
     
-    if ( self = [super initWithFrame:frame] )
+    if ( (self = [super initWithFrame:frame]) )
     {
         rectHeight = 40;
         rectangleLayerDelegate = [[SegmentLayerDelegate alloc] init];
@@ -180,32 +182,32 @@
     
     CALayer* leftHandleLayer = [CALayer layer];
     leftHandleLayer.name = @"leftHandleLayer";
-    leftHandleLayer.bounds = CGRectMake ( 0, 0, 10, 10 );
-    leftHandleLayer.cornerRadius = 3;
-    leftHandleLayer.backgroundColor = rectHandleColor;
-    leftHandleLayer.borderColor = rectHandleColor;
-    leftHandleLayer.borderWidth = 1;
+    leftHandleLayer.bounds = CGRectMake (0, 0, 10, rectHeight);
+//    leftHandleLayer.cornerRadius = 3;
+//    leftHandleLayer.backgroundColor = rectHandleColor;
+//    leftHandleLayer.borderColor = rectHandleColor;
+//    leftHandleLayer.borderWidth = 1;
     
-    [leftHandleLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMidY
+    [leftHandleLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxY
                                                               relativeTo:@"superlayer"
-                                                               attribute:kCAConstraintMidY]];
-    [leftHandleLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMidX
+                                                               attribute:kCAConstraintHeight]];
+    [leftHandleLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinX
                                                               relativeTo:@"superlayer"
                                                                attribute:kCAConstraintMinX]];
     [rectLayer addSublayer:leftHandleLayer];
     
     CALayer* rightHandleLayer = [CALayer layer];
     rightHandleLayer.name = @"rightHandleLayer";
-    rightHandleLayer.bounds = CGRectMake ( 0, 0, 10, 10 );
-    rightHandleLayer.cornerRadius = 3;
-    rightHandleLayer.backgroundColor = rectHandleColor;
-    rightHandleLayer.borderColor = rectHandleColor;
-    rightHandleLayer.borderWidth = 1;
+    rightHandleLayer.bounds = CGRectMake (0, 0, 10, rectHeight);
+//    rightHandleLayer.cornerRadius = 3;
+//    rightHandleLayer.backgroundColor = rectHandleColor;
+//    rightHandleLayer.borderColor = rectHandleColor;
+//    rightHandleLayer.borderWidth = 1;
     
-    [rightHandleLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMidY
+    [rightHandleLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxY
                                                                relativeTo:@"superlayer"
-                                                                attribute:kCAConstraintMidY]];
-    [rightHandleLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMidX
+                                                                attribute:kCAConstraintHeight]];
+    [rightHandleLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxX
                                                                relativeTo:@"superlayer"
                                                                 attribute:kCAConstraintMaxX]];
     
@@ -303,7 +305,7 @@
 {
     if (hitStripLayer) {
         CALayer* rectLayer = [self addRectangle:[containerLayerForRectangles convertPoint:mouseDownPoint
-                                                                                         toLayer:hitStripLayer]
+                                                                                  toLayer:hitStripLayer]
                                           inStripLayer:hitStripLayer];
         NSManagedObject<Track>* associatedTrack = [hitStripLayer valueForKey:@"track"];
         [self addSegmentForRectangle:rectLayer inTrack:associatedTrack];
@@ -317,11 +319,11 @@
         
         if ([hitHandleLayer.name isEqualToString:@"leftHandleLayer"]) {
             long t = lrintf(mouseDownPoint.x - mouseDownXOffset);
-            NSLog(@"setting startTime to %d", t);
+            NSLog(@"setting startTime to %ld", t);
             currentSegment.startTime = [NSNumber numberWithLong:t]; // TODO - convert that to composition time
         } else {
             long t = lrintf(mouseDownPoint.x - mouseDownXOffset + hitRectLayer.bounds.size.width);
-            NSLog(@"setting endTime to %d", t);
+            NSLog(@"setting endTime to %ld", t);
             currentSegment.endTime = [NSNumber numberWithLong:t]; // TODO - convert that to composition time            
         }
         
@@ -367,8 +369,8 @@
                 
                 [CATransaction commit];
                 
-                currentSegment.startTime = [NSNumber numberWithLong:lrint(mouseDownPoint.x - mouseDownXOffset)]; // TODO - convert that to composition time
-                currentSegment.endTime = [NSNumber numberWithLong:lrint(mouseDownPoint.x - mouseDownXOffset + hitRectLayer.bounds.size.width)]; // TODO - convert that to composition time
+//                currentSegment.startTime = [NSNumber numberWithLong:lrint(mouseDownPoint.x - mouseDownXOffset)]; // TODO - convert that to composition time
+//                currentSegment.endTime = [NSNumber numberWithLong:lrint(mouseDownPoint.x - mouseDownXOffset + hitRectLayer.bounds.size.width)]; // TODO - convert that to composition time
                 
             } else { // we're manipulating a segment handle
                 
@@ -386,16 +388,18 @@
                 //NSLog(@"current frame : %f,%f w=%f, h=%f", currentFrame.origin.x, currentFrame.origin.y, currentFrame.size.width, currentFrame.size.height);
                 
                 if ([hitHandleLayer.name isEqualToString:@"leftHandleLayer"]) {
-                    //NSLog(@"left handle move : current width : %f | delta : %f", currentFrame.size.width, deltaWidth);
+                    NSLog(@"left handle move : current width : %f | delta : %f", currentFrame.size.width, deltaWidth);
                     hitRectLayer.frame = CGRectMake(mouseDownPoint.x, currentFrame.origin.y, currentFrame.size.width - deltaWidth, currentFrame.size.height);
                     
                 } else {
-                    //NSLog(@"right handle move : current width : %f | delta : %f", currentFrame.size.width, deltaWidth);
+                    NSLog(@"right handle move : current width : %f | delta : %f", currentFrame.size.width, deltaWidth);
                     hitRectLayer.frame = CGRectMake(currentFrame.origin.x, currentFrame.origin.y, currentFrame.size.width + deltaWidth, currentFrame.size.height);                
                 }
                 
                 
                 [CATransaction commit];
+                
+                [hitRectLayer setNeedsDisplay];
             }
         }
         

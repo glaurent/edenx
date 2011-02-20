@@ -30,6 +30,10 @@
             
         midiSources = [NSMutableArray arrayWithCapacity:5];
         recordingStartTime = 0;
+        
+        NSUserDefaults *args = [NSUserDefaults standardUserDefaults];
+        disableSound = [args boolForKey:@"disableSound"];
+        NSLog(@"Recorder init : disableSound = %d", disableSound);
     }
 
     return self;
@@ -38,22 +42,26 @@
 - (void)setup
 {
     [midiSourcesController setContent:midiSources];
-    
-    // get MIDI sources
-    //
-    PYMIDIManager* manager = [PYMIDIManager sharedInstance];
-    NSMutableArray* tmp = [NSMutableArray arrayWithCapacity:[[manager realSources] count]];
-    
-    NSLog(@"Recorder init : midiSourcesController = %@", midiSourcesController);
-    [midiSourcesController addObjects:[manager realSources]];
-    NSLog(@"Recorder init : nb of midi sources : %d", [tmp count]);
-    NSLog(@"Recorder init : nb of controller items : %d", [[midiSourcesController arrangedObjects] count]);
-    NSLog(@"Recorder init : nb of added midi sources : %d", [midiSources count]);
-    
-    // notifs for MIDI environment changes
-    //
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMIDIAddObject:)    name:PYMIDIObjectAdded   object:manager];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMIDIRemoveObject:) name:PYMIDIObjectRemoved object:manager];
+
+    if (!disableSound) {
+        
+        // get MIDI sources
+        //
+        PYMIDIManager* manager = [PYMIDIManager sharedInstance];
+        NSMutableArray* tmp = [NSMutableArray arrayWithCapacity:[[manager realSources] count]];
+        
+        NSLog(@"Recorder init : midiSourcesController = %@", midiSourcesController);
+        [midiSourcesController addObjects:[manager realSources]];
+        NSLog(@"Recorder init : nb of midi sources : %d", [tmp count]);
+        NSLog(@"Recorder init : nb of controller items : %d", [[midiSourcesController arrangedObjects] count]);
+        NSLog(@"Recorder init : nb of added midi sources : %d", [midiSources count]);
+        
+        // notifs for MIDI environment changes
+        //
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMIDIAddObject:)    name:PYMIDIObjectAdded   object:manager];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMIDIRemoveObject:) name:PYMIDIObjectRemoved object:manager];
+
+    }
     
 }
 
@@ -134,5 +142,6 @@
 @synthesize midiSourcesController;
 @synthesize recording;
 @synthesize recordingStartTime;
+@synthesize disableSound;
 
 @end

@@ -17,6 +17,8 @@
     BOOL recording;
     MIDITimeStamp recordingStartTime;
     
+    BOOL disableSound;
+    
 }
 
 - (id)init;
@@ -31,5 +33,6 @@
 @property (readonly) NSArrayController* midiSourcesController;
 @property (readonly) BOOL recording;
 @property (readonly) MIDITimeStamp recordingStartTime;
+@property (readwrite) BOOL disableSound;
 
 @end

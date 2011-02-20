@@ -24,6 +24,7 @@
 		AF3E7E680F1CDE2B00CCF05E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF3E7E660F1CDE2B00CCF05E /* MainMenu.xib */; };
 		AF4B28760F75768B00438CAC /* TrackEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF4B28740F75768B00438CAC /* TrackEditor.xib */; };
 		AF4B28820F75920000438CAC /* TrackEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4B28810F75920000438CAC /* TrackEditor.m */; };
+		AF64A755130FF546001470D1 /* CALayerDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = AF64A754130FF546001470D1 /* CALayerDebug.m */; };
 		AF8693B00F9146EB00305C7D /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8693AF0F9146EB00305C7D /* Player.m */; };
 		AF8693BC0F914F5900305C7D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8693B80F914F5900305C7D /* AudioToolbox.framework */; };
 		AF8693BD0F914F5900305C7D /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8693B90F914F5900305C7D /* AudioUnit.framework */; };
@@ -57,13 +58,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 514E9DF8081EBF9C009B8CD9;
 			remoteInfo = "edenx Spotlight Importer";
-		};
-		AF3E7E380F1C7DB800CCF05E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AFAD22CB0F18FE2500166E36 /* DrawKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9660E6100BEF442B00B6A38C;
-			remoteInfo = DrawKit;
 		};
 		AFFAE936103F0BF4000FF2B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -121,6 +115,8 @@
 		AF4B28750F75768B00438CAC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/TrackEditor.xib; sourceTree = "<group>"; };
 		AF4B28800F75920000438CAC /* TrackEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackEditor.h; sourceTree = "<group>"; };
 		AF4B28810F75920000438CAC /* TrackEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackEditor.m; sourceTree = "<group>"; };
+		AF64A753130FF545001470D1 /* CALayerDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CALayerDebug.h; sourceTree = "<group>"; };
+		AF64A754130FF546001470D1 /* CALayerDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CALayerDebug.m; sourceTree = "<group>"; };
 		AF8693AE0F9146EB00305C7D /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		AF8693AF0F9146EB00305C7D /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		AF8693B80F914F5900305C7D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
@@ -140,7 +136,6 @@
 		AFA0C93D0F50746E00D67487 /* SynchroScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynchroScrollView.m; sourceTree = "<group>"; };
 		AFA0CACB0F5AA7E100D67487 /* CompositionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositionController.h; sourceTree = "<group>"; };
 		AFA0CACC0F5AA7E100D67487 /* CompositionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompositionController.m; sourceTree = "<group>"; };
-		AFAD22CB0F18FE2500166E36 /* DrawKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DrawKit.xcodeproj; path = "../DrawKit stuff/DrawKit/DrawKit.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		AFB1E1F011C4D5420031FFF3 /* SegmentSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentSelector.h; sourceTree = "<group>"; };
 		AFB1E1F111C4D5420031FFF3 /* SegmentSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentSelector.m; sourceTree = "<group>"; };
 		AFCA0765114CF43400FF7BA8 /* RulerScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RulerScale.h; sourceTree = "<group>"; };
@@ -309,19 +304,10 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		AF3E7E350F1C7DB800CCF05E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AF3E7E390F1C7DB800CCF05E /* GCDrawKit.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		AF8697E10FB470FC00305C7D /* Other Projects */ = {
 			isa = PBXGroup;
 			children = (
 				AFFAE932103F0BF4000FF2B5 /* SnoPyMIDI.xcodeproj */,
-				AFAD22CB0F18FE2500166E36 /* DrawKit.xcodeproj */,
 			);
 			name = "Other Projects";
 			sourceTree = "<group>";
@@ -335,6 +321,8 @@
 				AF93BBC711BB08380032FA84 /* SegmentLayerDelegate.m */,
 				AFB1E1F011C4D5420031FFF3 /* SegmentSelector.h */,
 				AFB1E1F111C4D5420031FFF3 /* SegmentSelector.m */,
+				AF64A753130FF545001470D1 /* CALayerDebug.h */,
+				AF64A754130FF546001470D1 /* CALayerDebug.m */,
 			);
 			name = "Segment Canvas";
 			sourceTree = "<group>";
@@ -431,16 +419,19 @@
 /* Begin PBXProject section */
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "telegraph-road.org";
+			};
 			buildConfigurationList = 26FC0ACE0875C91100E6366F /* Build configuration list for PBXProject "edenx" */;
 			compatibilityVersion = "Xcode 3.0";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* edenx */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = AF3E7E350F1C7DB800CCF05E /* Products */;
-					ProjectRef = AFAD22CB0F18FE2500166E36 /* DrawKit.xcodeproj */;
-				},
 				{
 					ProductGroup = AFFAE933103F0BF4000FF2B5 /* Products */;
 					ProjectRef = AFFAE932103F0BF4000FF2B5 /* SnoPyMIDI.xcodeproj */;
@@ -455,13 +446,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		AF3E7E390F1C7DB800CCF05E /* GCDrawKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = GCDrawKit.framework;
-			remoteRef = AF3E7E380F1C7DB800CCF05E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		AFFAE937103F0BF4000FF2B5 /* SnoPyMIDI.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -529,6 +513,7 @@
 				AF93BB3411BB074D0032FA84 /* SegmentCanvas.m in Sources */,
 				AF93BBC811BB08380032FA84 /* SegmentLayerDelegate.m in Sources */,
 				AFB1E1F211C4D5420031FFF3 /* SegmentSelector.m in Sources */,
+				AF64A755130FF546001470D1 /* CALayerDebug.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,11 +628,12 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = edenx_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_SHADOW = YES;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = edenx;
@@ -671,10 +657,11 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = edenx_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = edenx;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				USER_HEADER_SEARCH_PATHS = "../SnoPyMIDI/**";

@@ -56,8 +56,10 @@
 
     // synchronize track list and track canvas scroll views
     [trackListView setSynchronizedScrollView:trackCanvasView];
-        
-    
+
+    [trackCanvasView setHasHorizontalRuler:YES];
+    [trackCanvasView setRulersVisible:YES];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentIsBeingModified:) name:NSManagedObjectContextObjectsDidChangeNotification object:[self managedObjectContext]];
     
     [[NSNotificationCenter defaultCenter] addObserver:tracksController selector:@selector(handleMIDIRemoveObject:) name:PYMIDIObjectRemoved object:nil];
@@ -97,6 +99,7 @@
 
 - (void)setupZoomSlider
 {
+        
     // attach as observer to Composition.testRowHeight
     //
     NSLog(@"MyDocument adding SegmentCanvas as observer: %@ observing zoomVertical on %@", segmentCanvas, [compositionController content]);
@@ -280,7 +283,7 @@
         
         id aTrack;
         
-        while(aTrack = [tracksEnumerator nextObject]) {
+        while((aTrack = [tracksEnumerator nextObject])) {
             MusicTrack sequenceTrack;
             MusicSequenceNewTrack(sequence, &sequenceTrack);
             
@@ -305,7 +308,7 @@
                 
                 NSManagedObject<Element,Note>* anEvent;
                 
-                while(anEvent = [eventsEnumerator nextObject]) {
+                while((anEvent = [eventsEnumerator nextObject])) {
                     // NSLog(@"event : %@ ", anEvent);
                     MIDINoteMessage msg;
                     msg.channel = [[aTrack channel] intValue];

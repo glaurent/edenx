@@ -12,6 +12,8 @@
 #import "MIDIReceiver.h"
 #import "CoreDataStuff.h"
 
+static const unsigned int tablesize = 0xf * 0xff;
+
 // delegate for MIDIReceiver, job is to add to a track the SMMessages
 // converted to events
 //
@@ -24,8 +26,6 @@
     Float64 recordingStartTimeInSeconds;
     MusicSequence sequence; // used to convert events time
 }
-
-static const unsigned int tablesize = 0xf * 0xff;
 
 - (id)initWithTrack:(NSManagedObject<Track>*)aTrack withStartTime:(MIDITimeStamp)startTime withMusicSequence:(MusicSequence)aSeq;
 
