@@ -16,7 +16,7 @@
     self = [super init];
     
     currentSelectedSegment = nil;
-    selectedOnShadowColor = CGColorCreateGenericRGB(0.8, 0.0, 0.3, 0.5); // red 
+    selectedOnShadowColor = CGColorCreateGenericRGB(0.8, 0.3, 0.3, 0.5); // red 
     CFMakeCollectable(selectedOnShadowColor);
     
     return self;

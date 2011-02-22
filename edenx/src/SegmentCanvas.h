@@ -42,8 +42,9 @@
 }
 
 - (void)addStripLayerForTracks:(NSArray*)tracks;
-- (CALayer*)addStripLayerForTrack:(NSManagedObject<Track>*)track;
-
+- (CALayer*)addStripLayerForNewTrack:(NSManagedObject<Track>*)track;
+- (CALayer*)addStripLayerForTrack:(NSManagedObject<Track>*)track atIndex:(uint)index;
+- (id)addRectangleForSegment:(NSManagedObject<Segment>*)segment inTrack:(NSManagedObject<Track>*)associatedTrack;
 
 @property (readonly) unsigned int rectHeight;
 @property (readwrite, assign) CALayer* containerLayerForRectangles;
