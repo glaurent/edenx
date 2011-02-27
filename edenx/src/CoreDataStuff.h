@@ -45,11 +45,14 @@ typedef long timeT;
 - (void)addSegmentsObject:(id)Object;
 
 @property (nonatomic, retain) NSNumber * channel;
+@property (nonatomic, retain) NSNumber * index;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) id inputSource;
 @property (nonatomic, retain) NSMutableSet* segments;
 
 @end
+
+// Segment CoreData
 
 @protocol Segment<NSObject>
 

@@ -102,14 +102,14 @@
         
     // attach as observer to Composition.testRowHeight
     //
-    NSLog(@"MyDocument adding SegmentCanvas as observer: %@ observing zoomVertical on %@", segmentCanvas, [compositionController content]);
+    NSLog(@"MyDocument:setupZoomSlider adding SegmentCanvas as observer: %@ observing zoomVertical on %@", segmentCanvas, [compositionController content]);
     [[compositionController content] addObserver:segmentCanvas
                                         forKeyPath:@"zoomVertical"
                                            options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                                            context:NULL];    
 
 
-    NSLog(@"MyDocument:windowControllerDidLoadNib: adding observer on composition tracks");
+    NSLog(@"MyDocument:setupZoomSlider: adding observer on composition tracks");
     [[compositionController content] addObserver:segmentCanvas
                                       forKeyPath:@"tracks"
                                          options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld

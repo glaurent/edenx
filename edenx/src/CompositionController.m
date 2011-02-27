@@ -15,20 +15,15 @@
 
 @implementation CompositionController
 
-- (id)initWithContent:(id)content
-{
-    NSLog(@"CompositionController:initWithContent");
-    
-    [super initWithContent:content];
-    
-    dummyTimeSig = [NSEntityDescription insertNewObjectForEntityForName:@"TimeSignature"
-                                                 inManagedObjectContext:[self managedObjectContext]];
-    barPositionsNeedCalculating = YES;
-
-    document = [[NSDocumentController sharedDocumentController] currentDocument];
-    
-    return self;
-}
+// THIS IS NOT CALLED - NSArrayController created from NIB files aren't initialized this way
+//- (id)initWithContent:(id)content
+//{
+//    NSLog(@"CompositionController:initWithContent");
+//    
+//    [super initWithContent:content];
+//        
+//    return self;
+//}
 
 - (void)setContent:(id)content
 {
@@ -81,7 +76,16 @@
         // First call processPendingChanges on the managed object context to force the undo registration
         // for this insertion, then call removeAllActions.
         [moc processPendingChanges];
-        [[moc undoManager] removeAllActions];        
+        [[moc undoManager] removeAllActions];
+
+        // other setup
+        dummyTimeSig = [NSEntityDescription insertNewObjectForEntityForName:@"TimeSignature"
+                                                     inManagedObjectContext:[self managedObjectContext]];
+        barPositionsNeedCalculating = YES;
+        
+        document = [[NSDocumentController sharedDocumentController] currentDocument];
+
+        
     }
     
 }
@@ -118,7 +122,7 @@
     
     id<TimeSignature> aTimeSig;
     
-    while(aTimeSig = [timeSigsEnumerator nextObject])
+    while((aTimeSig = [timeSigsEnumerator nextObject]))
     {
         timeT myTime = [[aTimeSig absoluteTime] longValue];
         int n = (myTime - lastSigTime) / barDuration;

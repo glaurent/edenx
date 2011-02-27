@@ -41,7 +41,9 @@
         id segment = [segmentRectangle valueForKey:@"segment"];
         uint segmentIdx = [[segmentArrayController arrangedObjects] indexOfObject:segment];
         
-        NSLog(@"SegmentSelector:setCurrentSelectedSegment : idx = %d - # of objects : %d",
+        NSAssert(segmentIdx != NSNotFound, @"SegmentSelector:setCurrentSelectedSegments : segment not found");
+        
+        NSLog(@"SegmentSelector:setCurrentSelectedSegment : idx = %u - # of objects : %d",
               segmentIdx,
               [[segmentArrayController arrangedObjects] count]);
         [segmentArrayController setSelectionIndex:segmentIdx];
@@ -50,10 +52,38 @@
     }
 }
 
+- (void)setCurrentHoveredSegment:(CALayer*)segmentRectangle
+{
+    // NSLog(@"SegmentSelector:setCurrentHoveredSegment %@", segment);
+    
+    if (currentHoveredSegment == segmentRectangle) {
+//        NSLog(@"segment already hovered on - nothing to do");
+        return;
+    }
+    
+    if (currentHoveredSegment != nil) {
+        [currentHoveredSegment setValue:[NSNumber numberWithBool:NO] forKey:@"hovered"];
+        [currentHoveredSegment setNeedsDisplay];
+    }
+    
+    currentHoveredSegment = segmentRectangle;
+    if (currentHoveredSegment != nil) {
+        [currentHoveredSegment setValue:[NSNumber numberWithBool:YES] forKey:@"hovered"];
+        [currentHoveredSegment setNeedsDisplay];    
+    }
+}
+
+
 - (CALayer*)currentSelectedSegment
 {
     return currentSelectedSegment;
 }
+
+- (CALayer*)currentHoveredSegment
+{
+    return currentHoveredSegment;
+}
+
 
 - (void)setSelected:(CALayer*)segment toState:(BOOL)state
 {

@@ -12,11 +12,15 @@
 @interface CoreDataUtils : NSObject {
     NSSortDescriptor* absoluteTimeSortDescriptor;
     NSArray* absoluteTimeSortDescriptorArray;
+
+    NSSortDescriptor* trackSortDescriptor;
+    NSArray* trackSortDescriptorArray;
 }
 
 - (NSArray*) absoluteTimeSortDescriptorArray;
 // + (CoreDataUtils*) instance;
 
 @property(readonly) NSArray* absoluteTimeSortDescriptorArray;
+@property(readonly) NSArray* trackSortDescriptorArray;
 
 @end

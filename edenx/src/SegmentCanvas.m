@@ -111,18 +111,20 @@
     
     containerLayerForRectangles.layoutManager = [CAConstraintLayoutManager layoutManager];
     
+    int options = NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved | NSTrackingActiveAlways | NSTrackingInVisibleRect;
+    
+    NSTrackingArea* trackingArea = [[NSTrackingArea alloc] initWithRect:NSRectFromCGRect(mainLayer.bounds) options:options owner:self userInfo:nil];
+    [self addTrackingArea:trackingArea];
+    
 }
 
 - (void)addStripLayerForTracks:(NSArray*)tracks
 {
     // TODO : this is probably not the right way to do it. The "index" of the strip layer should be computed in accordance to the
     // track position in the track table, at the left of the segment canvas
-    //
-    uint index = 0;
-    
+    //    
     for(NSManagedObject<Track>* track in tracks) {
-        [self addStripLayerForTrack:track atIndex:index];
-        ++index;
+        [self addStripLayerForTrack:track atIndex:[track.index unsignedIntValue]];
     }
 
     for(NSManagedObject<Track>* track in tracks) {
@@ -174,7 +176,7 @@
     // create layer for rect
     //
     CALayer* rectLayer = [CALayer layer];
-    NSLog(@"containerLayerForRectangles.bounds.size.width : %f", containerLayerForRectangles.bounds.size.width);
+    //NSLog(@"SegmentCanvas:makeRectangleInStripLayer : containerLayerForRectangles.bounds.size.width : %f", containerLayerForRectangles.bounds.size.width);
     rectLayer.name = @"rectLayer";
     rectLayer.bounds = CGRectMake ( 0.0, 0.0, 100 , rectHeight ); // default widht = 100
     rectLayer.delegate = rectangleLayerDelegate;
@@ -182,6 +184,7 @@
     rectLayer.backgroundColor = rectFillColor;
     rectLayer.borderColor = rectBorderColor;
     rectLayer.borderWidth = 2;
+    rectLayer.needsDisplayOnBoundsChange = YES;
     //    [rectLayer setValue:[NSNumber numberWithFloat:100.0] forKey:@"segmentWidth"]; // set default length
     //    [rectLayer setValue:[NSNumber numberWithFloat:origin.x] forKey:@"segmentStart"]; // set start
     
@@ -292,6 +295,7 @@
     rectLayer.position = CGPointMake([segment.startTime floatValue], 0);
 
     [rectLayer setValue:segment forKey:@"segment"];
+    [rectLayer setNeedsDisplay];
     
     return rectLayer;
 }
@@ -319,27 +323,37 @@
     hitLayer = [containerLayerForRectangles hitTest:mouseDownPoint];
     
     if (hitLayer) {
-        NSLog(@"clicked on layer %@", hitLayer.name);
-        
+        NSLog(@"SegmentCanvas:mouseDown : clicked on layer %@", hitLayer.name);
+                
         if ([hitLayer.name hasSuffix:@"HandleLayer"]) {
             hitHandleLayer = hitLayer;
             hitRectLayer = hitLayer.superlayer;
+            hitStripLayer = hitRectLayer.superlayer;
             forgetSegmentTimeChanges = YES;
         } else if ([hitLayer.name isEqual:@"rectLayer"]) {
             hitRectLayer = hitLayer;
+            hitStripLayer = hitRectLayer.superlayer;
             mouseDownXOffset = mouseDownPoint.x - hitRectLayer.position.x;
             forgetSegmentTimeChanges = YES;
         } else if ([hitLayer.name hasPrefix:@"stripLayer"]) {
             NSLog(@"hit strip layer");
             hitStripLayer = hitLayer;
         }
+        
+        // select associated track
+        id track = [hitStripLayer valueForKey:@"track"];
+        uint selectedTrackIdx = [[tracksController arrangedObjects] indexOfObject:track];
+        NSLog(@"SegmentCanvas:mouseDown : selecting track %@ - array idx = %u", track, selectedTrackIdx);
+        
+        [tracksController setSelectionIndex:selectedTrackIdx];
+        
     }
     
 }
 
 - (void)mouseUp:(NSEvent*)aEvent
 {
-    if (hitStripLayer) {
+    if (hitStripLayer && !hitRectLayer) {
         CALayer* rectLayer = [self addRectangle:[containerLayerForRectangles convertPoint:mouseDownPoint
                                                                                   toLayer:hitStripLayer]
                                           inStripLayer:hitStripLayer];
@@ -374,14 +388,14 @@
     
 }
 
-- (void)mouseDragged:(NSEvent*)theEvent
+- (void)mouseDragged:(NSEvent*)aEvent
 {
-    [[self superview] autoscroll:theEvent];
+    [[self superview] autoscroll:aEvent];
     
     if (hitLayer) {
         
         // convert to local coordinate system
-        NSPoint mousePointInView = [self convertPoint:theEvent.locationInWindow fromView:nil];
+        NSPoint mousePointInView = [self convertPoint:aEvent.locationInWindow fromView:nil];
         
         // convert to CGPoint for convenience
         CGPoint cgMousePointInView = NSPointToCGPoint(mousePointInView);
@@ -452,6 +466,39 @@
     
 }
 
+- (void)mouseEntered:(NSEvent*)aEvent
+{
+}
+
+- (void)mouseExited:(NSEvent*)aEvent
+{
+}
+
+- (void)mouseMoved:(NSEvent*)aEvent
+{
+    // convert to local coordinate system
+    NSPoint mousePointInView = [self convertPoint:[aEvent locationInWindow] fromView:nil];
+    
+    // convert to CGPoint for convenience
+    CGPoint cgMousePointInView = NSPointToCGPoint(mousePointInView);
+    
+    CALayer* hoverLayer = [containerLayerForRectangles hitTest:cgMousePointInView];
+
+    if ([hoverLayer.name isEqual:@"rectLayer"] || [hoverLayer.name hasSuffix:@"HandleLayer"]) {
+//        NSLog(@"Hovering over %@", hoverLayer.name);
+        if ([hoverLayer.name isEqual:@"rectLayer"]) {
+            [segmentSelector setCurrentHoveredSegment:hoverLayer];
+        } else {
+            [segmentSelector setCurrentHoveredSegment:hoverLayer.superlayer];
+        }
+    } else {
+        [segmentSelector setCurrentHoveredSegment:nil];
+    }
+    
+}
+
+
+
 // DEBUG
 - (IBAction)showCoordinates:(id)sender
 {
@@ -514,6 +561,11 @@
         }
         for(NSManagedObject<Track>* addedTrack in newTracks) {
             NSLog(@"SegmentCanvas:observeValueForKeyPath - adding strip layer for track %@", addedTrack);
+            
+            // assign index to new track
+            uint nbTracks = [[tracksController arrangedObjects] count];
+            [addedTrack setIndex:[NSNumber numberWithInt:nbTracks]];
+            
             [self addStripLayerForNewTrack:addedTrack];
             [addedTrack addObserver:self
                          forKeyPath:@"segments"
@@ -625,7 +677,7 @@
     
     uint idx = [stripLayers indexOfObjectPassingTest:matchTrack];
     
-    NSLog(@"findAssociatedLayerForTrack : idx = %u", idx);
+    NSLog(@"findAssociatedLayerForTrack %@, track index %u : layer idx = %u", track.name, [track.index unsignedIntValue], idx);
     
     if (idx != NSNotFound) {
         return [stripLayers objectAtIndex:idx];

@@ -18,6 +18,9 @@
     if (self != nil) {
         absoluteTimeSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"absoluteTime" ascending:YES];
         absoluteTimeSortDescriptorArray = [NSArray arrayWithObject:absoluteTimeSortDescriptor];        
+
+        trackSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+        trackSortDescriptorArray = [NSArray arrayWithObject:trackSortDescriptor];
     }
     
     return self;
@@ -40,5 +43,6 @@
 //}
 
 @synthesize absoluteTimeSortDescriptorArray;
+@synthesize trackSortDescriptorArray;
 
 @end

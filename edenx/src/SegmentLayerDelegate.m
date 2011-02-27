@@ -51,22 +51,27 @@
     //    // release the path
     //    CFRelease(thePath);
     
+    NSNumber* hoveredNb = [layer valueForKey:@"hovered"];
     
-    CGMutablePathRef leftHandlePath = CGPathCreateMutable();
-    CGPathAddArc(leftHandlePath, NULL, 0, layer.bounds.size.height / 2, handleRadius, -M_PI_2, M_PI_2, NO);
+    if (hoveredNb && [hoveredNb boolValue]) {
     
-    CGMutablePathRef rightHandlePath = CGPathCreateMutable();
-    CGPathAddArc(rightHandlePath, NULL, layer.bounds.size.width, layer.bounds.size.height / 2, handleRadius, M_PI_2, -M_PI_2, NO);
-    
-    CGContextAddPath(context, leftHandlePath);
-    CGContextAddPath(context, rightHandlePath);
+        CGMutablePathRef leftHandlePath = CGPathCreateMutable();
+        CGPathAddArc(leftHandlePath, NULL, 0, layer.bounds.size.height / 2, handleRadius, -M_PI_2, M_PI_2, NO);
         
-    CGContextSetLineWidth(context, 2.0);
-    CGContextSetFillColorWithColor(context, handleFillColor);
-    CGContextDrawPath(context, kCGPathFill);
-    
-    CFRelease(leftHandlePath);
-    CFRelease(rightHandlePath);
+        CGMutablePathRef rightHandlePath = CGPathCreateMutable();
+        CGPathAddArc(rightHandlePath, NULL, layer.bounds.size.width, layer.bounds.size.height / 2, handleRadius, M_PI_2, -M_PI_2, NO);
+        
+        CGContextAddPath(context, leftHandlePath);
+        CGContextAddPath(context, rightHandlePath);
+        
+        CGContextSetLineWidth(context, 2.0);
+        CGContextSetFillColorWithColor(context, handleFillColor);
+        CGContextDrawPath(context, kCGPathFill);
+        
+        CFRelease(leftHandlePath);
+        CFRelease(rightHandlePath);
+
+    }
     
 }
 

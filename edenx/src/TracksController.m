@@ -13,6 +13,35 @@
 
 @implementation TracksController
 
+- (id)initWithContent:(id)content
+{
+    NSLog(@"TracksController.initWithContent");
+    
+    [super initWithContent:content];
+
+//    NSSortDescriptor * sd = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:NO];
+//    
+//    [self setSortDescriptors:[NSArray arrayWithObject:sd]];
+//    [self rearrangeObjects];
+//    
+    return self;
+}
+
+- (id)init
+{
+    NSLog(@"TracksController.init");
+    
+    [super init];
+    
+//    NSSortDescriptor * sd = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:NO];
+//    
+//    [self setSortDescriptors:[NSArray arrayWithObject:sd]];
+//    [self rearrangeObjects];
+    
+    return self;
+}
+
+
 - (NSArray*)recordingTracks
 {    
     NSLog(@"TracksController recordingTracks");

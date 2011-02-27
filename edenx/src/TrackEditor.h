@@ -10,6 +10,8 @@
 
 @class MyDocument;
 
+// Editor window for single track (currently only an event list)
+
 @interface TrackEditor : NSWindowController {
     MyDocument* editedDocument;
     IBOutlet NSTableView* trackList;

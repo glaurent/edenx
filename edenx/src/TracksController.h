@@ -14,6 +14,10 @@
     NSPredicate *inputSourceSetPredicate;
 }
 
+- (id)initWithContent:(id)content;
+- (id)init;
+
+
 // returns the lists of tracks which have an input source set and recording toggled on
 - (NSArray*)recordingTracks;
 
