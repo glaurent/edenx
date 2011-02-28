@@ -20,6 +20,7 @@
 - (CALayer*)findAssociatedLayerForSegment:(NSManagedObject<Segment>*)segment inTrack:(NSManagedObject<Track>*)track;
 - (void)observeSegment:(id)segment withRectLayer:(CALayer*)rectLayer;
 - (void)forgetSegment:(id)segment;
+- (void)animateRectLayer:(CALayer*)rectLayer;
 
 @end
 
@@ -184,7 +185,9 @@
     rectLayer.backgroundColor = rectFillColor;
     rectLayer.borderColor = rectBorderColor;
     rectLayer.borderWidth = 2;
-    rectLayer.needsDisplayOnBoundsChange = YES;
+    rectLayer.opacity = 0.0; // set opacity to 0; rect is supposed to be faded in
+    
+    rectLayer.needsDisplayOnBoundsChange = NO;
     //    [rectLayer setValue:[NSNumber numberWithFloat:100.0] forKey:@"segmentWidth"]; // set default length
     //    [rectLayer setValue:[NSNumber numberWithFloat:origin.x] forKey:@"segmentStart"]; // set start
     
@@ -244,10 +247,38 @@
     rectLayer.position = origin;
 
     [stripLayer setNeedsLayout];
-    [rectLayer setNeedsDisplay];
+    //[rectLayer setNeedsDisplay];
+
+    [self animateRectLayer:rectLayer];
     
     return rectLayer;
     
+}
+
+- (void)animateRectLayer:(CALayer*)rectLayer
+{
+    CGRect finalRect = rectLayer.bounds;
+    
+    // tmpRect is same as finalRect, but with 0 width
+    CGRect tmpRect = CGRectMake(CGRectGetMinX(finalRect), CGRectGetMinY(finalRect), 0, CGRectGetHeight(finalRect));
+        
+    rectLayer.bounds = tmpRect;
+    [rectLayer setNeedsDisplay];
+
+    NSLog(@"animateRectLayer width = %f", rectLayer.bounds.size.width);
+
+    [CATransaction flush];
+    [CATransaction begin];
+    
+    [CATransaction setValue:[NSNumber numberWithFloat:0.5]
+                     forKey:kCATransactionAnimationDuration];    
+    
+    rectLayer.opacity = 1.0;
+    rectLayer.bounds = finalRect;
+    
+    [CATransaction commit];
+    
+    rectLayer.needsDisplayOnBoundsChange = YES;
 }
 
 - (id)addSegmentForRectangle:(CALayer*)rectLayer inTrack:(NSManagedObject<Track>*)associatedTrack
@@ -287,6 +318,7 @@
 
     [rectLayer setValue:segment forKey:@"segment"];
     [rectLayer setNeedsDisplay];
+    [self animateRectLayer:rectLayer];
     
     return rectLayer;
 }
@@ -404,8 +436,8 @@
                                 
                 [CATransaction begin];
                 
-                [CATransaction setValue: [NSNumber numberWithFloat:0.0]
-                                 forKey: kCATransactionAnimationDuration];
+                [CATransaction setValue:[NSNumber numberWithFloat:0.1]
+                                 forKey:kCATransactionAnimationDuration];
                 
                 hitRectLayer.position = CGPointMake(mouseDownPoint.x - mouseDownXOffset, hitRectLayer.position.y);
                 
@@ -419,8 +451,8 @@
                 
                 [CATransaction begin];
                 
-                [CATransaction setValue: [NSNumber numberWithFloat:0.0]
-                                 forKey: kCATransactionAnimationDuration];
+                [CATransaction setValue:[NSNumber numberWithFloat:0.1]
+                                 forKey:kCATransactionAnimationDuration];
                 
                 CGRect currentFrame = hitRectLayer.frame;
                 //CGPoint hitHandleLayerPositionInRect = [containerLayerForRectangles convertPoint:hitHandleLayer.position fromLayer:hitHandleLayer];
@@ -531,8 +563,8 @@
     NSLog(@"SegmentCanvas:observeValueForKeyPath %@", keyPath);
     id newValue = [change objectForKey:NSKeyValueChangeNewKey];
     id oldValue = [change objectForKey:NSKeyValueChangeOldKey];
-    NSLog(@"newValue = %@", newValue);
-    NSLog(@"oldValue = %@", oldValue);
+//    NSLog(@"newValue = %@", newValue);
+//    NSLog(@"oldValue = %@", oldValue);
     
     if ([keyPath isEqual:@"tracks"]) {
         NSLog(@"SegmentCanvas:observeValueForKeyPath - tracks change");
@@ -593,6 +625,7 @@
                 CGFloat rectWidth = endP - startP;
                 rectLayer.position = rectPos;
                 rectLayer.bounds = CGRectMake ( 0.0, 0.0, rectWidth, rectHeight);
+                [self animateRectLayer:rectLayer];
                 [self observeSegment:addedSegment withRectLayer:rectLayer];
             }
         }
