@@ -19,6 +19,15 @@
 
 #import "MIDIReceiverTrackDelegate.h"
 
+@interface Recorder (private)
+{
+    
+}
+
+- (NSManagedObject<Segment>*)getFirstSuitableRecordingSegmentInTrack:(NSManagedObject<Track>*)track;
+
+@end
+
 @implementation Recorder
 
 - (id)init
@@ -77,6 +86,8 @@
     
     NSArray* recordingTracks = [tracksController recordingTracks];
 
+    NSLog(@"Recorder.start : recordingTracks count = %u", [recordingTracks count]);
+    
     midiReceiversToEndPointsTable = [NSMapTable mapTableWithStrongToStrongObjects];
     
     for(NSManagedObject<Track>* track in recordingTracks) {
@@ -85,10 +96,12 @@
         
         NSLog(@"document MOC : %@ - track MOC : %@", [currentDocument managedObjectContext], [track managedObjectContext]);
         
+        NSManagedObject<Segment>* segment = [self getFirstSuitableRecordingSegmentInTrack:track];
+        
         // create midiReceiver and its delegate
         MIDIReceiver* midiReceiver = [[MIDIReceiver alloc] init];
         MIDIReceiverTrackDelegate* receiverTrackDelegate = [[MIDIReceiverTrackDelegate alloc] 
-                                                            initWithTrack:track 
+                                                            initWithTrack:segment 
                                                             withStartTime:recordingStartTime
                                                             withMusicSequence:[currentDocument sequence]];
         
@@ -103,6 +116,31 @@
 
 }
 
+- (NSManagedObject<Segment>*)getFirstSuitableRecordingSegmentInTrack:(NSManagedObject<Track>*)track
+{
+    NSMutableSet* trackSegments = track.segments;
+
+    long startTime = 0;
+    NSManagedObject<Segment>* lastSegment = nil;
+    
+    // find last segment
+    for(NSManagedObject<Segment>* segment in trackSegments) {
+        if ([[segment startTime] longValue] > startTime) {
+            lastSegment = segment;
+        }
+    }    
+
+    if (!lastSegment) {
+        // create one
+        
+        MyDocument* currentDocument = [[NSDocumentController sharedDocumentController] currentDocument];
+        
+        lastSegment = [currentDocument createSegmentInTrack:track startingAtTime:0 endingAtTime:100];
+        
+    } 
+
+    return lastSegment;
+}
 
 - (void)stop
 {

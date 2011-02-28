@@ -125,6 +125,28 @@
     [[segmentCanvas segmentSelector] setSegmentArrayController:segmentsController];
 }
 
+- (NSManagedObject<Segment>*)createSegmentInTrack:(NSManagedObject<Track>*)track startingAtTime:(double)startTime endingAtTime:(double)endTime
+{
+    NSManagedObjectContext* managedObjectContext = [self managedObjectContext];
+    
+    NSEntityDescription* segmentEntity = [NSEntityDescription entityForName:@"Segment" inManagedObjectContext:managedObjectContext];
+    
+    NSManagedObject<Segment>* newSegment = [[NSManagedObject alloc] initWithEntity:segmentEntity insertIntoManagedObjectContext:nil];
+    
+    NSLog(@"createSegmentInTrack : newSegment = %@", newSegment);
+    
+    // TODO convert to composition time
+    newSegment.startTime = [NSNumber numberWithFloat:startTime];
+    newSegment.endTime = [NSNumber numberWithFloat:(endTime)];
+    
+    [managedObjectContext insertObject:newSegment];
+    
+    // insert segment into its track
+    [segmentsController addObject:newSegment];
+    
+    return newSegment;
+}
+
 - (IBAction)showPlayBackCursor:(id)sender
 {
     // TODO - implement me with a CoreAnim layer
@@ -240,7 +262,7 @@
     
     id<Composition> theComposition = [composition objectAtIndex:0];
     
-    NSNumber* f = [theComposition tempo];
+    NSNumber* f = [theComposition playbackTempo];
     
     NSLog(@"MyDocument:setupTempo : tempo = %@", f);
     

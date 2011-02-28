@@ -226,7 +226,7 @@
 						<object class="NSTextField" id="396263033">
 							<reference key="NSNextResponder" ref="562619584"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{93, 55}, {66, 17}}</string>
+							<string key="NSFrame">{{93, 55}, {149, 17}}</string>
 							<reference key="NSSuperview" ref="562619584"/>
 							<reference key="NSNextKeyView" ref="121357909"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
@@ -1340,14 +1340,6 @@
 					<int key="connectionID">284</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">compositionController</string>
-						<reference key="source" ref="951636235"/>
-						<reference key="destination" ref="45846733"/>
-					</object>
-					<int key="connectionID">306</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">contentSet: selection.tempos</string>
 						<reference key="source" ref="556352901"/>
@@ -1680,6 +1672,14 @@
 						</object>
 					</object>
 					<int key="connectionID">389</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">compositionController</string>
+						<reference key="source" ref="951636235"/>
+						<reference key="destination" ref="45846733"/>
+					</object>
+					<int key="connectionID">400</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2403,7 +2403,7 @@
 								<reference ref="547894776"/>
 								<reference ref="26"/>
 								<reference ref="26"/>
-								<object class="NSParagraphStyle">
+								<object class="NSMutableParagraphStyle">
 									<int key="NSAlignment">4</int>
 									<nil key="NSTabStops"/>
 								</object>
@@ -2450,7 +2450,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">398</int>
+			<int key="maxID">400</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

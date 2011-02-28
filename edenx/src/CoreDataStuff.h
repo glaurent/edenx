@@ -25,7 +25,7 @@ typedef long timeT;
 
 
 @property (nonatomic, retain) NSString* name;
-@property (nonatomic, retain) NSNumber* tempo;
+@property (nonatomic, retain) NSNumber* playbackTempo;
 @property (nonatomic, retain) NSNumber* loopStart;
 @property (nonatomic, retain) NSNumber* loopEnd;
 @property (nonatomic, retain) NSNumber* startMarker;

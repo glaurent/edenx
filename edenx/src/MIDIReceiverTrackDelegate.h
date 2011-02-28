@@ -21,13 +21,13 @@ static const unsigned int tablesize = 0xf * 0xff;
 
     int idx;
     id table[0xf * 0xff];
-    NSManagedObject<Track>* track;
+    NSManagedObject<Segment>* segment;
     MIDITimeStamp recordingStartTime;
     Float64 recordingStartTimeInSeconds;
     MusicSequence sequence; // used to convert events time
 }
 
-- (id)initWithTrack:(NSManagedObject<Track>*)aTrack withStartTime:(MIDITimeStamp)startTime withMusicSequence:(MusicSequence)aSeq;
+- (id)initWithTrack:(NSManagedObject<Segment>*)aTrack withStartTime:(MIDITimeStamp)startTime withMusicSequence:(MusicSequence)aSeq;
 
 - (void)didReceiveMessage:(NSArray *)messages count:(unsigned int)count;
 

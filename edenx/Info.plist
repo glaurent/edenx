@@ -91,6 +91,8 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>22</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.music</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

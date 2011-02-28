@@ -11,6 +11,7 @@
 
 #import "SynchroScrollView.h"
 #import "CoreDataUtils.h"
+#import "CoreDataStuff.h"
 
 @class TrackEditor;
 @class Player;
@@ -49,6 +50,8 @@
 - (NSArrayController*)midiSourcesController;
 
 - (void)setupZoomSlider;
+
+- (NSManagedObject<Segment>*)createSegmentInTrack:(NSManagedObject<Track>*)track startingAtTime:(double)startTime endingAtTime:(double)endTime;
 
 // this property actually comes from the Player, see implementation
 @property(readonly) BOOL playing;

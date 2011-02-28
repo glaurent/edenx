@@ -17,10 +17,10 @@
 
 @implementation MIDIReceiverTrackDelegate
 
-- (id)initWithTrack:(NSManagedObject<Track>*)aTrack withStartTime:(MIDITimeStamp)startTime withMusicSequence:(MusicSequence)aSeq
+- (id)initWithTrack:(NSManagedObject<Segment>*)aSegment withStartTime:(MIDITimeStamp)startTime withMusicSequence:(MusicSequence)aSeq
 {
     self = [super init];
-    track = aTrack;
+    segment = aSegment;
     recordingStartTime = startTime;
     sequence = aSeq;
     return self; 
@@ -70,10 +70,10 @@
                     MusicTimeStamp duration = noteOffMusicTimeStamp - noteOnMusicTimeStamp;
                     
                     
-                    NSLog(@"MIDIReceiverTrackDelegate : duration = %u", duration);
+                    NSLog(@"MIDIReceiverTrackDelegate : duration = %f", duration);
                     
                     NSManagedObject<Note>* newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note" 
-                                                                                   inManagedObjectContext:[track managedObjectContext]];
+                                                                                   inManagedObjectContext:[segment managedObjectContext]];
                     
                     [newNote setDuration:[NSNumber numberWithDouble:duration]];
                     [newNote setNote:[NSNumber numberWithUnsignedInt:[vmsg dataByte1]]];
@@ -85,7 +85,7 @@
                     NSLog(@"MIDIReceiverTrackDelegate : recording %@", newNote);
 //                  NSLog(@"MIDIReceiverTrackDelegate - events = %@ , nb events = %d", trackEventsSet, [trackEventsSet count]);
                     
-                    [track addEventsObject:newNote];
+                    [segment addEventsObject:newNote];
                     
                 } else {
                     NSLog(@"Couldn't find an associated NoteOn for this NoteOff event %@", vmsg);

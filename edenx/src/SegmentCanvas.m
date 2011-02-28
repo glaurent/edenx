@@ -254,28 +254,19 @@
 {
     [tracksController setSelectedObjects:[NSArray arrayWithObject:associatedTrack]];
     
-    NSManagedObjectContext* managedObjectContext = [tracksController managedObjectContext];
-
+    MyDocument* currentDocument = [[NSDocumentController sharedDocumentController] currentDocument];
+    
     forgetSegmentAdd = YES;
-    
-    NSEntityDescription* segmentEntity = [NSEntityDescription entityForName:@"Segment" inManagedObjectContext:managedObjectContext];
-    
-    NSManagedObject<Segment>* newSegment = [[NSManagedObject alloc] initWithEntity:segmentEntity insertIntoManagedObjectContext:nil];
+
+    // TODO convert to composition time
+    NSManagedObject<Segment>* newSegment = [currentDocument createSegmentInTrack:associatedTrack
+                                                                  startingAtTime:(rectLayer.position.x - rectLayer.bounds.size.width / 2)
+                                                                    endingAtTime:(rectLayer.position.x + rectLayer.bounds.size.width / 2)];
     
     NSLog(@"addSegmentForRectangle : newSegment = %@", newSegment);
 
     [rectLayer setValue:newSegment forKey:@"segment"];
     
-    // TODO convert to composition time
-    newSegment.startTime = [NSNumber numberWithFloat:(rectLayer.position.x - rectLayer.bounds.size.width / 2)];
-    newSegment.endTime = [NSNumber numberWithFloat:(rectLayer.position.x + rectLayer.bounds.size.width / 2)];
-    
-    [managedObjectContext insertObject:newSegment];
-
-    [[segmentSelector segmentArrayController] addObject:newSegment];
-
-    NSLog(@"addSegmentForRectangle : added newSegment = %@", newSegment);
-
     [self observeSegment:newSegment withRectLayer:rectLayer];
     
     forgetSegmentAdd = NO;
@@ -356,7 +347,7 @@
     if (hitStripLayer && !hitRectLayer) {
         CALayer* rectLayer = [self addRectangle:[containerLayerForRectangles convertPoint:mouseDownPoint
                                                                                   toLayer:hitStripLayer]
-                                          inStripLayer:hitStripLayer];
+                                   inStripLayer:hitStripLayer];
         NSManagedObject<Track>* associatedTrack = [hitStripLayer valueForKey:@"track"];
         [self addSegmentForRectangle:rectLayer inTrack:associatedTrack];
         [self.layer setNeedsDisplay];
@@ -442,12 +433,12 @@
                 
                 if ([hitHandleLayer.name isEqualToString:@"leftHandleLayer"]) {
                     
-                    NSLog(@"left handle move : current width : %f | delta : %f", currentFrame.size.width, deltaWidth);
+                    // NSLog(@"left handle move : current width : %f | delta : %f", currentFrame.size.width, deltaWidth);
                     hitRectLayer.frame = CGRectMake(mouseDownPoint.x, currentFrame.origin.y, currentFrame.size.width - deltaWidth, currentFrame.size.height);
 
                 } else {
 
-                    NSLog(@"right handle move : current width : %f | delta : %f", currentFrame.size.width, deltaWidth);
+                    // NSLog(@"right handle move : current width : %f | delta : %f", currentFrame.size.width, deltaWidth);
                     hitRectLayer.frame = CGRectMake(currentFrame.origin.x, currentFrame.origin.y, currentFrame.size.width + deltaWidth, currentFrame.size.height);                
 
                 }
