@@ -186,6 +186,7 @@
     rectLayer.borderColor = rectBorderColor;
     rectLayer.borderWidth = 2;
     rectLayer.opacity = 0.0; // set opacity to 0; rect is supposed to be faded in
+    rectLayer.anchorPoint = CGPointMake(0, 0.5);
     
     rectLayer.needsDisplayOnBoundsChange = NO;
     //    [rectLayer setValue:[NSNumber numberWithFloat:100.0] forKey:@"segmentWidth"]; // set default length
@@ -259,8 +260,8 @@
 {
     CGRect finalRect = rectLayer.bounds;
     
-    // tmpRect is same as finalRect, but with 0 width
-    CGRect tmpRect = CGRectMake(CGRectGetMinX(finalRect), CGRectGetMinY(finalRect), 0, CGRectGetHeight(finalRect));
+    // tmpRect is same as finalRect, but with 0 width and height
+    CGRect tmpRect = CGRectMake(CGRectGetMinX(finalRect), CGRectGetMinY(finalRect), 0, 0);
         
     rectLayer.bounds = tmpRect;
     [rectLayer setNeedsDisplay];
@@ -314,7 +315,7 @@
     // TODO convert from composition time
     CGFloat segmentDuration = [segment.endTime floatValue] - [segment.startTime floatValue];
     rectLayer.bounds = CGRectMake(0, 0, segmentDuration, rectHeight);
-    rectLayer.position = CGPointMake([segment.startTime floatValue], 0);
+    rectLayer.position = CGPointMake([segment.startTime floatValue] + segmentDuration / 2, 0);
 
     [rectLayer setValue:segment forKey:@"segment"];
     [rectLayer setNeedsDisplay];
@@ -560,7 +561,7 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    NSLog(@"SegmentCanvas:observeValueForKeyPath %@", keyPath);
+//    NSLog(@"SegmentCanvas:observeValueForKeyPath %@", keyPath);
     id newValue = [change objectForKey:NSKeyValueChangeNewKey];
     id oldValue = [change objectForKey:NSKeyValueChangeOldKey];
 //    NSLog(@"newValue = %@", newValue);
