@@ -133,7 +133,7 @@
     
     NSManagedObject<Segment>* newSegment = [[NSManagedObject alloc] initWithEntity:segmentEntity insertIntoManagedObjectContext:nil];
     
-    NSLog(@"createSegmentInTrack : newSegment = %@", newSegment);
+//    NSLog(@"createSegmentInTrack : newSegment = %@", newSegment);
     
     // TODO convert to composition time
     newSegment.startTime = [NSNumber numberWithFloat:startTime];
