@@ -326,7 +326,7 @@
             if (playableEvents != nil) {
                 NSEnumerator *eventsEnumerator = [playableEvents objectEnumerator];
                 
-                NSLog(@"got %d playable events for track '%@'", [playableEvents count], [aTrack name]);
+                NSLog(@"got %u playable events for track '%@'", [playableEvents count], [aTrack name]);
                 
                 NSManagedObject<Element,Note>* anEvent;
                 

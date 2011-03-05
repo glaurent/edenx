@@ -41,7 +41,7 @@
 
 - (void)parser:(SMMessageParser *)parser didReadMessages:(NSArray *)msgs
 {
-    NSLog(@"MIDIReceiver : did read %d messages", [msgs count]);
+    NSLog(@"MIDIReceiver : did read %u messages", [msgs count]);
     [messages addObjectsFromArray:msgs];
     if (delegate) {
         [delegate didReceiveMessage:messages count:[msgs count]];

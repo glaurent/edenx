@@ -61,9 +61,9 @@
         
         NSLog(@"Recorder init : midiSourcesController = %@", midiSourcesController);
         [midiSourcesController addObjects:[manager realSources]];
-        NSLog(@"Recorder init : nb of midi sources : %d", [tmp count]);
-        NSLog(@"Recorder init : nb of controller items : %d", [[midiSourcesController arrangedObjects] count]);
-        NSLog(@"Recorder init : nb of added midi sources : %d", [midiSources count]);
+        NSLog(@"Recorder init : nb of midi sources : %u", [tmp count]);
+        NSLog(@"Recorder init : nb of controller items : %u", [[midiSourcesController arrangedObjects] count]);
+        NSLog(@"Recorder init : nb of added midi sources : %u", [midiSources count]);
         
         // notifs for MIDI environment changes
         //
