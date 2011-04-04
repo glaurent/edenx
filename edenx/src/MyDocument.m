@@ -10,7 +10,7 @@
 
 #import "PYMIDI.h"
 
-#import "TrackEditor.h"
+#import "SegmentEditor.h"
 #import "Player.h"
 #import "SMMessage.h"
 #import "MIDIReceiver.h"
@@ -160,7 +160,7 @@
     
     if (!trackEditor) {
         NSLog(@"editSelectedTrack : allocating track editor");
-        trackEditor = [[TrackEditor alloc] initWithCurrentDocument:self];
+        trackEditor = [[SegmentEditor alloc] initWithCurrentDocument:self];
     }
     
     [trackEditor showWindow:self];

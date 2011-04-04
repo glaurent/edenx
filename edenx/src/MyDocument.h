@@ -13,7 +13,8 @@
 #import "CoreDataUtils.h"
 #import "CoreDataStuff.h"
 
-@class TrackEditor;
+@class SegmentEditor;
+@class SegmentNotationEditor;
 @class Player;
 @class NSManagedObject;
 @class TracksController;
@@ -30,7 +31,8 @@
     IBOutlet CoreDataUtils* coreDataUtils;
     IBOutlet SegmentCanvas* segmentCanvas;
     IBOutlet NSArrayController* segmentsController;
-    TrackEditor* trackEditor;
+    SegmentEditor* trackEditor;
+    SegmentNotationEditor* segmentNotationEditor;
     // cursor position
     Player* player;
     MusicSequence sequence;

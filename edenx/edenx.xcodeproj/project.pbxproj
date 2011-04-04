@@ -23,7 +23,7 @@
 		AF3E7E630F1CDDE300CCF05E /* MyDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF3E7E610F1CDDE300CCF05E /* MyDocument.xib */; };
 		AF3E7E680F1CDE2B00CCF05E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF3E7E660F1CDE2B00CCF05E /* MainMenu.xib */; };
 		AF4B28760F75768B00438CAC /* TrackEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF4B28740F75768B00438CAC /* TrackEditor.xib */; };
-		AF4B28820F75920000438CAC /* TrackEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4B28810F75920000438CAC /* TrackEditor.m */; };
+		AF4B28820F75920000438CAC /* SegmentEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4B28810F75920000438CAC /* SegmentEditor.m */; };
 		AF4E6DAA1316F99C00127C1C /* Track.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4E6DA91316F99B00127C1C /* Track.m */; };
 		AF64A755130FF546001470D1 /* CALayerDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = AF64A754130FF546001470D1 /* CALayerDebug.m */; };
 		AF8693B00F9146EB00305C7D /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8693AF0F9146EB00305C7D /* Player.m */; };
@@ -115,8 +115,8 @@
 		AF3E7E620F1CDDE300CCF05E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MyDocument.xib; sourceTree = "<group>"; };
 		AF3E7E670F1CDE2B00CCF05E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		AF4B28750F75768B00438CAC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/TrackEditor.xib; sourceTree = "<group>"; };
-		AF4B28800F75920000438CAC /* TrackEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackEditor.h; sourceTree = "<group>"; };
-		AF4B28810F75920000438CAC /* TrackEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackEditor.m; sourceTree = "<group>"; };
+		AF4B28800F75920000438CAC /* SegmentEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentEditor.h; sourceTree = "<group>"; };
+		AF4B28810F75920000438CAC /* SegmentEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentEditor.m; sourceTree = "<group>"; };
 		AF4E6DA81316F99B00127C1C /* Track.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Track.h; sourceTree = "<group>"; };
 		AF4E6DA91316F99B00127C1C /* Track.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Track.m; sourceTree = "<group>"; };
 		AF64A753130FF545001470D1 /* CALayerDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CALayerDebug.h; sourceTree = "<group>"; };
@@ -253,8 +253,8 @@
 				AFA0C93D0F50746E00D67487 /* SynchroScrollView.m */,
 				AFA0C7F60F4866C900D67487 /* AppController.h */,
 				AFA0C7F70F4866C900D67487 /* AppController.m */,
-				AF4B28800F75920000438CAC /* TrackEditor.h */,
-				AF4B28810F75920000438CAC /* TrackEditor.m */,
+				AF4B28800F75920000438CAC /* SegmentEditor.h */,
+				AF4B28810F75920000438CAC /* SegmentEditor.m */,
 				AF4E6DA81316F99B00127C1C /* Track.h */,
 				AF4E6DA91316F99B00127C1C /* Track.m */,
 				AF86951D0F92AB9200305C7D /* CoreDataStuff.h */,
@@ -506,7 +506,7 @@
 				AFA0C7F80F4866C900D67487 /* AppController.m in Sources */,
 				AFA0C93E0F50746E00D67487 /* SynchroScrollView.m in Sources */,
 				AFA0CACD0F5AA7E100D67487 /* CompositionController.m in Sources */,
-				AF4B28820F75920000438CAC /* TrackEditor.m in Sources */,
+				AF4B28820F75920000438CAC /* SegmentEditor.m in Sources */,
 				AF8693B00F9146EB00305C7D /* Player.m in Sources */,
 				AF86951F0F92AB9200305C7D /* CoreDataStuff.m in Sources */,
 				AFFAE993103F19F4000FF2B5 /* MIDIReceiver.m in Sources */,

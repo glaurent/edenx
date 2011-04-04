@@ -12,7 +12,7 @@
 
 // Editor window for single track (currently only an event list)
 
-@interface TrackEditor : NSWindowController {
+@interface SegmentEditor : NSWindowController {
     MyDocument* editedDocument;
     IBOutlet NSTableView* trackList;
 }

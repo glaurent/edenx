@@ -6,11 +6,11 @@
 //  Copyright 2009 telegraph-road.org. All rights reserved.
 //
 
-#import "TrackEditor.h"
+#import "SegmentEditor.h"
 #import "MyDocument.h"
 #import "TracksController.h"
 
-@implementation TrackEditor
+@implementation SegmentEditor
 
 - (id)initWithCurrentDocument:(MyDocument*)doc {
     if (![super initWithWindowNibName:@"TrackEditor"]) {

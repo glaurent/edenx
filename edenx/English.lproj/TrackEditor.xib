@@ -3,29 +3,15 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">10J869</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1306</string>
+		<string key="IBDocument.InterfaceBuilderVersion">844</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1306</string>
+			<string key="NS.object.0">844</string>
 		</object>
-		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
+		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>NSScroller</string>
-			<string>NSArrayController</string>
-			<string>NSTableHeaderView</string>
-			<string>NSButton</string>
-			<string>NSScrollView</string>
-			<string>NSTextFieldCell</string>
-			<string>NSButtonCell</string>
-			<string>NSNumberFormatter</string>
-			<string>NSTableView</string>
-			<string>NSCustomObject</string>
-			<string>NSView</string>
-			<string>NSWindowTemplate</string>
-			<string>NSTableColumn</string>
-			<string>NSTextField</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -36,12 +22,14 @@
 			<object class="NSArray" key="dict.sortedKeys" id="0">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 			</object>
-			<reference key="dict.values" ref="0"/>
+			<object class="NSMutableArray" key="dict.values">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+			</object>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSCustomObject" id="1001">
-				<string key="NSClassName">TrackEditor</string>
+				<string key="NSClassName">SegmentEditor</string>
 			</object>
 			<object class="NSCustomObject" id="1003">
 				<string key="NSClassName">FirstResponder</string>
@@ -57,8 +45,9 @@
 				<string key="NSWindowTitle">Track Editor</string>
 				<string key="NSWindowClass">NSPanel</string>
 				<nil key="NSViewClass"/>
+				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
 				<object class="NSView" key="NSWindowView" id="596363374">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -77,7 +66,7 @@
 											<int key="NSvFlags">256</int>
 											<string key="NSFrameSize">{681, 475}</string>
 											<reference key="NSSuperview" ref="81593166"/>
-											<reference key="NSNextKeyView" ref="582081334"/>
+											<reference key="NSNextKeyView" ref="813904114"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTableHeaderView" key="NSHeaderView" id="395935957">
 												<reference key="NSNextResponder" ref="813904114"/>
@@ -162,10 +151,12 @@
 															<nil key="NS.nil"/>
 															<object class="NSAttributedString" key="NS.nan">
 																<string key="NSString">NaN</string>
-																<object class="NSDictionary" key="NSAttributes" id="807147041">
+																<object class="NSDictionary" key="NSAttributes" id="814710921">
 																	<bool key="EncodedWithXMLCoder">YES</bool>
 																	<reference key="dict.sortedKeys" ref="0"/>
-																	<reference key="dict.values" ref="0"/>
+																	<object class="NSMutableArray" key="dict.values">
+																		<bool key="EncodedWithXMLCoder">YES</bool>
+																	</object>
 																</object>
 															</object>
 															<real value="0.0" key="NS.min"/>
@@ -260,7 +251,7 @@
 															<nil key="NS.nil"/>
 															<object class="NSAttributedString" key="NS.nan">
 																<string key="NSString">NaN</string>
-																<reference key="NSAttributes" ref="807147041"/>
+																<reference key="NSAttributes" ref="814710921"/>
 															</object>
 															<reference key="NS.min" ref="570175873"/>
 															<reference key="NS.max" ref="570175873"/>
@@ -331,7 +322,7 @@
 															<nil key="NS.nil"/>
 															<object class="NSAttributedString" key="NS.nan">
 																<string key="NSString">NaN</string>
-																<reference key="NSAttributes" ref="807147041"/>
+																<reference key="NSAttributes" ref="814710921"/>
 															</object>
 															<reference key="NS.min" ref="570175873"/>
 															<reference key="NS.max" ref="570175873"/>
@@ -397,7 +388,7 @@
 															<nil key="NS.nil"/>
 															<object class="NSAttributedString" key="NS.nan">
 																<string key="NSString">NaN</string>
-																<reference key="NSAttributes" ref="807147041"/>
+																<reference key="NSAttributes" ref="814710921"/>
 															</object>
 															<reference key="NS.min" ref="570175873"/>
 															<reference key="NS.max" ref="570175873"/>
@@ -505,13 +496,12 @@
 							</object>
 							<string key="NSFrame">{{20, 85}, {698, 508}}</string>
 							<reference key="NSSuperview" ref="596363374"/>
-							<reference key="NSNextKeyView" ref="813904114"/>
+							<reference key="NSNextKeyView" ref="81593166"/>
 							<int key="NSsFlags">50</int>
 							<reference key="NSVScroller" ref="582081334"/>
 							<reference key="NSHScroller" ref="294110582"/>
 							<reference key="NSContentView" ref="81593166"/>
 							<reference key="NSHeaderClipView" ref="813904114"/>
-							<reference key="NSCornerView" ref="303969104"/>
 							<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 						</object>
 						<object class="NSButton" id="238482171">
@@ -582,7 +572,6 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{444, 47}, {277, 17}}</string>
 							<reference key="NSSuperview" ref="596363374"/>
-							<reference key="NSNextKeyView"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="1021037543">
 								<int key="NSCellFlags">68288064</int>
@@ -601,11 +590,10 @@
 						</object>
 					</object>
 					<string key="NSFrame">{{7, 11}, {740, 613}}</string>
-					<reference key="NSSuperview"/>
 					<reference key="NSNextKeyView" ref="397050465"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
-				<string key="NSMaxSize">{1e+13, 1e+13}</string>
+				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
 			</object>
 			<object class="NSArrayController" id="946665956">
 				<object class="NSMutableArray" key="NSDeclaredKeys">
@@ -1187,13 +1175,17 @@
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<reference key="dict.sortedKeys" ref="0"/>
-				<reference key="dict.values" ref="0"/>
+				<object class="NSMutableArray" key="dict.values">
+					<bool key="EncodedWithXMLCoder">YES</bool>
+				</object>
 			</object>
 			<nil key="activeLocalization"/>
 			<object class="NSMutableDictionary" key="localizations">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<reference key="dict.sortedKeys" ref="0"/>
-				<reference key="dict.values" ref="0"/>
+				<object class="NSMutableArray" key="dict.values">
+					<bool key="EncodedWithXMLCoder">YES</bool>
+				</object>
 			</object>
 			<nil key="sourceID"/>
 			<int key="maxID">128</int>
@@ -1214,6 +1206,7 @@
 			<integer value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
+		<nil key="IBDocument.LastKnownRelativeProjectPath"/>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 	</data>
 </archive>
