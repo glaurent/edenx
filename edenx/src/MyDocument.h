@@ -38,7 +38,8 @@
 }
 
 - (IBAction)showPlayBackCursor:(id)sender;
-- (IBAction)editSelectedTrack:(id)sender;
+- (IBAction)editSelectedSegmentEventList:(id)sender;
+- (IBAction)editSelectedSegmentNotation:(id)sender;
 - (IBAction)togglePlay:(id)sender;
 - (IBAction)play:(id)sender;
 - (IBAction)stop:(id)sender;

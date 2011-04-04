@@ -47,14 +47,14 @@ static const unsigned int shortestTime = 960 / 16;
 
 + (Note*)noteWithType:(NoteType)t
 {
-    self = [[Note alloc] initWithType:t withDots:0];
-    return self;
+    Note* note = [[Note alloc] initWithType:t withDots:0];
+    return note;
 }
 
 + (Note*)noteWithType:(NoteType)t withDots:(int)d
 {
-    self = [[Note alloc] initWithType:t withDots:d];
-    return self;
+    Note* note = [[Note alloc] initWithType:t withDots:d];
+    return note;
 }
 
 

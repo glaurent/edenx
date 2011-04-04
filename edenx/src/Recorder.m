@@ -61,9 +61,9 @@
         
         NSLog(@"Recorder init : midiSourcesController = %@", midiSourcesController);
         [midiSourcesController addObjects:[manager realSources]];
-        NSLog(@"Recorder init : nb of midi sources : %u", [tmp count]);
-        NSLog(@"Recorder init : nb of controller items : %u", [[midiSourcesController arrangedObjects] count]);
-        NSLog(@"Recorder init : nb of added midi sources : %u", [midiSources count]);
+        NSLog(@"Recorder init : nb of midi sources : %lu", [tmp count]);
+        NSLog(@"Recorder init : nb of controller items : %lu", [[midiSourcesController arrangedObjects] count]);
+        NSLog(@"Recorder init : nb of added midi sources : %lu", [midiSources count]);
         
         // notifs for MIDI environment changes
         //
@@ -86,7 +86,7 @@
     
     NSArray* recordingTracks = [tracksController recordingTracks];
 
-    NSLog(@"Recorder.start : recordingTracks count = %u", [recordingTracks count]);
+    NSLog(@"Recorder.start : recordingTracks count = %lu", [recordingTracks count]);
     
     midiReceiversToEndPointsTable = [NSMapTable mapTableWithStrongToStrongObjects];
     

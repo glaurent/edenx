@@ -130,7 +130,7 @@ OSStatus SetUpGraph (AUGraph inGraph, UInt32 numFrames, Float64 sampleRate, bool
 		AUNode node;
 		require_noerr (result = AUGraphGetIndNode(inGraph, i, &node), home);
         
-		ComponentDescription desc;
+		AudioComponentDescription desc;
 		AudioUnit unit;
 		require_noerr (result = AUGraphNodeInfo(inGraph, node, &desc, &unit), home);
 		
@@ -216,7 +216,7 @@ OSStatus GetSynthFromGraph (AUGraph inGraph, AudioUnit outSynth)
 		AUNode node;
 		require_noerr (result = AUGraphGetIndNode(inGraph, i, &node), fail);
         
-		ComponentDescription desc;
+		AudioComponentDescription desc;
 		require_noerr (result = AUGraphNodeInfo(inGraph, node, &desc, 0), fail);
 		
 		if (desc.componentType == kAudioUnitType_MusicDevice) 

@@ -150,18 +150,31 @@
 - (IBAction)showPlayBackCursor:(id)sender
 {
     // TODO - implement me with a CoreAnim layer
-    NSLog(@"showPlayBackCursor : %d", [sender state]);
+    NSLog(@"showPlayBackCursor : %ld", [sender state]);
     
 }
 
-- (IBAction)editSelectedTrack:(id)sender
+- (IBAction)editSelectedSegmentEventList:(id)sender
 {
+    NSLog(@"MyDocument:editSelectedSegmentEventList");
+    
     if (!trackEditor) {
         NSLog(@"editSelectedTrack : allocating track editor");
         trackEditor = [[TrackEditor alloc] initWithCurrentDocument:self];
     }
     
     [trackEditor showWindow:self];
+}
+
+- (IBAction)editSelectedSegmentNotation:(id)sender
+{
+    NSLog(@"MyDocument:editSelectedSegmentNotation");
+//    if (!trackEditor) {
+//        NSLog(@"editSelectedTrack : allocating track editor");
+//        trackEditor = [[TrackEditor alloc] initWithCurrentDocument:self];
+//    }
+//    
+//    [trackEditor showWindow:self];
 }
 
 - (IBAction)togglePlay:(id)sender
@@ -326,7 +339,7 @@
             if (playableEvents != nil) {
                 NSEnumerator *eventsEnumerator = [playableEvents objectEnumerator];
                 
-                NSLog(@"got %u playable events for track '%@'", [playableEvents count], [aTrack name]);
+                NSLog(@"got %lu playable events for track '%@'", [playableEvents count], [aTrack name]);
                 
                 NSManagedObject<Element,Note>* anEvent;
                 

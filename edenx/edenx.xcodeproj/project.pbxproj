@@ -35,6 +35,7 @@
 		AF93BB3411BB074D0032FA84 /* SegmentCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = AF93BB3311BB074D0032FA84 /* SegmentCanvas.m */; };
 		AF93BB7C11BB07D00032FA84 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF93BB7B11BB07D00032FA84 /* QuartzCore.framework */; };
 		AF93BBC811BB08380032FA84 /* SegmentLayerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF93BBC711BB08380032FA84 /* SegmentLayerDelegate.m */; };
+		AFA08A3F13486B5C00218D2D /* NotationEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFA08A3E13486B5C00218D2D /* NotationEditor.xib */; };
 		AFA0C7F80F4866C900D67487 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0C7F70F4866C900D67487 /* AppController.m */; };
 		AFA0C93E0F50746E00D67487 /* SynchroScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0C93D0F50746E00D67487 /* SynchroScrollView.m */; };
 		AFA0CACD0F5AA7E100D67487 /* CompositionController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0CACC0F5AA7E100D67487 /* CompositionController.m */; };
@@ -133,6 +134,7 @@
 		AF93BB7B11BB07D00032FA84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AF93BBC611BB08380032FA84 /* SegmentLayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentLayerDelegate.h; sourceTree = "<group>"; };
 		AF93BBC711BB08380032FA84 /* SegmentLayerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentLayerDelegate.m; sourceTree = "<group>"; };
+		AFA08A3E13486B5C00218D2D /* NotationEditor.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotationEditor.xib; sourceTree = "<group>"; };
 		AFA0C7F60F4866C900D67487 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		AFA0C7F70F4866C900D67487 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		AFA0C93C0F50746E00D67487 /* SynchroScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynchroScrollView.h; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AFA08A3E13486B5C00218D2D /* NotationEditor.xib */,
 				AF3E7E610F1CDDE300CCF05E /* MyDocument.xib */,
 				AF3E7E660F1CDE2B00CCF05E /* MainMenu.xib */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
@@ -479,6 +482,7 @@
 				AF4B28760F75768B00438CAC /* TrackEditor.xib in Resources */,
 				AFFAE9A7103F1C0A000FF2B5 /* Importer Read Me.txt in Resources */,
 				AFFAE9A8103F1C0A000FF2B5 /* Importer-Info.plist in Resources */,
+				AFA08A3F13486B5C00218D2D /* NotationEditor.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +599,7 @@
 				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
 				LIBRARY_STYLE = BUNDLE;
 				PRODUCT_NAME = edenx;
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mdimporter;
 				ZERO_LINK = YES;
@@ -611,6 +616,7 @@
 				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
 				LIBRARY_STYLE = BUNDLE;
 				PRODUCT_NAME = edenx;
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mdimporter;
 			};
@@ -643,7 +649,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = edenx;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "../SnoPyMIDI/**";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
@@ -669,7 +675,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = edenx;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "../SnoPyMIDI/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -685,7 +691,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = "";
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -698,7 +704,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = "";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};

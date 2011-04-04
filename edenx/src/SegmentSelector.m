@@ -43,7 +43,7 @@
         
         NSAssert(segmentIdx != NSNotFound, @"SegmentSelector:setCurrentSelectedSegments : segment not found");
         
-        NSLog(@"SegmentSelector:setCurrentSelectedSegment : idx = %u - # of objects : %u",
+        NSLog(@"SegmentSelector:setCurrentSelectedSegment : idx = %u - # of objects : %lu",
               segmentIdx,
               [[segmentArrayController arrangedObjects] count]);
         [segmentArrayController setSelectionIndex:segmentIdx];
