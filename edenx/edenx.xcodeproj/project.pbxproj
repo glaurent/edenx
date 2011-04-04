@@ -22,7 +22,7 @@
 		AF28316E1066D02400EC4D07 /* MIDIReceiverTrackDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF28316D1066D02400EC4D07 /* MIDIReceiverTrackDelegate.m */; };
 		AF3E7E630F1CDDE300CCF05E /* MyDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF3E7E610F1CDDE300CCF05E /* MyDocument.xib */; };
 		AF3E7E680F1CDE2B00CCF05E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF3E7E660F1CDE2B00CCF05E /* MainMenu.xib */; };
-		AF4B28760F75768B00438CAC /* TrackEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF4B28740F75768B00438CAC /* TrackEditor.xib */; };
+		AF4B28760F75768B00438CAC /* SegmentEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF4B28740F75768B00438CAC /* SegmentEditor.xib */; };
 		AF4B28820F75920000438CAC /* SegmentEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4B28810F75920000438CAC /* SegmentEditor.m */; };
 		AF4E6DAA1316F99C00127C1C /* Track.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4E6DA91316F99B00127C1C /* Track.m */; };
 		AF64A755130FF546001470D1 /* CALayerDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = AF64A754130FF546001470D1 /* CALayerDebug.m */; };
@@ -114,7 +114,7 @@
 		AF28316D1066D02400EC4D07 /* MIDIReceiverTrackDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIDIReceiverTrackDelegate.m; sourceTree = "<group>"; };
 		AF3E7E620F1CDDE300CCF05E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MyDocument.xib; sourceTree = "<group>"; };
 		AF3E7E670F1CDE2B00CCF05E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		AF4B28750F75768B00438CAC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/TrackEditor.xib; sourceTree = "<group>"; };
+		AF4B28750F75768B00438CAC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SegmentEditor.xib; sourceTree = "<group>"; };
 		AF4B28800F75920000438CAC /* SegmentEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentEditor.h; sourceTree = "<group>"; };
 		AF4B28810F75920000438CAC /* SegmentEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentEditor.m; sourceTree = "<group>"; };
 		AF4E6DA81316F99B00127C1C /* Track.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Track.h; sourceTree = "<group>"; };
@@ -286,7 +286,7 @@
 				8D15AC360486D014006FF6A4 /* Info.plist */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
 				514E9DFA081EBF9C009B8CD9 /* Importer-Info.plist */,
-				AF4B28740F75768B00438CAC /* TrackEditor.xib */,
+				AF4B28740F75768B00438CAC /* SegmentEditor.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -479,7 +479,7 @@
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
 				AF3E7E630F1CDDE300CCF05E /* MyDocument.xib in Resources */,
 				AF3E7E680F1CDE2B00CCF05E /* MainMenu.xib in Resources */,
-				AF4B28760F75768B00438CAC /* TrackEditor.xib in Resources */,
+				AF4B28760F75768B00438CAC /* SegmentEditor.xib in Resources */,
 				AFFAE9A7103F1C0A000FF2B5 /* Importer Read Me.txt in Resources */,
 				AFFAE9A8103F1C0A000FF2B5 /* Importer-Info.plist in Resources */,
 				AFA08A3F13486B5C00218D2D /* NotationEditor.xib in Resources */,
@@ -575,12 +575,12 @@
 			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
-		AF4B28740F75768B00438CAC /* TrackEditor.xib */ = {
+		AF4B28740F75768B00438CAC /* SegmentEditor.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				AF4B28750F75768B00438CAC /* English */,
 			);
-			name = TrackEditor.xib;
+			name = SegmentEditor.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

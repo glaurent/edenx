@@ -13,7 +13,7 @@
 @implementation SegmentEditor
 
 - (id)initWithCurrentDocument:(MyDocument*)doc {
-    if (![super initWithWindowNibName:@"TrackEditor"]) {
+    if (![super initWithWindowNibName:@"SegmentEditor"]) {
         return nil;
     }
     
@@ -24,7 +24,7 @@
 
 - (void)windowDidLoad
 {
-    NSLog(@"TrackEditor nib file is loaded");
+    NSLog(@"SegmentEditor nib file is loaded");
     
     NSSortDescriptor * sd = [[NSSortDescriptor alloc] initWithKey:@"absoluteTime" ascending:YES];
     
