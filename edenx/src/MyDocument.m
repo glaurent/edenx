@@ -11,6 +11,7 @@
 #import "PYMIDI.h"
 
 #import "SegmentEditor.h"
+#import "SegmentNotationEditor.h"
 #import "Player.h"
 #import "SMMessage.h"
 #import "MIDIReceiver.h"
@@ -18,6 +19,7 @@
 #import "Recorder.h"
 #import "CoreDataStuff.h"
 #import "SegmentCanvas.h"
+#import "CompositionController.h"
 #import "TracksController.h"
 #import "SegmentSelector.h"
 
@@ -28,6 +30,7 @@
 - (void)setupTempo;
 - (void)fillSequence;
 - (void)documentIsBeingModified:(NSNotification*)notification;
+- (void)compositionControllerContentSet:(NSNotification*)notification;
 
 @end
 
@@ -41,6 +44,10 @@
         player = [(AppController*)[NSApp delegate] player];
         NewMusicSequence(&sequence);
         documentModifiedSinceLastPlay = YES; // this is a new document, so player needs setup.
+        firstDocumentModif = YES;
+        
+        
+        
     }
     return self;
 }
@@ -63,6 +70,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(documentIsBeingModified:) name:NSManagedObjectContextObjectsDidChangeNotification object:[self managedObjectContext]];
     
     [[NSNotificationCenter defaultCenter] addObserver:tracksController selector:@selector(handleMIDIRemoveObject:) name:PYMIDIObjectRemoved object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(compositionControllerContentSet:) name:CompositionControllerContentSet object:compositionController];
 
     //segmentCanvas.tracksArrayController = tracksController;
     
@@ -158,23 +167,23 @@
 {
     NSLog(@"MyDocument:editSelectedSegmentEventList");
     
-    if (!trackEditor) {
+    if (!segmentEventListEditor) {
         NSLog(@"editSelectedTrack : allocating track editor");
-        trackEditor = [[SegmentEditor alloc] initWithCurrentDocument:self];
+        segmentEventListEditor = [[SegmentEditor alloc] initWithCurrentDocument:self];
     }
     
-    [trackEditor showWindow:self];
+    [segmentEventListEditor showWindow:self];
 }
 
 - (IBAction)editSelectedSegmentNotation:(id)sender
 {
     NSLog(@"MyDocument:editSelectedSegmentNotation");
-//    if (!trackEditor) {
-//        NSLog(@"editSelectedTrack : allocating track editor");
-//        trackEditor = [[TrackEditor alloc] initWithCurrentDocument:self];
-//    }
-//    
-//    [trackEditor showWindow:self];
+    if (!segmentNotationEditor) {
+        NSLog(@"editSelectedTrack : allocating track editor");
+        segmentNotationEditor = [[SegmentNotationEditor alloc] initWithCurrentDocument:self];
+    }
+    
+    [segmentNotationEditor showWindow:self];
 }
 
 - (IBAction)togglePlay:(id)sender
@@ -289,9 +298,16 @@
     
 }
 
+- (void)compositionControllerContentSet:(NSNotification *)notification
+{
+    NSLog(@"MyDocument:compositionControllerContentSet");
+    [self setupZoomSlider];
+}
+
 - (void)documentIsBeingModified:(NSNotification*)notification
 {
-//    NSLog(@"MyDocument:documentIsBeingModified");
+    NSLog(@"MyDocument:documentIsBeingModified");
+    
     documentModifiedSinceLastPlay = YES;    
 }
 

@@ -20,6 +20,12 @@
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		AF282F95106646A800EC4D07 /* TracksController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF282F94106646A800EC4D07 /* TracksController.m */; };
 		AF28316E1066D02400EC4D07 /* MIDIReceiverTrackDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF28316D1066D02400EC4D07 /* MIDIReceiverTrackDelegate.m */; };
+		AF2A0F5F134A73600001A5E7 /* SegmentNotationEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2A0F5E134A73600001A5E7 /* SegmentNotationEditor.m */; };
+		AF2A0F67134CF45B0001A5E7 /* StaffLayerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2A0F62134CF45B0001A5E7 /* StaffLayerDelegate.m */; };
+		AF2A0F68134CF45B0001A5E7 /* NoteViewLayerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2A0F64134CF45B0001A5E7 /* NoteViewLayerDelegate.m */; };
+		AF2A0F69134CF45B0001A5E7 /* NoteGlyphPathFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2A0F66134CF45B0001A5E7 /* NoteGlyphPathFactory.m */; };
+		AF2A0F6B134D08FB0001A5E7 /* GNU-LilyPond-feta-20.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF2A0F6A134D08FB0001A5E7 /* GNU-LilyPond-feta-20.ttf */; };
+		AF2A0F6E134D11030001A5E7 /* NotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2A0F6D134D11030001A5E7 /* NotationView.m */; };
 		AF3E7E630F1CDDE300CCF05E /* MyDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF3E7E610F1CDDE300CCF05E /* MyDocument.xib */; };
 		AF3E7E680F1CDE2B00CCF05E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF3E7E660F1CDE2B00CCF05E /* MainMenu.xib */; };
 		AF4B28760F75768B00438CAC /* SegmentEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF4B28740F75768B00438CAC /* SegmentEditor.xib */; };
@@ -112,6 +118,17 @@
 		AF282F94106646A800EC4D07 /* TracksController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksController.m; sourceTree = "<group>"; };
 		AF28316C1066D02400EC4D07 /* MIDIReceiverTrackDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDIReceiverTrackDelegate.h; sourceTree = "<group>"; };
 		AF28316D1066D02400EC4D07 /* MIDIReceiverTrackDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIDIReceiverTrackDelegate.m; sourceTree = "<group>"; };
+		AF2A0F5D134A73600001A5E7 /* SegmentNotationEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentNotationEditor.h; sourceTree = "<group>"; };
+		AF2A0F5E134A73600001A5E7 /* SegmentNotationEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentNotationEditor.m; sourceTree = "<group>"; };
+		AF2A0F61134CF45B0001A5E7 /* StaffLayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffLayerDelegate.h; sourceTree = "<group>"; };
+		AF2A0F62134CF45B0001A5E7 /* StaffLayerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffLayerDelegate.m; sourceTree = "<group>"; };
+		AF2A0F63134CF45B0001A5E7 /* NoteViewLayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteViewLayerDelegate.h; sourceTree = "<group>"; };
+		AF2A0F64134CF45B0001A5E7 /* NoteViewLayerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteViewLayerDelegate.m; sourceTree = "<group>"; };
+		AF2A0F65134CF45B0001A5E7 /* NoteGlyphPathFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteGlyphPathFactory.h; sourceTree = "<group>"; };
+		AF2A0F66134CF45B0001A5E7 /* NoteGlyphPathFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteGlyphPathFactory.m; sourceTree = "<group>"; };
+		AF2A0F6A134D08FB0001A5E7 /* GNU-LilyPond-feta-20.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GNU-LilyPond-feta-20.ttf"; sourceTree = "<group>"; };
+		AF2A0F6C134D11030001A5E7 /* NotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotationView.h; sourceTree = "<group>"; };
+		AF2A0F6D134D11030001A5E7 /* NotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotationView.m; sourceTree = "<group>"; };
 		AF3E7E620F1CDDE300CCF05E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MyDocument.xib; sourceTree = "<group>"; };
 		AF3E7E670F1CDE2B00CCF05E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		AF4B28750F75768B00438CAC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SegmentEditor.xib; sourceTree = "<group>"; };
@@ -244,6 +261,7 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AF2A0F60134CF4150001A5E7 /* Notation */,
 				AF93BB3111BB07080032FA84 /* Segment Canvas */,
 				AFCA07741152B78A00FF7BA8 /* Composition Stuff */,
 				AFEBDCC4105C15F10009E944 /* Record and play */,
@@ -279,6 +297,7 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AF2A0F6A134D08FB0001A5E7 /* GNU-LilyPond-feta-20.ttf */,
 				AFA08A3E13486B5C00218D2D /* NotationEditor.xib */,
 				AF3E7E610F1CDDE300CCF05E /* MyDocument.xib */,
 				AF3E7E660F1CDE2B00CCF05E /* MainMenu.xib */,
@@ -310,6 +329,23 @@
 			);
 			name = Importer;
 			path = src;
+			sourceTree = "<group>";
+		};
+		AF2A0F60134CF4150001A5E7 /* Notation */ = {
+			isa = PBXGroup;
+			children = (
+				AF2A0F61134CF45B0001A5E7 /* StaffLayerDelegate.h */,
+				AF2A0F62134CF45B0001A5E7 /* StaffLayerDelegate.m */,
+				AF2A0F63134CF45B0001A5E7 /* NoteViewLayerDelegate.h */,
+				AF2A0F64134CF45B0001A5E7 /* NoteViewLayerDelegate.m */,
+				AF2A0F65134CF45B0001A5E7 /* NoteGlyphPathFactory.h */,
+				AF2A0F66134CF45B0001A5E7 /* NoteGlyphPathFactory.m */,
+				AF2A0F5D134A73600001A5E7 /* SegmentNotationEditor.h */,
+				AF2A0F5E134A73600001A5E7 /* SegmentNotationEditor.m */,
+				AF2A0F6C134D11030001A5E7 /* NotationView.h */,
+				AF2A0F6D134D11030001A5E7 /* NotationView.m */,
+			);
+			name = Notation;
 			sourceTree = "<group>";
 		};
 		AF8697E10FB470FC00305C7D /* Other Projects */ = {
@@ -483,6 +519,7 @@
 				AFFAE9A7103F1C0A000FF2B5 /* Importer Read Me.txt in Resources */,
 				AFFAE9A8103F1C0A000FF2B5 /* Importer-Info.plist in Resources */,
 				AFA08A3F13486B5C00218D2D /* NotationEditor.xib in Resources */,
+				AF2A0F6B134D08FB0001A5E7 /* GNU-LilyPond-feta-20.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +561,11 @@
 				AFB1E1F211C4D5420031FFF3 /* SegmentSelector.m in Sources */,
 				AF64A755130FF546001470D1 /* CALayerDebug.m in Sources */,
 				AF4E6DAA1316F99C00127C1C /* Track.m in Sources */,
+				AF2A0F5F134A73600001A5E7 /* SegmentNotationEditor.m in Sources */,
+				AF2A0F67134CF45B0001A5E7 /* StaffLayerDelegate.m in Sources */,
+				AF2A0F68134CF45B0001A5E7 /* NoteViewLayerDelegate.m in Sources */,
+				AF2A0F69134CF45B0001A5E7 /* NoteGlyphPathFactory.m in Sources */,
+				AF2A0F6E134D11030001A5E7 /* NotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

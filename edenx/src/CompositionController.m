@@ -13,6 +13,9 @@
 #import "CoreDataUtils.h"
 #import "CoreDataStuff.h"
 
+
+static NSString* const CompositionControllerContentSet = @"CompositionControllerContentSet";
+
 @implementation CompositionController
 
 // THIS IS NOT CALLED - NSArrayController created from NIB files aren't initialized this way
@@ -29,7 +32,12 @@
 {
     NSLog(@"CompositionController:setContent %@", content);
     [super setContent:content];
-    [[[NSDocumentController sharedDocumentController] currentDocument] setupZoomSlider]; // TODO - gotta be a better way to do this
+    
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    
+    [nc postNotificationName:CompositionControllerContentSet object:self];
+    
+//    [[[NSDocumentController sharedDocumentController] currentDocument] setupZoomSlider]; // TODO - gotta be a better way to do this
 }
 
 - (void)prepareContent
@@ -82,10 +90,7 @@
         dummyTimeSig = [NSEntityDescription insertNewObjectForEntityForName:@"TimeSignature"
                                                      inManagedObjectContext:[self managedObjectContext]];
         barPositionsNeedCalculating = YES;
-        
-        document = [[NSDocumentController sharedDocumentController] currentDocument];
-
-        
+                
     }
     
 }
@@ -97,6 +102,7 @@
 
     id<Composition> composition = [self content];
     
+    MyDocument* document = [[NSDocumentController sharedDocumentController] currentDocument];
     
     NSArray* sortedTimeSignatures = [[document timeSignaturesController] arrangedObjects];
     NSEnumerator *timeSigsEnumerator = [sortedTimeSignatures objectEnumerator];
@@ -163,7 +169,8 @@
     [self calculateBarPositions];
     
     NSManagedObjectContext* moc = [self managedObjectContext];
-    
+    MyDocument* document = [[NSDocumentController sharedDocumentController] currentDocument];    
+
     NSEntityDescription *timeSignatureDescription = [NSEntityDescription entityForName:@"TimeSignature" inManagedObjectContext:moc];
     
     NSFetchRequest *timeSignaturesRequest = [[[NSFetchRequest alloc] init] autorelease];
@@ -268,7 +275,8 @@
     timerange res;
     
     NSManagedObjectContext* moc = [self managedObjectContext];
-    
+    MyDocument* document = [[NSDocumentController sharedDocumentController] currentDocument];
+
     NSEntityDescription *timeSignatureDescription = [NSEntityDescription entityForName:@"TimeSignature" inManagedObjectContext:moc];
     
     NSFetchRequest *timeSignaturesRequest = [[[NSFetchRequest alloc] init] autorelease];
@@ -354,7 +362,8 @@
     // fetch all Elements in reverse order, return absoluteTime of first returned one 
     
     NSManagedObjectContext* moc = [self managedObjectContext];
-    
+    MyDocument* document = [[NSDocumentController sharedDocumentController] currentDocument];
+
     NSEntityDescription *eventDescription = [NSEntityDescription entityForName:@"Element" inManagedObjectContext:moc];
     
     NSFetchRequest *allEventsRequest = [[[NSFetchRequest alloc] init] autorelease];
@@ -377,6 +386,8 @@
 
 - (timeT) timeSignaturesDuration
 {
+    MyDocument* document = [[NSDocumentController sharedDocumentController] currentDocument];
+
     NSArray* sortedTimeSignatures = [[document timeSignaturesController] arrangedObjects];
     
     if ([sortedTimeSignatures count] > 0) {
@@ -390,6 +401,7 @@
 
 - (NSUInteger) findNearestTimeInTimeSignatures:(timeT)t
 {
+    MyDocument* document = [[NSDocumentController sharedDocumentController] currentDocument];
 
     NSUInteger i = [self findTimeInTimeSignatures:t];
 
@@ -408,6 +420,8 @@
 // this method cannot return NSNotFound because it uses NSBinarySearchingInsertionIndex, so it returns an insertion point - may return last index (i.e. count() - 1)
 - (NSUInteger) findTimeInTimeSignatures:(timeT)t
 {
+    MyDocument* document = [[NSDocumentController sharedDocumentController] currentDocument];
+
     NSArray* sortedTimeSignatures = [[document timeSignaturesController] arrangedObjects];
     
     [dummyTimeSig setAbsoluteTime:[NSNumber numberWithLong:t]];
@@ -433,6 +447,8 @@
 
 - (timeT) timeSignatureAt:(timeT)t outTimeSignature:(NSManagedObject<TimeSignature>**)timeSig
 {
+    MyDocument* document = [[NSDocumentController sharedDocumentController] currentDocument];
+
     NSArray* sortedTimeSignatures = [[document timeSignaturesController] arrangedObjects];
     
     NSUInteger i = [self findNearestTimeInTimeSignatures:t];
@@ -457,6 +473,8 @@
 
 - (NSManagedObject<TimeSignature>*) timeSignatureInBar:(int)barNo isNew:(BOOL*)isNew
 {
+    MyDocument* document = [[NSDocumentController sharedDocumentController] currentDocument];
+
     NSArray* sortedTimeSignatures = [[document timeSignaturesController] arrangedObjects];
     
     *isNew = NO;
@@ -484,7 +502,5 @@
     
     return [sortedTimeSignatures objectAtIndex:i];
 }
-
-@synthesize document;
 
 @end

@@ -40,7 +40,7 @@
         rectBorderColor = CGColorCreateGenericRGB(0.3, 0.4, 0.4, 0.8); // more saturated greenish ?
         CFMakeCollectable(rectBorderColor);
         rectHandleColor = CGColorCreateGenericRGB(0.3, 0.5, 0.5, 0.8); 
-        CFMakeCollectable(rectBorderColor);
+        CFMakeCollectable(rectHandleColor);
         
         // test colors
         redColor = CGColorCreateGenericRGB(1.0, 0.0, 0.0, 0.5);
@@ -163,7 +163,7 @@
 - (CALayer*)addStripLayerForNewTrack:(NSManagedObject<Track>*)track
 {
 //    NSLog(@"addStripLayerForTrack : tracksArrayController content : %@ - arrangedObjects : %@",
-//          [tracksArrayController content], [tracksArrayController arrangedObjects]);
+//          [tracksController content], [tracksController arrangedObjects]);
     uint nbTracks = [[tracksController arrangedObjects] count];
     uint newTrackIndex = nbTracks;
     

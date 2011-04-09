@@ -31,12 +31,13 @@
     IBOutlet CoreDataUtils* coreDataUtils;
     IBOutlet SegmentCanvas* segmentCanvas;
     IBOutlet NSArrayController* segmentsController;
-    SegmentEditor* trackEditor;
+    SegmentEditor* segmentEventListEditor;
     SegmentNotationEditor* segmentNotationEditor;
     // cursor position
     Player* player;
     MusicSequence sequence;
     BOOL documentModifiedSinceLastPlay;
+    BOOL firstDocumentModif;
 }
 
 - (IBAction)showPlayBackCursor:(id)sender;

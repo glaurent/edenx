@@ -29,6 +29,13 @@
     
     player = [[Player alloc] init];
     [recorder setup];
+    
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)notification;
+{
+    NSLog(@"AppController:applicationDidFinishLaunching");
+    
 }
 
 

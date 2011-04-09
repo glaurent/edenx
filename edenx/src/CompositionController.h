@@ -16,11 +16,12 @@ typedef struct {
     timeT end;
 } timerange;
 
+static NSString* const CompositionControllerContentSet;
+
 @interface CompositionController : NSObjectController {
 
     BOOL barPositionsNeedCalculating;
     NSManagedObject<TimeSignature> *dummyTimeSig; // used in find*InTimeSignatures
-    MyDocument* document;
 }
 
 // override prepareContent to ensure a Composition is there
@@ -41,7 +42,5 @@ typedef struct {
 - (timeT) timeSignaturesDuration;
 - (NSManagedObject<TimeSignature>*) timeSignatureInBar:(int)barNo isNew:(BOOL*)isnew;
 
-
-@property (readonly) MyDocument* document;
 
 @end
