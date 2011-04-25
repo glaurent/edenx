@@ -440,7 +440,8 @@
                 [CATransaction setValue:[NSNumber numberWithFloat:0.1]
                                  forKey:kCATransactionAnimationDuration];
                 
-                hitRectLayer.position = CGPointMake(mouseDownPoint.x - mouseDownXOffset, hitRectLayer.position.y);
+                // hitRectLayer.position = CGPointMake(mouseDownPoint.x - mouseDownXOffset, hitRectLayer.position.y); - more direct, but more verbose way below
+                [hitRectLayer setValue:[NSNumber numberWithFloat:(mouseDownPoint.x - mouseDownXOffset)] forKeyPath:@"position.x"];
                 
                 [CATransaction commit];
                 
@@ -472,7 +473,8 @@
                 } else {
 
                     // NSLog(@"right handle move : current width : %f | delta : %f", currentFrame.size.width, deltaWidth);
-                    hitRectLayer.frame = CGRectMake(currentFrame.origin.x, currentFrame.origin.y, currentFrame.size.width + deltaWidth, currentFrame.size.height);                
+                    //hitRectLayer.frame = CGRectMake(currentFrame.origin.x, currentFrame.origin.y, currentFrame.size.width + deltaWidth, currentFrame.size.height);                
+                    [hitRectLayer setValue:[NSNumber numberWithFloat:(currentFrame.size.width + deltaWidth)] forKeyPath:@"frame.size.width"];
 
                 }
                 
