@@ -26,6 +26,13 @@
 
 @implementation SegmentCanvas
 
+@synthesize rectHeight;
+@synthesize containerLayerForRectangles;
+@synthesize mouseDownPoint;
+@synthesize segmentSelector;
+@synthesize tracksController;
+
+
 - (id)initWithFrame:(NSRect)frame
 {
     NSLog(@"SegmentCanvas:initWithFrame");
@@ -36,17 +43,12 @@
         rectangleLayerDelegate = [[SegmentLayerDelegate alloc] init];
         
         rectFillColor = CGColorCreateGenericRGB(0.2, 1.0, 0.3, 0.5); // greenish 
-        CFMakeCollectable(rectFillColor);
         rectBorderColor = CGColorCreateGenericRGB(0.3, 0.4, 0.4, 0.8); // more saturated greenish ?
-        CFMakeCollectable(rectBorderColor);
         rectHandleColor = CGColorCreateGenericRGB(0.3, 0.5, 0.5, 0.8); 
-        CFMakeCollectable(rectHandleColor);
         
         // test colors
         redColor = CGColorCreateGenericRGB(1.0, 0.0, 0.0, 0.5);
-        CFMakeCollectable(redColor);
         blueColor = CGColorCreateGenericRGB(0.0, 0.0, 1.0, 0.8);
-        CFMakeCollectable(blueColor);
         
         segmentSelector = [[SegmentSelector alloc] init];
         
@@ -596,7 +598,7 @@
             [addedTrack addObserver:self
                          forKeyPath:@"segments"
                             options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
-                            context:addedTrack];
+                            context:(__bridge void*)addedTrack];
         }
         
     } else if ([keyPath isEqual:@"segments"]) {
@@ -607,7 +609,7 @@
         NSMutableSet* removedSegments = [NSMutableSet setWithSet:oldValue];
         [removedSegments minusSet:newValue];
 
-        NSManagedObject<Track>* track = context;
+        NSManagedObject<Track>* track = (__bridge NSManagedObject<Track>*)context;
         
         for(NSManagedObject<Segment>* removedSegment in removedSegments) {
             [self forgetSegment:removedSegment];
@@ -637,7 +639,7 @@
     } else if ([keyPath isEqual:@"startTime"]) {
         
         if (!forgetSegmentTimeChanges && newValue != [NSNull null]) {
-            CALayer* rectLayer = context;
+            CALayer* rectLayer = (__bridge CALayer*)context;
             [CATransaction begin];
             
             [CATransaction setValue: [NSNumber numberWithFloat:0.0]
@@ -658,7 +660,7 @@
     } else if ([keyPath isEqual:@"endTime"]) {
         
         if (!forgetSegmentTimeChanges && newValue != [NSNull null]) {
-            CALayer* rectLayer = context;
+            CALayer* rectLayer = (__bridge CALayer*)context;
             [CATransaction begin];
             
             [CATransaction setValue: [NSNumber numberWithFloat:0.0]
@@ -744,11 +746,11 @@
     [segment addObserver:self
               forKeyPath:@"startTime" 
                  options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
-                 context:rectLayer];
+                 context:(__bridge void*)rectLayer];
     [segment addObserver:self
               forKeyPath:@"endTime" 
                  options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
-                 context:rectLayer];    
+                 context:(__bridge void*)rectLayer];    
 }
 
 - (void)forgetSegment:(id)segment
@@ -769,11 +771,5 @@
 //    NSLog(@"CompositionViewProto:reflectScrolledClipView documentRect %f,%f - w=%f, h=%f", r.origin.x, r.origin.y, r.size.width, r.size.height);
 //    [super reflectScrolledClipView:aClipView];
 //}
-
-@synthesize rectHeight;
-@synthesize containerLayerForRectangles;
-@synthesize mouseDownPoint;
-@synthesize segmentSelector;
-@synthesize tracksController;
 
 @end

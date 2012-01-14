@@ -3,7 +3,7 @@
 //  orchard Spotlight Importer
 //
 //  Created by Guillaume Laurent on 4/13/08.
-//  Copyright (c) 2008 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2008 telegraph-road.org. All rights reserved.
 //
 
 

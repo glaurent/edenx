@@ -12,7 +12,7 @@
 @interface StaffLayerDelegate : NSObject {
 @private
     
-    __strong CGColorRef drawColor;
+    CGColorRef drawColor;
 
     float interlineSpace;
 }

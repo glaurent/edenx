@@ -11,20 +11,15 @@
 
 @interface SegmentSelector : NSObject {
     
-    CALayer* currentSelectedSegment;
-    CALayer* currentHoveredSegment;
-    
-    __strong CGColorRef selectedOnShadowColor;
-    
-    NSArrayController* segmentArrayController;
+    CGColorRef selectedOnShadowColor;
     
 }
 
 - (id)init;
 - (void)setSelected:(CALayer*)segment toState:(BOOL)state;
 
-@property (readwrite,assign) CALayer* currentSelectedSegment;
-@property (readwrite,assign) CALayer* currentHoveredSegment;
-@property (readwrite,assign) NSArrayController* segmentArrayController;
+@property (strong, readwrite) CALayer* currentSelectedSegment;
+@property (strong, readwrite) CALayer* currentHoveredSegment;
+@property (strong, readwrite) NSArrayController* segmentArrayController;
 
 @end

@@ -40,7 +40,7 @@
         return self;
     
     NSMutableArray *result = [self mutableCopy];
-    CFMutableArrayRef cfResult = (CFMutableArrayRef)result;
+    CFMutableArrayRef cfResult = (__bridge CFMutableArrayRef)result;
     CFIndex startIndex = 0;
     CFIndex endIndex = count - 1;
     while (startIndex < endIndex) {
@@ -49,7 +49,7 @@
         endIndex--;
     }
     
-    return [result autorelease];
+    return result;
 }
 
 @end
@@ -69,10 +69,7 @@
             [result addObject:obj];
         }
     }
-    [self setArray: result];
-    [result release];
-    
-    [objectsToRemoveSet release];
+    [self setArray: result];    
 }
 
 @end

@@ -12,27 +12,27 @@
 @interface NoteGlyphPathFactory : NSObject {
 @private
 
-    __strong CTFontRef lilypondFontRef;
+    CTFontRef lilypondFontRef;
     
     CGAffineTransform glyphTransform;
     
-    __strong CGPathRef quadrupleRestPathRef;
-    __strong CGPathRef doubleRestPathRef;
-    __strong CGPathRef wholeRestPathRef;
-    __strong CGPathRef halfRestPathRef;
-    __strong CGPathRef quarterRestPathRef;
-    __strong CGPathRef eigthRestPathRef;
-    __strong CGPathRef sixteenthRestPathRef;
-    __strong CGPathRef thirtySecondthRestPathRef;
-    __strong CGPathRef sixtyFourthRestPathRef;
+    CGPathRef quadrupleRestPathRef;
+    CGPathRef doubleRestPathRef;
+    CGPathRef wholeRestPathRef;
+    CGPathRef halfRestPathRef;
+    CGPathRef quarterRestPathRef;
+    CGPathRef eigthRestPathRef;
+    CGPathRef sixteenthRestPathRef;
+    CGPathRef thirtySecondthRestPathRef;
+    CGPathRef sixtyFourthRestPathRef;
     
-    __strong CGPathRef wholeNotePathRef;
-    __strong CGPathRef halfNotePathRef;
-    __strong CGPathRef quarterNotePathRef;
-    __strong CGPathRef eigthNotePathRef;
-    __strong CGPathRef sixteenthNotePathRef;
-    __strong CGPathRef thirtySecondthNotePathRef;
-    __strong CGPathRef sixtyFourthNotePathRef;
+    CGPathRef wholeNotePathRef;
+    CGPathRef halfNotePathRef;
+    CGPathRef quarterNotePathRef;
+    CGPathRef eigthNotePathRef;
+    CGPathRef sixteenthNotePathRef;
+    CGPathRef thirtySecondthNotePathRef;
+    CGPathRef sixtyFourthNotePathRef;
     
 }
 

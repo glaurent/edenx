@@ -57,17 +57,17 @@ PYMIDIGetEndpointName (MIDIEndpointRef midiEndpointRef)
                 ) == kCFCompareEqualTo;
                 
             if (endpointNameBeginsWithDeviceName)
-                name = [NSString stringWithString:(NSString*)endpointName];
+                name = [NSString stringWithString:(__bridge NSString*)endpointName];
             else
                 name = [NSString stringWithFormat:@"%@ %@", deviceName, endpointName];
         }
         else
-            name = [NSString stringWithString:(NSString*)endpointName];
+            name = [NSString stringWithString:(__bridge NSString*)endpointName];
     }
     
     else {
         if (deviceName != nil)
-            name = [NSString stringWithString:(NSString*)deviceName];
+            name = [NSString stringWithString:(__bridge NSString*)deviceName];
         else
             name = nil;   // Hopefully we'll never get here!
     }

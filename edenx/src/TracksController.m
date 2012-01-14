@@ -17,7 +17,7 @@
 {
     NSLog(@"TracksController.initWithContent");
     
-    [super initWithContent:content];
+    self = [super initWithContent:content];
 
 //    NSSortDescriptor * sd = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:NO];
 //    
@@ -31,7 +31,7 @@
 {
     NSLog(@"TracksController.init");
     
-    [super init];
+    self = [super init];
     
 //    NSSortDescriptor * sd = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:NO];
 //    

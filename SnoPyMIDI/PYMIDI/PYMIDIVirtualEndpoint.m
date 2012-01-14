@@ -37,9 +37,7 @@
     
     [manager disableNotifications];
     MIDIEndpointDispose (midiEndpointRef);
-    [manager enableNotifications];
-    
-    [super dealloc];
+    [manager enableNotifications];    
 }
 
 - (void)dispose

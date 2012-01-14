@@ -11,13 +11,16 @@
 
 @implementation SegmentSelector
 
+@synthesize segmentArrayController;
+@synthesize currentHoveredSegment;
+@synthesize currentSelectedSegment;
+
 - (id)init
 {
     self = [super init];
     
     currentSelectedSegment = nil;
     selectedOnShadowColor = CGColorCreateGenericRGB(0.8, 0.3, 0.3, 0.5); // red 
-    CFMakeCollectable(selectedOnShadowColor);
     
     return self;
 }
@@ -99,7 +102,5 @@
         segment.shadowOpacity = 1.0;
     }
 }
-
-@synthesize segmentArrayController;
 
 @end

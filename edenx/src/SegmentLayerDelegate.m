@@ -17,8 +17,6 @@
     
     if (self) {
         handleFillColor = CGColorCreateGenericRGB(0.3, 0.5, 0.5, 0.8); // greenish 
-        CFMakeCollectable(handleFillColor);
-
     }
     
     return self;

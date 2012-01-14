@@ -46,13 +46,9 @@
 
 - (void)dealloc;
 {
-    [readingSysExData release];
     readingSysExData = nil;
     [sysExTimeOutTimer invalidate];
-    [sysExTimeOutTimer release];
-    sysExTimeOutTimer = nil;
-    
-    [super dealloc];
+    sysExTimeOutTimer = nil;    
 }
 
 @synthesize originatingEndpoint;
@@ -96,7 +92,7 @@
             runLoop = [NSRunLoop currentRunLoop];
             mode = [runLoop currentMode];
             if (mode) {
-                sysExTimeOutTimer = [[NSTimer timerWithTimeInterval:sysExTimeOut target:self selector:@selector(sysExTimedOut) userInfo:nil repeats:NO] retain];
+                sysExTimeOutTimer = [NSTimer timerWithTimeInterval:sysExTimeOut target:self selector:@selector(sysExTimedOut) userInfo:nil repeats:NO];
                 [runLoop addTimer:sysExTimeOutTimer forMode:mode];
             } else {
 #if DEBUG
@@ -111,7 +107,6 @@
         // Not reading sysex, so if we have a timeout pending, forget about it
         if (sysExTimeOutTimer) {
             [sysExTimeOutTimer invalidate];
-            [sysExTimeOutTimer release];
             sysExTimeOutTimer = nil;
         }        
     }
@@ -122,7 +117,6 @@
     BOOL cancelled = NO;
 
     if (readingSysExData) {
-        [readingSysExData release];
         readingSysExData = nil;
         cancelled = YES;
     }
@@ -310,7 +304,6 @@
     if (readingSysExData) {
         message = [SMSystemExclusiveMessage systemExclusiveMessageWithTimeStamp:startSysExTimeStamp data:readingSysExData];
         
-        [readingSysExData release];
         readingSysExData = nil;
     }
 
@@ -327,7 +320,6 @@
 {
     SMSystemExclusiveMessage *message;
 
-    [sysExTimeOutTimer release];
     sysExTimeOutTimer = nil;
 
     message = [self finishSysExMessageWithValidEnd:NO];

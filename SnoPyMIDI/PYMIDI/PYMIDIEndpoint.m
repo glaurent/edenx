@@ -56,7 +56,7 @@
 {
     self = [self init];
     
-    name = [newName retain];
+    name = newName;
     uniqueID = newUniqueID;
     
     return self;
@@ -77,12 +77,6 @@
 - (void)dealloc
 {
     [self stopIO];
-    [name release];
-    [displayName release];
-    [receivers release];
-    [senders release];
-    
-    [super dealloc];
 }
 
 
@@ -132,8 +126,7 @@
 
 - (void)setNameFromMIDIEndpoint
 {
-    [name release];
-    name = [PYMIDIGetEndpointName (midiEndpointRef) retain];
+    name = PYMIDIGetEndpointName(midiEndpointRef);
 }
 
 
@@ -142,8 +135,6 @@
     CFDataRef externalIDs;
     OSStatus result;
 
-    [displayName release];
-    
     NSMutableArray* names = [NSMutableArray arrayWithCapacity:0];
         
     // Pull in a list of external devices connected to our endpoint
@@ -178,7 +169,7 @@
                         CFStringRef externalName;
                         result = MIDIObjectGetStringProperty (externalDevice, kMIDIPropertyName, &externalName);
                         if (result == noErr) {
-                            [names addObject:[NSString stringWithString:(NSString*)externalName]];
+                            [names addObject:[NSString stringWithString:(__bridge NSString*)externalName]];
                             CFRelease (externalName);
                         }
                     }
@@ -205,7 +196,6 @@
             displayName = @"UNKNOWN DEVICE";
     }
     
-    [displayName retain];
 }
 
 
@@ -224,14 +214,13 @@
     
     [manager disableNotifications];
     
-    result = MIDIObjectSetStringProperty (midiEndpointRef, kMIDIPropertyName, (CFStringRef)newName);
+    result = MIDIObjectSetStringProperty (midiEndpointRef, kMIDIPropertyName, (__bridge CFStringRef)newName);
 
     [manager enableNotifications];
     
     if (result == noErr) {
-        [name autorelease];
-        name = [newName retain];
-        displayName = [newName retain];
+        name = newName;
+        displayName = newName;
     }
     else {
         NSLog(@"PYMIDIEndpoint:setName failed - %@", self);
@@ -305,7 +294,7 @@
 
     BOOL isIACBus = 
         driverName != nil &&
-        [@"com.apple.AppleMIDIIACDriver" isEqualToString:(NSString*)driverName];
+        [@"com.apple.AppleMIDIIACDriver" isEqualToString:(__bridge NSString*)driverName];
         
     if (driverName != nil) CFRelease (driverName);
     

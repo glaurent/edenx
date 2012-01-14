@@ -22,7 +22,7 @@
 {
     SMVoiceMessage *message;
     
-    message = [[[SMVoiceMessage alloc] initWithTimeStamp:aTimeStamp statusByte:aStatusByte] autorelease];
+    message = [[SMVoiceMessage alloc] initWithTimeStamp:aTimeStamp statusByte:aStatusByte];
 
 //    SMAssert(aLength >= 1 && aLength <= 2);
     if (aLength >= 1)
@@ -70,7 +70,6 @@
     return self;
     
 fail:
-    [self release];
     return nil;
 }
 

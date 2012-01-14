@@ -12,10 +12,10 @@
 
 @interface NoteViewLayerDelegate : NSObject {
 
-    __strong CGColorRef drawColor;
-    __strong CGColorRef bgColor;
+    CGColorRef drawColor;
+    CGColorRef bgColor;
     
-    __strong CTFontRef lilypondFontRef;
+    CTFontRef lilypondFontRef;
     
     CGAffineTransform glyphTransform;
     

@@ -22,18 +22,11 @@
 {
     SMInvalidMessage *message;
     
-    message = [[[SMInvalidMessage alloc] initWithTimeStamp:aTimeStamp statusByte:0x00] autorelease];
+    message = [[SMInvalidMessage alloc] initWithTimeStamp:aTimeStamp statusByte:0x00];
     // statusByte is ignored
     [message setData:aData];
 
     return message;
-}
-
-- (void)dealloc
-{
-    [data release];
-
-    [super dealloc];
 }
 
 //
@@ -61,7 +54,7 @@
     if ((self = [super initWithCoder:decoder])) {
         id obj = [decoder decodeObjectForKey:@"data"];
         if (obj && [obj isKindOfClass:[NSData class]]) {
-            data = [obj retain];
+            data = obj;
         } else {
             goto fail;
         }
@@ -70,7 +63,6 @@
     return self;
     
 fail:
-    [self release];
     return nil;
 }
 
@@ -117,8 +109,7 @@ fail:
 - (void)setData:(NSData *)newData;
 {
     if (data != newData) {
-        [data release];
-        data = [newData retain];
+        data = newData;
     }
 }
 

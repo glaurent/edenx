@@ -14,12 +14,12 @@
 
     float interlineSpace;
 
-    __strong CGColorRef drawColor;
-    __strong CGColorRef debugColor;
-    __strong CGColorRef debugColor2;
+    CGColorRef drawColor;
+    CGColorRef debugColor;
+    CGColorRef debugColor2;
 
-    __strong CTFontDescriptorRef lilyPondFontDescRef;
-    __strong CTFontRef lilyPondFontRef;
+    CTFontDescriptorRef lilyPondFontDescRef;
+    CTFontRef lilyPondFontRef;
     
 //    CGAffineTransform glyphTransform;
 

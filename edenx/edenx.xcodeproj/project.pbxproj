@@ -67,6 +67,13 @@
 			remoteGlobalIDString = 514E9DF8081EBF9C009B8CD9;
 			remoteInfo = "edenx Spotlight Importer";
 		};
+		AFA013ED14C0FCD900AFD9BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFA013E914C0FCD900AFD9BA /* SnoPyMIDI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = SnoPyMIDI;
+		};
 		AFFAE936103F0BF4000FF2B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AFFAE932103F0BF4000FF2B5 /* SnoPyMIDI.xcodeproj */;
@@ -151,6 +158,7 @@
 		AF93BB7B11BB07D00032FA84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AF93BBC611BB08380032FA84 /* SegmentLayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentLayerDelegate.h; sourceTree = "<group>"; };
 		AF93BBC711BB08380032FA84 /* SegmentLayerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentLayerDelegate.m; sourceTree = "<group>"; };
+		AFA013E914C0FCD900AFD9BA /* SnoPyMIDI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SnoPyMIDI.xcodeproj; path = ../SnoPyMIDI/SnoPyMIDI.xcodeproj; sourceTree = "<group>"; };
 		AFA08A3E13486B5C00218D2D /* NotationEditor.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotationEditor.xib; sourceTree = "<group>"; };
 		AFA0C7F60F4866C900D67487 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		AFA0C7F70F4866C900D67487 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
@@ -228,6 +236,7 @@
 		1058C7A8FEA54F5311CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AFA013E914C0FCD900AFD9BA /* SnoPyMIDI.xcodeproj */,
 				2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */,
 			);
 			name = "Other Frameworks";
@@ -371,6 +380,14 @@
 			name = "Segment Canvas";
 			sourceTree = "<group>";
 		};
+		AFA013EA14C0FCD900AFD9BA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AFA013EE14C0FCD900AFD9BA /* SnoPyMIDI.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		AFCA07741152B78A00FF7BA8 /* Composition Stuff */ = {
 			isa = PBXGroup;
 			children = (
@@ -477,6 +494,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = AFA013EA14C0FCD900AFD9BA /* Products */;
+					ProjectRef = AFA013E914C0FCD900AFD9BA /* SnoPyMIDI.xcodeproj */;
+				},
+				{
 					ProductGroup = AFFAE933103F0BF4000FF2B5 /* Products */;
 					ProjectRef = AFFAE932103F0BF4000FF2B5 /* SnoPyMIDI.xcodeproj */;
 				},
@@ -490,6 +511,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		AFA013EE14C0FCD900AFD9BA /* SnoPyMIDI.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SnoPyMIDI.framework;
+			remoteRef = AFA013ED14C0FCD900AFD9BA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		AFFAE937103F0BF4000FF2B5 /* SnoPyMIDI.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -667,16 +695,14 @@
 		26FC0ACB0875C91100E6366F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DSTROOT = "/tmp/$(PROJECT_NAME).dst";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../builds/Debug\"",
-				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_ENABLE_OBJC_GC = required;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_ENABLE_SYMBOL_SEPARATION = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -687,7 +713,7 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = edenx;
@@ -701,13 +727,10 @@
 		26FC0ACC0875C91100E6366F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../builds/Debug\"",
-				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_ENABLE_OBJC_GC = required;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = edenx_Prefix.pch;
@@ -715,7 +738,7 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = edenx;
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "../SnoPyMIDI/**";

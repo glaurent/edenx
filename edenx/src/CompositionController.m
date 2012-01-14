@@ -173,7 +173,7 @@ static NSString* const CompositionControllerContentSet = @"CompositionController
 
     NSEntityDescription *timeSignatureDescription = [NSEntityDescription entityForName:@"TimeSignature" inManagedObjectContext:moc];
     
-    NSFetchRequest *timeSignaturesRequest = [[[NSFetchRequest alloc] init] autorelease];
+    NSFetchRequest *timeSignaturesRequest = [[NSFetchRequest alloc] init];
     [timeSignaturesRequest setEntity:timeSignatureDescription];
     
     // order by absolute time
@@ -279,7 +279,7 @@ static NSString* const CompositionControllerContentSet = @"CompositionController
 
     NSEntityDescription *timeSignatureDescription = [NSEntityDescription entityForName:@"TimeSignature" inManagedObjectContext:moc];
     
-    NSFetchRequest *timeSignaturesRequest = [[[NSFetchRequest alloc] init] autorelease];
+    NSFetchRequest *timeSignaturesRequest = [[NSFetchRequest alloc] init];
     [timeSignaturesRequest setEntity:timeSignatureDescription];
     
     // order by absolute time
@@ -366,7 +366,7 @@ static NSString* const CompositionControllerContentSet = @"CompositionController
 
     NSEntityDescription *eventDescription = [NSEntityDescription entityForName:@"Element" inManagedObjectContext:moc];
     
-    NSFetchRequest *allEventsRequest = [[[NSFetchRequest alloc] init] autorelease];
+    NSFetchRequest *allEventsRequest = [[NSFetchRequest alloc] init];
     [allEventsRequest setEntity:eventDescription];
     [allEventsRequest setFetchLimit:2]; // we're only interested in the first element
     

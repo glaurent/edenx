@@ -224,7 +224,6 @@ NSString *SMTimeFormatPreferenceKey = @"SMTimeFormat";
         
         if (!manufacturerNames)
             manufacturerNames = [NSDictionary dictionary];
-        [manufacturerNames retain];
     }
 
     identifierString = [manufacturerIdentifierData SnoizeMIDI_lowercaseHexString];
@@ -242,7 +241,7 @@ NSString *SMTimeFormatPreferenceKey = @"SMTimeFormat";
         return nil;
 
     timeStamp = aTimeStamp;
-    timeBase = [[SMMessageTimeBase currentTimeBase] retain];
+    timeBase = [SMMessageTimeBase currentTimeBase];
     statusByte = aStatusByte;
         
     return self;
@@ -254,16 +253,9 @@ NSString *SMTimeFormatPreferenceKey = @"SMTimeFormat";
         return nil;
 
     timeStamp = 0;
-    timeBase = [[SMMessageTimeBase currentTimeBase] retain];
+    timeBase = [SMMessageTimeBase currentTimeBase];
     statusByte = 0;
     return nil;
-}
-
-- (void)dealloc
-{
-    [timeBase release];
-    [originatingEndpointOrName release];
-    [super dealloc];
 }
 
 - (id)copyWithZone:(NSZone *)zone;
@@ -271,9 +263,8 @@ NSString *SMTimeFormatPreferenceKey = @"SMTimeFormat";
     SMMessage *newMessage;
     
     newMessage = [[[self class] allocWithZone:zone] initWithTimeStamp:timeStamp statusByte:statusByte];
-    [newMessage->timeBase release];
-    newMessage->timeBase = [timeBase retain];
-    newMessage->originatingEndpointOrName = [originatingEndpointOrName retain];
+    newMessage->timeBase = timeBase;
+    newMessage->originatingEndpointOrName = originatingEndpointOrName;
     return newMessage;
 }
 
@@ -292,7 +283,7 @@ NSString *SMTimeFormatPreferenceKey = @"SMTimeFormat";
 
         id maybeTimeBase = [decoder decodeObjectForKey:@"timeBase"];
         if ([maybeTimeBase isKindOfClass:[SMMessageTimeBase class]]) {
-            timeBase = [maybeTimeBase retain];            
+            timeBase = maybeTimeBase;            
         } else {
             goto fail;
         }
@@ -310,7 +301,6 @@ NSString *SMTimeFormatPreferenceKey = @"SMTimeFormat";
     return self;
     
 fail:
-    [self release];
     return nil;
 }
 
@@ -375,8 +365,7 @@ fail:
 - (void)setOriginatingEndpoint:(PYMIDIEndpoint *)value
 {
     if (originatingEndpointOrName != value) {
-        [originatingEndpointOrName release];
-        originatingEndpointOrName = [value retain];
+        originatingEndpointOrName = value;
     }
 }
 
@@ -461,9 +450,9 @@ fail:
         static NSString *kToString = nil;
         
         if (!kFromString)
-            kFromString = [NSLocalizedStringFromTableInBundle(@"From", @"SnoizeMIDI", SMBundleForObject(self), "Prefix for endpoint name when it's a source") retain];
+            kFromString = NSLocalizedStringFromTableInBundle(@"From", @"SnoizeMIDI", SMBundleForObject(self), "Prefix for endpoint name when it's a source");
         if (!kToString)
-            kToString = [NSLocalizedStringFromTableInBundle(@"To", @"SnoizeMIDI", SMBundleForObject(self), "Prefix for endpoint name when it's a destination") retain];
+            kToString = NSLocalizedStringFromTableInBundle(@"To", @"SnoizeMIDI", SMBundleForObject(self), "Prefix for endpoint name when it's a destination");
         
         NSString* fromOrTo = ([endpoint isKindOfClass:[PYMIDIRealSource class]] ? kFromString : kToString);
         return [[fromOrTo stringByAppendingString:@" "] stringByAppendingString:[endpoint name]];

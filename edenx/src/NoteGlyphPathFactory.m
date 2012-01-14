@@ -56,15 +56,15 @@
 
 - (void)makeRestPaths
 {
-    quadrupleRestPathRef      = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 9,  &glyphTransform));
-    doubleRestPathRef         = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 8,  &glyphTransform));
-    wholeRestPathRef          = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 5,  &glyphTransform));
-    halfRestPathRef           = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 6,  &glyphTransform));
-    quarterRestPathRef        = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 10,  &glyphTransform));
-    eigthRestPathRef          = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 12,  &glyphTransform));
-    sixteenthRestPathRef      = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 13,  &glyphTransform));
-    thirtySecondthRestPathRef = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 14,  &glyphTransform));
-    sixtyFourthRestPathRef    = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 15,  &glyphTransform));  
+    quadrupleRestPathRef      = CTFontCreatePathForGlyph(lilypondFontRef, 9,  &glyphTransform);
+    doubleRestPathRef         = CTFontCreatePathForGlyph(lilypondFontRef, 8,  &glyphTransform);
+    wholeRestPathRef          = CTFontCreatePathForGlyph(lilypondFontRef, 5,  &glyphTransform);
+    halfRestPathRef           = CTFontCreatePathForGlyph(lilypondFontRef, 6,  &glyphTransform);
+    quarterRestPathRef        = CTFontCreatePathForGlyph(lilypondFontRef, 10,  &glyphTransform);
+    eigthRestPathRef          = CTFontCreatePathForGlyph(lilypondFontRef, 12,  &glyphTransform);
+    sixteenthRestPathRef      = CTFontCreatePathForGlyph(lilypondFontRef, 13,  &glyphTransform);
+    thirtySecondthRestPathRef = CTFontCreatePathForGlyph(lilypondFontRef, 14,  &glyphTransform);
+    sixtyFourthRestPathRef    = CTFontCreatePathForGlyph(lilypondFontRef, 15,  &glyphTransform);
 
 }
 
@@ -82,17 +82,15 @@
     // up stem
     //
     CGPathRef stemPath = CTFontCreatePathForGlyph(lilypondFontRef, 105, &glyphTransform);
-    CFMakeCollectable(stemPath);
     
     // whole note
     //
     wholeNotePathRef = CTFontCreatePathForGlyph(lilypondFontRef, 34,  &glyphTransform);
-    CFMakeCollectable(wholeNotePathRef);
     
     // half note
     //
-    CGMutablePathRef tmpPath = (CGMutablePathRef)CFMakeCollectable(CGPathCreateMutable());
-    CGPathRef tmpBodyPath = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 35,  &glyphTransform)); 
+    CGMutablePathRef tmpPath = (CGMutablePathRef)CGPathCreateMutable();
+    CGPathRef tmpBodyPath = CTFontCreatePathForGlyph(lilypondFontRef, 35,  &glyphTransform); 
     
     CGPathAddPath(tmpPath, NULL, tmpBodyPath);
     
@@ -102,13 +100,12 @@
     
     CGPathAddPath(tmpPath, &translate, stemPath);
     
-    halfNotePathRef = CFMakeCollectable(CGPathCreateCopy(tmpPath));
+    halfNotePathRef = CGPathCreateCopy(tmpPath);
     
     // crotchet / quarter
     //
     tmpPath = CGPathCreateMutable();
-    CFMakeCollectable(tmpPath);
-    tmpBodyPath = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 36,  &glyphTransform)); 
+    tmpBodyPath = CTFontCreatePathForGlyph(lilypondFontRef, 36,  &glyphTransform);
     
     CGPathAddPath(tmpPath, NULL, tmpBodyPath);
     
@@ -118,18 +115,17 @@
     
     CGPathAddPath(tmpPath, &translateNoteBody, stemPath);
     
-    quarterNotePathRef = CFMakeCollectable(CGPathCreateCopy(tmpPath));
+    quarterNotePathRef = CGPathCreateCopy(tmpPath);
     
     // 8th
     //
     tmpPath = CGPathCreateMutable();
-    CFMakeCollectable(tmpPath);
     
     CGPathAddPath(tmpPath, NULL, tmpBodyPath);
     
     CGPathAddPath(tmpPath, &translateNoteBody, stemPath);
     
-    CGPathRef crotchetPath = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 95,  &glyphTransform));
+    CGPathRef crotchetPath = CTFontCreatePathForGlyph(lilypondFontRef, 95,  &glyphTransform);
     
     CGRect stemBoundingRect = CGPathGetBoundingBox(stemPath);
     CGRect crotchetBoundingRect = CGPathGetBoundingBox(crotchetPath);
@@ -140,18 +136,17 @@
     
     CGPathAddPath(tmpPath, &translateNoteBodyAndStem, crotchetPath);
     
-    eigthNotePathRef = CFMakeCollectable(CGPathCreateCopy(tmpPath));
+    eigthNotePathRef = CGPathCreateCopy(tmpPath);
     
     // 16th
     //
     tmpPath = CGPathCreateMutable();
-    CFMakeCollectable(tmpPath);
     
     CGPathAddPath(tmpPath, NULL, tmpBodyPath);
     
     CGPathAddPath(tmpPath, &translateNoteBody, stemPath);
     
-    crotchetPath = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 96,  &glyphTransform));
+    crotchetPath = CTFontCreatePathForGlyph(lilypondFontRef, 96,  &glyphTransform);
     
     crotchetBoundingRect = CGPathGetBoundingBox(crotchetPath);
     
@@ -161,18 +156,17 @@
     
     CGPathAddPath(tmpPath, &translateNoteBodyAndStem, crotchetPath);
     
-    sixteenthNotePathRef = CFMakeCollectable(CGPathCreateCopy(tmpPath));
+    sixteenthNotePathRef = CGPathCreateCopy(tmpPath);
     
     // 32nd
     //
     tmpPath = CGPathCreateMutable();
-    CFMakeCollectable(tmpPath);
     
     CGPathAddPath(tmpPath, NULL, tmpBodyPath);
     
     CGPathAddPath(tmpPath, &translateNoteBody, stemPath);
     
-    crotchetPath = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 97,  &glyphTransform));
+    crotchetPath = CTFontCreatePathForGlyph(lilypondFontRef, 97,  &glyphTransform);
     
     crotchetBoundingRect = CGPathGetBoundingBox(crotchetPath);
     
@@ -182,19 +176,17 @@
     
     CGPathAddPath(tmpPath, &translateNoteBodyAndStem, crotchetPath);
     
-    thirtySecondthNotePathRef = CFMakeCollectable(CGPathCreateCopy(tmpPath));
+    thirtySecondthNotePathRef = CGPathCreateCopy(tmpPath);
     
     // 64th
     //
     tmpPath = CGPathCreateMutable();
-    CFMakeCollectable(tmpPath);
     
     CGPathAddPath(tmpPath, NULL, tmpBodyPath);
     
     CGPathAddPath(tmpPath, &translateNoteBody, stemPath);
     
     crotchetPath = CTFontCreatePathForGlyph(lilypondFontRef, 98,  &glyphTransform);
-    CFMakeCollectable(crotchetPath);
     
     crotchetBoundingRect = CGPathGetBoundingBox(crotchetPath);
     
@@ -204,7 +196,7 @@
     
     CGPathAddPath(tmpPath, &translateNoteBodyAndStem, crotchetPath);
     
-    sixtyFourthNotePathRef = CFMakeCollectable(CGPathCreateCopy(tmpPath));
+    sixtyFourthNotePathRef = CGPathCreateCopy(tmpPath);
     
 }
 

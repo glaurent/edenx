@@ -21,10 +21,6 @@
         debugColor = CGColorCreateGenericRGB(1.0, 0.5, 0.0, 0.5); // red
         debugColor2 = CGColorCreateGenericRGB(1.0, 0.0, 0.5, 0.5); // purple
         
-        CFMakeCollectable(drawColor);
-        CFMakeCollectable(debugColor);
-        CFMakeCollectable(debugColor2);
-
 //        glyphTransform = CGAffineTransformMakeScale(1.0, 1.0);
 //        glyphTransform = CGAffineTransformTranslate(glyphTransform, 20.0, 20.0);
 
@@ -37,8 +33,8 @@
 {
     NSLog(@"MyClass.setFontLoaded");
     
-    lilyPondFontDescRef = CFMakeCollectable(CTFontDescriptorCreateWithNameAndSize(CFSTR("LilyPond-feta"), 0.0));
-    lilyPondFontRef = CFMakeCollectable(CTFontCreateWithFontDescriptor(lilyPondFontDescRef, 20.0, NULL));
+    lilyPondFontDescRef = CTFontDescriptorCreateWithNameAndSize(CFSTR("LilyPond-feta"), 0.0);
+    lilyPondFontRef = CTFontCreateWithFontDescriptor(lilyPondFontDescRef, 20.0, NULL);
     
     NSLog(@"glyph count : %ld", CTFontGetGlyphCount(lilyPondFontRef));
     
@@ -90,7 +86,7 @@
     
     // get size of crotchet body glyph to dimension the stafflayer with
     //
-    CGPathRef crotchetBodyPath = CFMakeCollectable(CTFontCreatePathForGlyph(lilyPondFontRef, 36, NULL));
+    CGPathRef crotchetBodyPath = CTFontCreatePathForGlyph(lilyPondFontRef, 36, NULL);
     
     CGRect crotchetBoundingRect = CGPathGetBoundingBox(crotchetBodyPath);
     

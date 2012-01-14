@@ -20,8 +20,6 @@
 
 @interface MIDIReceiver : NSObject <SMMessageParserDelegate> {
     SMMessageParser* parser;
-    NSMutableArray*  messages;
-    id<MIDIReceiverDelegate> delegate;
 }
 
 - (id)init;
@@ -30,8 +28,8 @@
 - (void)clearMessages;
 
 
-@property (readonly) NSMutableArray* messages;
-@property (readwrite) id delegate;
+@property (strong, readonly) NSMutableArray* messages;
+@property (strong, readwrite) id<MIDIReceiverDelegate> delegate;
 
 
 // SMMessageParserDelegate implementation

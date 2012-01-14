@@ -3,7 +3,7 @@
 //  edenx Spotlight Importer
 //
 //  Created by Guillaume Laurent on 4/13/08.
-//  Copyright (c) 2008 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2008 telegraph-road.org. All rights reserved.
 //
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -30,12 +30,11 @@ Boolean GetMetadataForFile(void* thisInterface,
     /* Return the attribute keys and attribute values in the dict */
     /* Return TRUE if successful, FALSE if there was no data provided */
 
-    NSAutoreleasePool *pool  = [[NSAutoreleasePool alloc] init];
     NSError *error = nil;
     Boolean ok = FALSE;
     
     // Create the URL, then attempt to get the meta-data from the store
-    NSURL *url = [NSURL fileURLWithPath: (NSString *)pathToFile];
+    NSURL *url = [NSURL fileURLWithPath: (__bridge NSString *)pathToFile];
     NSDictionary *metadata = [NSPersistentStoreCoordinator 
         metadataForPersistentStoreWithURL:url error:&error];
 
@@ -48,13 +47,12 @@ Boolean GetMetadataForFile(void* thisInterface,
 		if ( contentToIndex != nil ) {
 		
 			// Add the metadata to the text content for indexing
-			[(NSMutableDictionary *)attributes setObject:contentToIndex 
+			[(__bridge NSMutableDictionary *)attributes setObject:contentToIndex 
 				forKey:(NSString *)kMDItemTextContent];
 			ok = TRUE;    
 		}
     }
 	
 	// Return the status
-    [pool release];
     return ok;
 }

@@ -13,6 +13,9 @@
 
 @implementation MIDIReceiver
 
+@synthesize messages;
+@synthesize delegate;
+
 - (id)init
 {
     if (!(self = [super init]))
@@ -57,9 +60,5 @@
 {
     [messages addObject:message];
 }
-
-
-@synthesize messages;
-@synthesize delegate;
 
 @end

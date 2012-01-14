@@ -6,6 +6,8 @@
 //  Copyright 2009 telegraph-road.org. All rights reserved.
 //
 
+#include <CoreAudio/CoreAudio.h>
+
 #import "Recorder.h"
 #import "AppController.h"
 

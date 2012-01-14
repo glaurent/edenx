@@ -20,8 +20,6 @@
         glyphTransform = transform;
         drawColor = CGColorCreateGenericRGB(0.0, 0.0, 0.0, 1.0); // solid black 
         bgColor = CGColorCreateGenericRGB(1.0, 1.0, 0.0, 0.5); 
-        CFMakeCollectable(drawColor);
-        CFMakeCollectable(bgColor);
         
         glyphPathFactory = [[NoteGlyphPathFactory alloc] initWithFont:lilypondFontRef withGlyphTransform:transform];
         
@@ -52,7 +50,6 @@
     CGContextScaleCTM(context, scaleFactor, scaleFactor);
 
     CGMutablePathRef globalPath = CGPathCreateMutable();
-    CFMakeCollectable(globalPath);
     
     CGPathRef quarterNotePathRef = glyphPathFactory.quarterNotePathRef;
     CGRect pathBoundingRect = CGPathGetBoundingBox(quarterNotePathRef);
@@ -99,12 +96,11 @@
 //    CGFloat fontAscent = CTFontGetAscent(lilypondFontRef);
     CGFloat fontDescent = CTFontGetDescent(lilypondFontRef);
     
-    CGPathRef crotchetBodyPath = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 36,  &glyphTransform));
-    CGPathRef stemPath         = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 105, &glyphTransform));
-    CGPathRef crotchetPath     = CFMakeCollectable(CTFontCreatePathForGlyph(lilypondFontRef, 98,  &glyphTransform));
+    CGPathRef crotchetBodyPath = CTFontCreatePathForGlyph(lilypondFontRef, 36,  &glyphTransform);
+    CGPathRef stemPath         = CTFontCreatePathForGlyph(lilypondFontRef, 105, &glyphTransform);
+    CGPathRef crotchetPath     = CTFontCreatePathForGlyph(lilypondFontRef, 98,  &glyphTransform);
     
     CGMutablePathRef globalPath = CGPathCreateMutable();
-    CFMakeCollectable(globalPath);
     
     CGAffineTransform center = CGAffineTransformMakeTranslation(layer.bounds.size.width / (2 * scaleFactor), layer.bounds.size.height / (2 * scaleFactor));
     
@@ -157,7 +153,6 @@
 //    CGContextScaleCTM(context, scaleFactor, scaleFactor);
     
     CGMutablePathRef globalPath = CGPathCreateMutable();
-    CFMakeCollectable(globalPath);
     
     CGPathMoveToPoint(globalPath, NULL, 30.0, 30.0);
 

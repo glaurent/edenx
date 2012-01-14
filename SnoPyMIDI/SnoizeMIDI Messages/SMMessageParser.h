@@ -19,8 +19,6 @@
 
 @interface SMMessageParser : NSObject
 {
-    PYMIDIEndpoint *originatingEndpoint;
-    id delegate;
 
     NSMutableData *readingSysExData;
     MIDITimeStamp startSysExTimeStamp;
@@ -35,8 +33,8 @@
 - (BOOL)cancelReceivingSysExMessage;
     // Returns YES if it successfully cancels a sysex message which is being received, and NO otherwise.
 
-@property (readwrite) PYMIDIEndpoint* originatingEndpoint;
-@property (readwrite) id delegate;
+@property (strong, readwrite) PYMIDIEndpoint* originatingEndpoint;
+@property (strong, readwrite) id delegate;
 @property (readwrite) NSTimeInterval sysExTimeOut;
 @property (readwrite) BOOL ignoreInvalidData;
 

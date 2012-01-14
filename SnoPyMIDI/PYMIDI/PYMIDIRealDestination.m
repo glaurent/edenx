@@ -41,8 +41,7 @@
     
     descriptor = [PYMIDIEndpointDescriptor descriptorWithName:newName uniqueID:newUniqueID];
     
-    [self release];
-    return [[manager realDestinationWithDescriptor:descriptor] retain];
+    return [manager realDestinationWithDescriptor:descriptor];
 }    
 
 

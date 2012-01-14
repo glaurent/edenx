@@ -22,7 +22,7 @@
 {
     SMSystemRealTimeMessage *message;
     
-    message = [[[SMSystemRealTimeMessage alloc] initWithTimeStamp:aTimeStamp statusByte:aType] autorelease];
+    message = [[SMSystemRealTimeMessage alloc] initWithTimeStamp:aTimeStamp statusByte:aType];
     
     return message;
 }

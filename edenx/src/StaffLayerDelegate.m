@@ -19,7 +19,6 @@
     if (self) {
         [self setInterlineSpace:space];
         drawColor = CGColorCreateGenericRGB(0.0, 0.0, 0.0, 1.0); // solid black
-        CFMakeCollectable(drawColor);
     }
     
     return self;
@@ -35,13 +34,11 @@
     CGRect contextBoundingRect = CGContextGetClipBoundingBox(context);
     
     CGMutablePathRef globalPath = CGPathCreateMutable();
-    CFMakeCollectable(globalPath);
     
     float base = contextBoundingRect.size.height / 2 - (interlineSpace * 2.5);
     
     for(int i = 0; i < 5; ++i) {
         CGMutablePathRef linePath = CGPathCreateMutable();
-        CFMakeCollectable(linePath);
         float height = base + (interlineSpace * i);
         CGPathMoveToPoint(linePath, NULL, 10.0, height);
         CGPathAddLineToPoint(linePath, NULL, contextBoundingRect.size.width - 5.0, height);

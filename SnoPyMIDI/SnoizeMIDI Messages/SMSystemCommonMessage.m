@@ -22,7 +22,7 @@
 {
     SMSystemCommonMessage *message;
     
-    message = [[[SMSystemCommonMessage alloc] initWithTimeStamp:aTimeStamp statusByte:aType] autorelease];
+    message = [[SMSystemCommonMessage alloc] initWithTimeStamp:aTimeStamp statusByte:aType];
 
 //    SMAssert(aLength <= 2);
     if (aLength >= 1)
@@ -70,7 +70,6 @@
     return self;
     
 fail:
-    [self release];
     return nil;
 }
 

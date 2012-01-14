@@ -39,7 +39,7 @@ static void writeVariableLengthFieldIntoSMF(Byte **pPtr, const UInt32 value);
 {
     SMSystemExclusiveMessage *message;
     
-    message = [[[SMSystemExclusiveMessage alloc] initWithTimeStamp:aTimeStamp statusByte:0xF0] autorelease];
+    message = [[SMSystemExclusiveMessage alloc] initWithTimeStamp:aTimeStamp statusByte:0xF0];
     [message setData:aData];
 
     return message;
@@ -144,14 +144,6 @@ static void writeVariableLengthFieldIntoSMF(Byte **pPtr, const UInt32 value);
     return self;
 }
 
-- (void)dealloc
-{
-    [data release];
-    [cachedDataWithEOX release];
-
-    [super dealloc];
-}
-
 //
 // SMMessage overrides
 //
@@ -179,7 +171,7 @@ static void writeVariableLengthFieldIntoSMF(Byte **pPtr, const UInt32 value);
     if ((self = [super initWithCoder:decoder])) {
         id obj = [decoder decodeObjectForKey:@"data"];
         if (obj && [obj isKindOfClass:[NSData class]]) {
-            data = [obj retain];
+            data = obj;
         } else {
             goto fail;
         }
@@ -190,7 +182,6 @@ static void writeVariableLengthFieldIntoSMF(Byte **pPtr, const UInt32 value);
     return self;
     
 fail:
-    [self release];
     return nil;
 }
 
@@ -255,10 +246,8 @@ fail:
 - (void)setData:(NSData *)newData;
 {
     if (data != newData) {
-        [data release];
-        data = [newData retain];
+        data = newData;
         
-        [cachedDataWithEOX release];
         cachedDataWithEOX = nil;
     }
 }

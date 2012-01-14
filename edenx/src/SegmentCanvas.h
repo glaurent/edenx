@@ -15,7 +15,6 @@
 
 @interface SegmentCanvas : NSView {
 
-    CALayer* containerLayerForRectangles;
     CGPoint mouseDownPoint;
     CGPoint previousMouseDownPoint;
     unsigned int rectHeight;
@@ -23,11 +22,11 @@
     BOOL forgetSegmentTimeChanges;
     BOOL forgetSegmentAdd; // set to YES on initial segment creation in mouseUp
     
-    __strong CGColorRef rectFillColor;
-    __strong CGColorRef rectBorderColor;
-    __strong CGColorRef rectHandleColor;
-    __strong CGColorRef redColor;
-    __strong CGColorRef blueColor;
+    CGColorRef rectFillColor;
+    CGColorRef rectBorderColor;
+    CGColorRef rectHandleColor;
+    CGColorRef redColor;
+    CGColorRef blueColor;
     
     CALayer* hitLayer;
     CALayer* hitHandleLayer;
@@ -35,10 +34,6 @@
     CALayer* hitStripLayer;
     float mouseDownXOffset;
     
-    SegmentSelector* segmentSelector;
-
-    NSArrayController* tracksController;
-
 }
 
 - (void)addStripLayerForTracks:(NSArray*)tracks;
@@ -47,9 +42,9 @@
 - (id)addRectangleForSegment:(NSManagedObject<Segment>*)segment inTrack:(NSManagedObject<Track>*)associatedTrack;
 
 @property (readonly) unsigned int rectHeight;
-@property (readwrite, assign) CALayer* containerLayerForRectangles;
+@property (readwrite, strong) CALayer* containerLayerForRectangles;
 @property (readwrite, assign) CGPoint mouseDownPoint;
-@property (readonly) SegmentSelector* segmentSelector;
-@property (readwrite, assign) NSArrayController* tracksController;
+@property (readonly, strong) SegmentSelector* segmentSelector;
+@property (readwrite, strong) NSArrayController* tracksController;
 
 @end

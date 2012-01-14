@@ -3,8 +3,10 @@
 //  orchard
 //
 //  Created by Guillaume Laurent on 4/13/08.
-//  Copyright __MyCompanyName__ 2008 . All rights reserved.
+//  Copyright telegraph-road.org 2008 . All rights reserved.
 //
+
+#include <CoreAudio/CoreAudio.h>
 
 #import "MyDocument.h"
 
@@ -140,7 +142,7 @@
     
     NSEntityDescription* segmentEntity = [NSEntityDescription entityForName:@"Segment" inManagedObjectContext:managedObjectContext];
     
-    NSManagedObject<Segment>* newSegment = [[NSManagedObject alloc] initWithEntity:segmentEntity insertIntoManagedObjectContext:nil];
+    NSManagedObject<Segment>* newSegment = (NSManagedObject<Segment>*)[[NSManagedObject alloc] initWithEntity:segmentEntity insertIntoManagedObjectContext:nil];
     
 //    NSLog(@"createSegmentInTrack : newSegment = %@", newSegment);
     
@@ -276,7 +278,7 @@
     
     // Get tempo from composition
     NSEntityDescription *compositionEntityDescription = [NSEntityDescription entityForName:@"Composition" inManagedObjectContext:moc];
-    NSFetchRequest *compositionRequest = [[[NSFetchRequest alloc] init] autorelease];
+    NSFetchRequest *compositionRequest = [[NSFetchRequest alloc] init];
     [compositionRequest setEntity:compositionEntityDescription];    
     
     NSError *error = nil;
@@ -321,7 +323,7 @@
 
     NSEntityDescription *trackEntityDescription = [NSEntityDescription entityForName:@"Track" inManagedObjectContext:moc];
     
-    NSFetchRequest *tracksRequest = [[[NSFetchRequest alloc] init] autorelease];
+    NSFetchRequest *tracksRequest = [[NSFetchRequest alloc] init];
     [tracksRequest setEntity:trackEntityDescription];    
     
     NSError *error = nil;
@@ -342,7 +344,7 @@
             // Fetch all playable events from that track
             NSEntityDescription *playableEventDescription = [NSEntityDescription entityForName:@"PlayableElement" inManagedObjectContext:moc];
             
-            NSFetchRequest *playableEventsRequest = [[[NSFetchRequest alloc] init] autorelease];
+            NSFetchRequest *playableEventsRequest = [[NSFetchRequest alloc] init];
             [playableEventsRequest setEntity:playableEventDescription];
             
             // I could get the events directly from aTrack, but with a query I get the filtering of playable events for free

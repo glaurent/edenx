@@ -11,6 +11,8 @@
 
 @implementation SegmentNotationEditor
 
+@synthesize editedDocument;
+
 - (id)initWithCurrentDocument:(MyDocument*)doc {
     if (![super initWithWindowNibName:@"NotationEditor"]) {
         return nil;
@@ -21,10 +23,10 @@
     NSString* fontDirPath = [[NSBundle mainBundle] pathForResource:@"GNU-LilyPond-feta-20" ofType:@"ttf"];
 
     NSURL* url = [NSURL fileURLWithPath:fontDirPath];
-
+    
     CFErrorRef err;
     
-    BOOL res = CTFontManagerRegisterFontsForURL(url, kCTFontManagerScopeProcess, &err);
+    BOOL res = CTFontManagerRegisterFontsForURL((__bridge CFURLRef)url, kCTFontManagerScopeProcess, &err);
 
     
     return self;
@@ -37,8 +39,5 @@
     
     [notationView setFontLoaded];
 }
-
-
-@synthesize editedDocument;
 
 @end

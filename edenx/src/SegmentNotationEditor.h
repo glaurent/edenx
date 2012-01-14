@@ -13,11 +13,12 @@
 
 @interface SegmentNotationEditor : NSWindowController {
 @private
-    MyDocument* editedDocument;
 
     IBOutlet NotationView* notationView;
 }
 
-@property (readonly) MyDocument* editedDocument;
+@property (strong, readonly) MyDocument* editedDocument;
+
+- (id)initWithCurrentDocument:(MyDocument*)doc;
 
 @end
