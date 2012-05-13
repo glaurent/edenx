@@ -530,19 +530,22 @@
 - (void)keyUp:(NSEvent *)theEvent
 {
     NSString *chars = [theEvent characters];
-    unichar character = [chars characterAtIndex: 0];
 
-    if (character == NSDeleteCharacter) {
-        NSLog(@"%s : delete pressed", __PRETTY_FUNCTION__);
+    if (chars.length > 0) {
+        unichar character = [chars characterAtIndex:0];
         
-        if (self.segmentSelector.currentSelectedSegment != nil) {
-            NSManagedObject<Segment>* segment = [segmentSelector.currentSelectedSegment valueForKey:@"segment"];
-            MyDocument* currentDocument = [[NSDocumentController sharedDocumentController] currentDocument];
-            [currentDocument deleteSegment:segment];
+        if (character == NSDeleteCharacter || character == NSBackspaceCharacter) {
+            NSLog(@"%s : delete segment", __PRETTY_FUNCTION__);
+            
+            if (self.segmentSelector.currentSelectedSegment != nil) {
+                NSManagedObject<Segment>* segment = [segmentSelector.currentSelectedSegment valueForKey:@"segment"];
+                MyDocument* currentDocument = [[NSDocumentController sharedDocumentController] currentDocument];
+                [currentDocument deleteSegment:segment];
+            }
+            
+        } else {
+            NSLog(@"%s : keycode : %d", __PRETTY_FUNCTION__, theEvent.keyCode);
         }
-        
-    } else {
-        NSLog(@"%s : keycode : %d", __PRETTY_FUNCTION__, theEvent.keyCode);
     }
 }
 
@@ -553,13 +556,17 @@
 
 - (BOOL)performKeyEquivalent:(NSEvent *)theEvent
 {
-    // say that we handle the 'delete' key only
-    //
     NSString *chars = [theEvent characters];
-    unichar character = [chars characterAtIndex: 0];
-    
-    return character == NSDeleteCharacter;
 
+    if (chars.length > 0) {
+        // say that we handle the 'delete' key only
+        //
+        unichar character = [chars characterAtIndex:0];
+        
+        return character == NSDeleteCharacter;
+    }
+    
+    return NO;
 }
 
 #pragma mark - other

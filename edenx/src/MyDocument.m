@@ -190,6 +190,7 @@
     if (!segmentNotationEditor) {
         NSLog(@"editSelectedTrack : allocating track editor");
         segmentNotationEditor = [[SegmentNotationEditor alloc] initWithCurrentDocument:self];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notationEditorClosing:) name:NSWindowWillCloseNotification object:segmentNotationEditor.window];
     }
     
     [segmentNotationEditor showWindow:self];
@@ -389,6 +390,14 @@
     
     NSLog(@"CAShow sequence :");
     CAShow(sequence);
+}
+
+
+- (void)notationEditorClosing:(NSNotification *)notification
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSWindowWillCloseNotification object:segmentNotationEditor.window];
+    segmentNotationEditor = nil;
 }
 
 @synthesize tracksController;

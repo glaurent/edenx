@@ -11,7 +11,17 @@
 #import "NotationView.h"
 #import "StaffLayerDelegate.h"
 
+@interface NotationView ()
+{
+}
+
+@property (strong, nonatomic) StaffLayerDelegate* staffLayerDelegate;
+
+@end
+
 @implementation NotationView
+
+@synthesize staffLayerDelegate;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -99,9 +109,9 @@
     
     staffLayer.autoresizingMask = kCALayerWidthSizable | kCALayerMinXMargin | kCALayerMaxXMargin;
     
-    StaffLayerDelegate* staffViewLayerDelegate = [[StaffLayerDelegate alloc] initWithInterlineSpace:interlineSpace];
+    self.staffLayerDelegate = [[StaffLayerDelegate alloc] initWithInterlineSpace:interlineSpace];
     
-    staffLayer.delegate = staffViewLayerDelegate;
+    staffLayer.delegate = self.staffLayerDelegate;
     
     // center staff in notationLayer
     //
