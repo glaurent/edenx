@@ -158,6 +158,13 @@
     return newSegment;
 }
 
+- (void)deleteSegment:(NSManagedObject<Segment>*)segment
+{
+    NSManagedObjectContext* managedObjectContext = [self managedObjectContext];
+
+    [managedObjectContext deleteObject:segment];
+}
+
 - (IBAction)showPlayBackCursor:(id)sender
 {
     // TODO - implement me with a CoreAnim layer

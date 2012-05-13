@@ -18,8 +18,8 @@
 - (id)init;
 - (void)setSelected:(CALayer*)segment toState:(BOOL)state;
 
-@property (strong, readwrite) CALayer* currentSelectedSegment;
-@property (strong, readwrite) CALayer* currentHoveredSegment;
+@property (weak, nonatomic) CALayer* currentSelectedSegment;
+@property (weak, nonatomic) CALayer* currentHoveredSegment;
 @property (strong, readwrite) NSArrayController* segmentArrayController;
 
 @end

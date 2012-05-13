@@ -56,6 +56,7 @@
 - (void)setupZoomSlider;
 
 - (NSManagedObject<Segment>*)createSegmentInTrack:(NSManagedObject<Track>*)track startingAtTime:(double)startTime endingAtTime:(double)endTime;
+- (void)deleteSegment:(NSManagedObject<Segment>*)segment;
 
 // this property actually comes from the Player, see implementation
 @property(readonly) BOOL playing;

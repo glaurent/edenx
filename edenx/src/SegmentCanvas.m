@@ -515,17 +515,54 @@
     if ([hoverLayer.name isEqual:@"rectLayer"] || [hoverLayer.name hasSuffix:@"HandleLayer"]) {
 //        NSLog(@"Hovering over %@", hoverLayer.name);
         if ([hoverLayer.name isEqual:@"rectLayer"]) {
-            [segmentSelector setCurrentHoveredSegment:hoverLayer];
+            self.segmentSelector.currentHoveredSegment = hoverLayer;
         } else {
-            [segmentSelector setCurrentHoveredSegment:hoverLayer.superlayer];
+            self.segmentSelector.currentHoveredSegment = hoverLayer.superlayer;
         }
     } else {
-        [segmentSelector setCurrentHoveredSegment:nil];
+        self.segmentSelector.currentHoveredSegment = nil;
     }
     
 }
 
+#pragma mark - key events
 
+- (void)keyUp:(NSEvent *)theEvent
+{
+    NSString *chars = [theEvent characters];
+    unichar character = [chars characterAtIndex: 0];
+
+    if (character == NSDeleteCharacter) {
+        NSLog(@"%s : delete pressed", __PRETTY_FUNCTION__);
+        
+        if (self.segmentSelector.currentSelectedSegment != nil) {
+            NSManagedObject<Segment>* segment = [segmentSelector.currentSelectedSegment valueForKey:@"segment"];
+            MyDocument* currentDocument = [[NSDocumentController sharedDocumentController] currentDocument];
+            [currentDocument deleteSegment:segment];
+        }
+        
+    } else {
+        NSLog(@"%s : keycode : %d", __PRETTY_FUNCTION__, theEvent.keyCode);
+    }
+}
+
+- (BOOL)acceptsFirstResponder
+{
+    return YES;
+}
+
+- (BOOL)performKeyEquivalent:(NSEvent *)theEvent
+{
+    // say that we handle the 'delete' key only
+    //
+    NSString *chars = [theEvent characters];
+    unichar character = [chars characterAtIndex: 0];
+    
+    return character == NSDeleteCharacter;
+
+}
+
+#pragma mark - other
 
 // DEBUG
 - (IBAction)showCoordinates:(id)sender
@@ -538,6 +575,8 @@
         }
     }
 }
+
+#pragma mark - model/UI maintenance
 
 - (void)resetStripLayersYCoordinates:(NSArray*)tracks withRemovedTracks:(NSSet*)removedTracks
 {

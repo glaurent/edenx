@@ -77,15 +77,15 @@
 }
 
 
-- (CALayer*)currentSelectedSegment
-{
-    return currentSelectedSegment;
-}
-
-- (CALayer*)currentHoveredSegment
-{
-    return currentHoveredSegment;
-}
+//- (CALayer*)currentSelectedSegment
+//{
+//    return currentSelectedSegment;
+//}
+//
+//- (CALayer*)currentHoveredSegment
+//{
+//    return currentHoveredSegment;
+//}
 
 
 - (void)setSelected:(CALayer*)segment toState:(BOOL)state
